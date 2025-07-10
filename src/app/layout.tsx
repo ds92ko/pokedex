@@ -1,7 +1,8 @@
 import type { Metadata } from 'next';
-import { fredoka, pressStart2p } from './fonts';
-import { QueryProvider } from '@/lib/tanstack-query/query-provider';
 import { ReactNode } from 'react';
+
+import { fredoka, pressStart2p } from '@/app/fonts';
+import { QueryProvider } from '@/lib/tanstack-query/query-provider';
 
 type RootLayoutProps = Readonly<{
   children: ReactNode;

@@ -1,4 +1,5 @@
 import { isServer, QueryClient } from '@tanstack/react-query';
+
 import { queryClientInstance } from '@/lib/tanstack-query/query-client-instance';
 
 let queryClient: QueryClient | null = null;
