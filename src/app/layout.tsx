@@ -4,6 +4,8 @@ import { ReactNode } from 'react';
 import { fredoka, pressStart2p } from '@/app/fonts';
 import { QueryProvider } from '@/lib/tanstack-query/query-provider';
 
+import '@/styles/reset.css';
+
 type RootLayoutProps = Readonly<{
   children: ReactNode;
 }>;
@@ -19,9 +21,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="ko">
       <body className={`${pressStart2p.variable} ${fredoka.variable}`}>
         <QueryProvider>
-          <header>헤더</header>
+          <header>Header</header>
           <main>{children}</main>
-          <footer>푸터</footer>
+          <footer>Footer</footer>
         </QueryProvider>
       </body>
     </html>
