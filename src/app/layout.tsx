@@ -1,5 +1,11 @@
 import type { Metadata } from 'next';
 import { fredoka, pressStart2p } from './fonts';
+import { QueryProvider } from '@/lib/tanstack-query/query-provider';
+import { ReactNode } from 'react';
+
+type RootLayoutProps = Readonly<{
+  children: ReactNode;
+}>;
 
 export const metadata: Metadata = {
   title: 'Pokédex',
@@ -7,14 +13,16 @@ export const metadata: Metadata = {
     '모든 세대의 포켓몬 정보를 한눈에! 이름, 타입, 능력치를 검색하고, 나만의 포켓몬을 찾아보세요.'
 };
 
-export default function RootLayout({
-  children
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="ko">
-      <body className={`${pressStart2p.variable} ${fredoka.variable}`}>{children}</body>
+      <body className={`${pressStart2p.variable} ${fredoka.variable}`}>
+        <QueryProvider>
+          <header>헤더</header>
+          <main>{children}</main>
+          <footer>푸터</footer>
+        </QueryProvider>
+      </body>
     </html>
   );
 }
