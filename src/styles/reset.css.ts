@@ -21,7 +21,7 @@ globalStyle(
 );
 
 globalStyle('body', {
-  fontFamily: 'var(--font-fredoka)',
+  fontFamily: 'var(--font-gothic-a1), sans-serif',
   lineHeight: 1
 });
 

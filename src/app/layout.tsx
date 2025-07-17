@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import { ReactNode } from 'react';
 
-import { fredoka, pressStart2p } from '@/app/fonts';
+import { gothicA1 } from '@/app/fonts';
 import { QueryProvider } from '@/lib/tanstack-query/query-provider';
 
 import '@/styles/reset.css';
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="ko">
-      <body className={`${pressStart2p.variable} ${fredoka.variable}`}>
+      <body className={gothicA1.variable}>
         <QueryProvider>
           <header>Header</header>
           <main>{children}</main>
