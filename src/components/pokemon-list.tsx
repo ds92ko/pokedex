@@ -2,6 +2,7 @@
 
 import { useInfiniteQuery } from '@tanstack/react-query';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useEffect, useRef } from 'react';
 
 import { fetchPokemonList } from '@/api/pokemon';
@@ -37,15 +38,17 @@ export default function PokemonList() {
         {data?.pages.flatMap((page, pageIndex) =>
           page.results.map((pokemon, idx) => (
             <li key={`${pokemon.name}-${pageIndex}-${idx}`}>
-              <Image
-                src={pokemon.image}
-                alt={pokemon.name}
-                width={120}
-                height={120}
-              />
-              <span>No.{pokemon.id.toString().padStart(page.count.toString().length, '0')}</span>
-              <h3>{pokemon.name}</h3>
-              <p>{pokemon.genera}</p>
+              <Link href={`/${pokemon.id}`}>
+                <Image
+                  src={pokemon.image}
+                  alt={pokemon.name}
+                  width={120}
+                  height={120}
+                />
+                <span>No.{pokemon.id.toString().padStart(page.count.toString().length, '0')}</span>
+                <h3>{pokemon.name}</h3>
+                <p>{pokemon.genera}</p>
+              </Link>
             </li>
           ))
         )}
