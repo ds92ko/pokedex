@@ -47,7 +47,8 @@ export default function PokemonList() {
                 />
                 <span>No.{pokemon.id.toString().padStart(page.count.toString().length, '0')}</span>
                 <h3>{pokemon.name}</h3>
-                <p>{pokemon.genera}</p>
+                <p>{pokemon.genus}</p>
+                <p>{pokemon.description}</p>
               </Link>
             </li>
           ))

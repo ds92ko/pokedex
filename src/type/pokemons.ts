@@ -84,7 +84,8 @@ export interface PokeApiSpeciesResponse {
 export interface PokemonResultResponse {
   id: number;
   name: string;
-  genera: string;
+  genus: string;
+  description: string;
   image: string;
 }
 

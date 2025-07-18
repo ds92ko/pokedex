@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-import { POKEMON_LIST_LIMIT } from '@/constants/pokemons';
+import { POKE_API_REVALIDATE, POKEMON_LIST_LIMIT } from '@/constants/pokemons';
 import {
   PokeApiListResponse,
   PokeApiSpeciesResponse,
@@ -13,7 +13,10 @@ export async function GET(request: NextRequest) {
 
   try {
     const listRes = await fetch(
-      `${process.env.POKEAPI_BASE_URL}/pokemon?offset=${offset}&limit=${POKEMON_LIST_LIMIT}`
+      `${process.env.POKEAPI_BASE_URL}/pokemon?offset=${offset}&limit=${POKEMON_LIST_LIMIT}`,
+      {
+        next: { revalidate: POKE_API_REVALIDATE }
+      }
     );
 
     if (!listRes.ok) {
@@ -29,7 +32,10 @@ export async function GET(request: NextRequest) {
       list.results.map(async pokemon => {
         try {
           const speciesRes = await fetch(
-            `${process.env.POKEAPI_BASE_URL}/pokemon-species/${pokemon.name}`
+            `${process.env.POKEAPI_BASE_URL}/pokemon-species/${pokemon.name}`,
+            {
+              next: { revalidate: POKE_API_REVALIDATE }
+            }
           );
           if (!speciesRes.ok) throw new Error();
 
@@ -50,8 +56,12 @@ export async function GET(request: NextRequest) {
 
         return {
           id: Number(id),
-          name: species.names.find(name => name.language.name === 'ko')?.name || pokemon.name,
-          genera: species.genera.find(genus => genus.language.name === 'ko')?.genus || '',
+          name: species.names.find(({ language }) => language.name === 'ko')?.name || pokemon.name,
+          genus: species.genera.find(({ language }) => language.name === 'ko')?.genus || '',
+          description:
+            species.flavor_text_entries
+              .find(({ language, version }) => language.name === 'ko' && version.name === 'sword')
+              ?.flavor_text.replace(/\n/g, ' ') || '',
           image: `https://${process.env.POKEMON_IMAGE_HOSTNAME}/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`
         };
       })
