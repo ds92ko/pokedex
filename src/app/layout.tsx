@@ -1,7 +1,10 @@
 import type { Metadata } from 'next';
 import { ReactNode } from 'react';
 
-import { gothicA1 } from '@/app/fonts';
+import { cherryBombOne, dongle } from '@/app/fonts';
+import Container from '@/components/container';
+import Footer from '@/components/footer';
+import Header from '@/components/header';
 import { QueryProvider } from '@/lib/tanstack-query/query-provider';
 
 import '@/styles/reset.css';
@@ -19,11 +22,13 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="ko">
-      <body className={gothicA1.variable}>
+      <body className={`${cherryBombOne.variable} ${dongle.variable}`}>
         <QueryProvider>
-          <header>Header</header>
-          <main>{children}</main>
-          <footer>Footer</footer>
+          <Header />
+          <main>
+            <Container>{children}</Container>
+          </main>
+          <Footer />
         </QueryProvider>
       </body>
     </html>
