@@ -5,10 +5,18 @@ export const fontFamily = {
   text: 'var(--font-dongle)'
 };
 
-export const iconSize = {
-  sm: '16px',
-  md: '20px',
-  lg: '24px'
+export const icons = {
+  size: {
+    sm: '16px',
+    md: '20px',
+    lg: '24px'
+  }
+};
+
+const layout = {
+  header: {
+    height: '68px'
+  }
 };
 
 const fonts = {
@@ -71,6 +79,7 @@ const colors = {
 };
 
 export const vars = createGlobalTheme(':root', {
+  layout,
   fonts,
   spacing,
   colors
