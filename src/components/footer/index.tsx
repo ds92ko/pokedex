@@ -1,8 +1,9 @@
 import Container from '@/components/container';
+import { footer } from '@/components/footer/index.css';
 
 export default async function Footer() {
   return (
-    <footer>
+    <footer className={footer}>
       <Container>
         <p>&copy; 2025 Dasom Ko</p>
         <p>
