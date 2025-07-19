@@ -52,6 +52,14 @@ globalStyle('a', {
   color: 'inherit'
 });
 
+globalStyle('button', {
+  font: 'inherit',
+  padding: 0,
+  border: 0,
+  outline: 0,
+  background: 'transparent'
+});
+
 globalStyle('input', {
   font: 'inherit',
   padding: 0,
