@@ -7,7 +7,8 @@ export const inputBox = style({
   alignItems: 'center',
   justifyContent: 'space-between',
   border: `1px solid ${vars.colors.border}`,
-  borderRadius: `calc((${vars.fonts.size.md} + (${vars.spacing.xs} * 2)) / 2)`
+  borderRadius: `calc((${vars.fonts.size.md} + (${vars.spacing.xs} * 2)) / 2)`,
+  background: vars.colors.white
 });
 
 export const inputAddonBase = style({

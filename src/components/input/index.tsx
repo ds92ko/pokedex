@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, ReactNode } from 'react';
+import { InputHTMLAttributes, ReactNode, forwardRef } from 'react';
 
 import { inputAddon, inputBox, inputField } from '@/components/input/index.css';
 
@@ -7,15 +7,22 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   end?: ReactNode;
 }
 
-export default function Input({ start, end, className = '', ...props }: InputProps) {
-  return (
-    <div className={`${inputBox} ${className}`}>
-      {start && <div className={inputAddon.start}>{start}</div>}
-      <input
-        className={inputField}
-        {...props}
-      />
-      {end && <div className={inputAddon.end}>{end}</div>}
-    </div>
-  );
-}
+const Input = forwardRef<HTMLInputElement, InputProps>(
+  ({ start, end, className = '', ...props }, ref) => {
+    return (
+      <div className={`${inputBox} ${className}`}>
+        {start && <div className={inputAddon.start}>{start}</div>}
+        <input
+          ref={ref}
+          className={inputField}
+          {...props}
+        />
+        {end && <div className={inputAddon.end}>{end}</div>}
+      </div>
+    );
+  }
+);
+
+Input.displayName = 'Input';
+
+export default Input;
