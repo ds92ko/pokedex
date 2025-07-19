@@ -62,7 +62,7 @@ export async function GET(request: NextRequest) {
             species.flavor_text_entries
               .find(({ language, version }) => language.name === 'ko' && version.name === 'sword')
               ?.flavor_text.replace(/\n/g, ' ') || '',
-          image: `https://${process.env.POKEMON_IMAGE_HOSTNAME}/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`
+          image: `${process.env.NEXT_PUBLIC_POKEMON_IMAGE_URL}/${id}.png`
         };
       })
       .filter(Boolean) as NonNullable<PokemonResultResponse[]>;
