@@ -8,7 +8,7 @@ export const sectionTitle = style({
   justifyContent: 'space-between',
   flexWrap: 'wrap',
   paddingTop: vars.spacing.xxl,
-  paddingBottom: vars.spacing.md,
+  paddingBottom: vars.spacing.lg,
   gap: vars.spacing.sm
 });
 
