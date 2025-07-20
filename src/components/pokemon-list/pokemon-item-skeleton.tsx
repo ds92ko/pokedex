@@ -2,7 +2,6 @@ import Pokeball from '@/components/pokeball';
 import {
   pokemonCard,
   pokemonCardImage,
-  pokemonCardName,
   pokemonCardNumber,
   pokemonCardTitle
 } from '@/components/pokemon-list/index.css';
@@ -17,9 +16,7 @@ export default function PokemonItemSkeleton() {
         </div>
         <div>
           <span className={`${pokemonCardNumber} ${skeleton}`}>No.0000</span>
-          <h3 className={`${pokemonCardTitle} ${skeleton}`}>
-            <span className={pokemonCardName}>포켓몬 이름</span> · 포켓몬 분류
-          </h3>
+          <h3 className={`${pokemonCardTitle} ${skeleton}`}>포켓몬 이름 · 포켓몬 분류</h3>
           <p className={skeleton}>포켓몬 설명</p>
         </div>
       </div>
