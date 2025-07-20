@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { BiTrash } from 'react-icons/bi';
 
 import Pokeball from '@/components/pokeball';
+import { searchHistoryImageSize } from '@/components/search/constants';
 import {
   searchHistoryButton,
   searchHistoryContent,
@@ -25,7 +26,6 @@ export default function HistoryItem({ history }: { history: SearchHistory }) {
   const { id, image, value } = history;
 
   const formattedId = value.toString().padStart(total.toString().length, '0');
-  const searchHistoryImageSize = 50;
 
   return (
     <li className={`searchHistoryItem ${error ? 'error' : ''}`}>

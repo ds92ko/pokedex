@@ -4,6 +4,7 @@ import { BiTrash } from 'react-icons/bi';
 
 import HistoryItem from '@/components/search/history-item';
 import { searchHistory } from '@/components/search/index.css';
+import NoResult from '@/components/search/no-result';
 import Section from '@/components/section';
 import { usePokemonsContext } from '@/stores/pokemons';
 import { useSearchActions, useSearchContext } from '@/stores/search';
@@ -46,7 +47,7 @@ export default function History() {
             ))}
           </ul>
         ) : (
-          <div>검색 기록이 없습니다</div>
+          <NoResult />
         )}
       </Section>
     </div>

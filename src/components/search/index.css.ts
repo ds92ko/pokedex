@@ -76,3 +76,13 @@ export const searchHistoryText = style({
   fontWeight: vars.fonts.weight.medium,
   color: vars.colors.accent
 });
+
+export const noResult = style({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+  gap: vars.spacing.sm,
+  paddingBlock: vars.spacing.lg,
+  borderBlock: `1px solid ${vars.colors.border}`
+});
