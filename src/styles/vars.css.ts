@@ -51,6 +51,7 @@ const colors = {
   secondary: '#F3C93B', // 보조 포인트 컬러
   background: '#FAFAFA', // 배경 컬러
   text: '#333333', // 텍스트 컬러
+  caption: '#777777', // 캡션 컬러
   accent: '#4A5FC1', // 버튼/링크
   border: '#E0E0E0', // 보더 컬러
   white: '#FFFFFF', // 흰색
