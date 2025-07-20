@@ -4,6 +4,7 @@ import { vars } from '@/styles/vars.css';
 
 export const main = style({
   position: 'relative',
+  minHeight: '100vh',
   paddingTop: vars.layout.header.height,
   zIndex: 100
 });
