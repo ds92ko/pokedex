@@ -71,3 +71,7 @@ globalStyle('input', {
   boxSizing: 'border-box',
   height: vars.fonts.size.md
 });
+
+globalStyle('[class*="skeleton"], [class*="skeleton"] *', {
+  color: 'transparent !important'
+});
