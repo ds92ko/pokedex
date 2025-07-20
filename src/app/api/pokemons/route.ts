@@ -58,7 +58,7 @@ export async function GET(request: NextRequest) {
           genus: species.genera.find(({ language }) => language.name === 'ko')?.genus || '',
           description:
             species.flavor_text_entries
-              .find(({ language, version }) => language.name === 'ko' && version.name === 'sword')
+              .find(({ language }) => language.name === 'ko')
               ?.flavor_text.replace(/\n/g, ' ') || '',
           image: `${POKEMON_IMAGE_BASE_URL}/${id}.png`
         };
