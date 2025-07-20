@@ -2,11 +2,11 @@ import type { Metadata } from 'next';
 import { ReactNode } from 'react';
 
 import { cherryBombOne, dongle } from '@/app/fonts';
-import Container from '@/components/container';
 import Footer from '@/components/footer';
 import Header from '@/components/header';
+import OverlayScrollbar from '@/lib/overlay-scrollbar/overlay-scrollbar';
 import { QueryProvider } from '@/lib/tanstack-query/query-provider';
-
+import { main } from '@/styles/layout.css';
 import '@/styles/reset.css';
 
 type RootLayoutProps = Readonly<{
@@ -21,14 +21,21 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="ko">
-      <body className={`${cherryBombOne.variable} ${dongle.variable}`}>
+    <html
+      lang="ko"
+      data-overlayscrollbars-initialize
+    >
+      <body
+        className={`${cherryBombOne.variable} ${dongle.variable}`}
+        data-overlayscrollbars-initialize
+      >
         <QueryProvider>
-          <Header />
-          <main>
-            <Container>{children}</Container>
-          </main>
-          <Footer />
+          <OverlayScrollbar>
+            <Header />
+            <main className={main}>{children}</main>
+            <Footer />
+            <div id="portal" />
+          </OverlayScrollbar>
         </QueryProvider>
       </body>
     </html>
