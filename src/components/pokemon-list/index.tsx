@@ -7,8 +7,11 @@ import { useEffect, useRef } from 'react';
 
 import { fetchPokemonList } from '@/api/pokemon';
 import { POKEMON_LIST_LIMIT, POKEMON_LIST_QUERY_KEY } from '@/constants/pokemons';
+import { usePokemonsActions, usePokemonsContext } from '@/stores/pokemons';
 
 export default function PokemonList() {
+  const { total } = usePokemonsContext();
+  const { setTotal } = usePokemonsActions();
   const { data, isFetchingNextPage, fetchNextPage, hasNextPage } = useInfiniteQuery({
     queryKey: POKEMON_LIST_QUERY_KEY,
     queryFn: fetchPokemonList,
@@ -18,6 +21,8 @@ export default function PokemonList() {
       return nextOffset < lastPage.count ? nextOffset : undefined;
     }
   });
+
+  if (data?.pages[0].count && !total) setTotal(data?.pages[0].count);
 
   const observerRef = useRef<HTMLDivElement | null>(null);
 
@@ -32,8 +37,7 @@ export default function PokemonList() {
   }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
 
   return (
-    <div>
-      <h2>포켓몬 도감</h2>
+    <>
       <ul>
         {data?.pages.flatMap((page, pageIndex) =>
           page.results.map((pokemon, idx) => (
@@ -56,6 +60,6 @@ export default function PokemonList() {
       </ul>
       <div ref={observerRef} />
       {isFetchingNextPage && <p>Loading more...</p>}
-    </div>
+    </>
   );
 }
