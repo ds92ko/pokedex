@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { ReactNode } from 'react';
 
 import Container from '@/components/container';
 import { sectionContent, sectionTitle, titleText } from '@/components/section/index.css';
@@ -6,8 +6,8 @@ import { sectionContent, sectionTitle, titleText } from '@/components/section/in
 interface SectionProps {
   className?: string;
   title: string;
-  titleContent?: ReactElement;
-  children: ReactElement;
+  titleContent?: ReactNode;
+  children: ReactNode;
 }
 
 export default function Section({ className = '', title, titleContent, children }: SectionProps) {

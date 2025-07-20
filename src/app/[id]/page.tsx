@@ -1,3 +1,5 @@
+import Section from '@/components/section';
+
 export default async function DetailPage() {
-  return <div>Detail Page</div>;
+  return <Section title="포켓몬 상세">상세 페이지</Section>;
 }
