@@ -2,6 +2,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
+import { POKEMON_IMAGE_BASE_URL } from '@/constants/api';
+
 export interface SearchHistory {
   id: string;
   image: string;
@@ -51,7 +53,7 @@ const useSearchStore = create<SearchStore>()(
               history: [
                 {
                   id: uuidv4(),
-                  image: `${process.env.NEXT_PUBLIC_POKEMON_IMAGE_URL}/${value}.png`,
+                  image: `${POKEMON_IMAGE_BASE_URL}/${value}.png`,
                   value
                 },
                 ...context.history

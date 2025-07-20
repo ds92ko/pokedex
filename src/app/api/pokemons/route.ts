@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+import { POKEAPI_BASE_URL, POKEMON_IMAGE_BASE_URL } from '@/constants/api';
 import { POKE_API_REVALIDATE, POKEMON_LIST_LIMIT } from '@/constants/pokemons';
 import {
   PokeApiListResponse,
@@ -13,7 +14,7 @@ export async function GET(request: NextRequest) {
 
   try {
     const listRes = await fetch(
-      `${process.env.POKEAPI_BASE_URL}/pokemon?offset=${offset}&limit=${POKEMON_LIST_LIMIT}`,
+      `${POKEAPI_BASE_URL}/pokemon?offset=${offset}&limit=${POKEMON_LIST_LIMIT}`,
       {
         next: { revalidate: POKE_API_REVALIDATE }
       }
@@ -31,12 +32,9 @@ export async function GET(request: NextRequest) {
     const speciesList = await Promise.all(
       list.results.map(async pokemon => {
         try {
-          const speciesRes = await fetch(
-            `${process.env.POKEAPI_BASE_URL}/pokemon-species/${pokemon.name}`,
-            {
-              next: { revalidate: POKE_API_REVALIDATE }
-            }
-          );
+          const speciesRes = await fetch(`${POKEAPI_BASE_URL}/pokemon-species/${pokemon.name}`, {
+            next: { revalidate: POKE_API_REVALIDATE }
+          });
           if (!speciesRes.ok) throw new Error();
 
           const species: PokeApiSpeciesResponse = await speciesRes.json();
@@ -62,7 +60,7 @@ export async function GET(request: NextRequest) {
             species.flavor_text_entries
               .find(({ language, version }) => language.name === 'ko' && version.name === 'sword')
               ?.flavor_text.replace(/\n/g, ' ') || '',
-          image: `${process.env.NEXT_PUBLIC_POKEMON_IMAGE_URL}/${id}.png`
+          image: `${POKEMON_IMAGE_BASE_URL}/${id}.png`
         };
       })
       .filter(Boolean) as NonNullable<PokemonResultResponse[]>;

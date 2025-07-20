@@ -1,6 +1,8 @@
 import { createVanillaExtractPlugin } from '@vanilla-extract/next-plugin';
 import type { NextConfig } from 'next';
 
+import { POKEMON_IMAGE_HOSTNAME, POKEMON_IMAGE_PATHNAME } from '@/constants/api';
+
 const vanillaExtractPlugin = createVanillaExtractPlugin();
 
 const nextConfig: NextConfig = {
@@ -8,8 +10,8 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: process.env.POKEMON_IMAGE_HOSTNAME || 'raw.githubusercontent.com',
-        pathname: process.env.POKEMON_IMAGE_PATHNAME || '/PokeAPI/sprites/**'
+        hostname: POKEMON_IMAGE_HOSTNAME,
+        pathname: POKEMON_IMAGE_PATHNAME
       }
     ]
   }
