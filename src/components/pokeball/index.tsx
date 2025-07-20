@@ -1,22 +1,22 @@
 import { pokeball, pokeballButton, pokeballLine } from '@/components/pokeball/index.css';
 
-export default function Pokeball({ size = 50 }: { size?: number }) {
+export default function Pokeball({ size }: { size?: number }) {
   return (
     <div
       className={pokeball}
       style={{
-        width: size,
-        height: size,
-        borderWidth: size * 0.06
+        width: size || '100%',
+        height: size || '100%',
+        borderWidth: (size || 50) * 0.06
       }}
     >
       <div
         className={pokeballLine}
-        style={{ height: size * 0.06 }}
+        style={{ height: (size || 50) * 0.06 }}
       />
       <div
         className={pokeballButton}
-        style={{ borderWidth: size * 0.06 }}
+        style={{ borderWidth: (size || 50) * 0.06 }}
       />
     </div>
   );
