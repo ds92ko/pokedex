@@ -47,19 +47,25 @@ const useSearchStore = create<SearchStore>()(
             context: { ...context, value: '', open: false }
           })),
         addHistory: value =>
-          set(({ context }) => ({
-            context: {
-              ...context,
-              history: [
-                {
-                  id: uuidv4(),
-                  image: `${POKEMON_IMAGE_BASE_URL}/${value}.png`,
-                  value
-                },
-                ...context.history
-              ]
-            }
-          })),
+          set(({ context }) => {
+            const existing = context.history.find(h => h.value === value);
+
+            return {
+              context: {
+                ...context,
+                history: existing
+                  ? [existing, ...context.history.filter(h => h.value !== value)]
+                  : [
+                      {
+                        id: uuidv4(),
+                        image: `${POKEMON_IMAGE_BASE_URL}/${value}.png`,
+                        value
+                      },
+                      ...context.history
+                    ]
+              }
+            };
+          }),
         removeHistory: id =>
           set(({ context }) => ({
             context: {
