@@ -2,11 +2,12 @@ import type { Metadata } from 'next';
 import { ReactNode } from 'react';
 
 import { cherryBombOne, dongle } from '@/app/fonts';
-import Footer from '@/components/footer';
-import Header from '@/components/header';
+import Footer from '@/components/layouts/footer';
+import Header from '@/components/layouts/header';
 import OverlayScrollbar from '@/lib/overlay-scrollbar/overlay-scrollbar';
 import { QueryProvider } from '@/lib/tanstack-query/query-provider';
 import { main } from '@/styles/layout.css';
+
 import '@/styles/reset.css';
 
 type RootLayoutProps = Readonly<{

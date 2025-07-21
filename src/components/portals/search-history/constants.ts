@@ -1,0 +1,1 @@
+export const SEARCH_HISTORY_IMAGE_SIZE = 50;

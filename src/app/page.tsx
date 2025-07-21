@@ -1,8 +1,8 @@
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 
 import { fetchPokemonList } from '@/api/pokemon';
-import PokemonList from '@/components/pokemon-list';
-import Section from '@/components/section';
+import PokemonList from '@/app/_components/pokemon-list';
+import Section from '@/components/layouts/section';
 import { POKEMON_LIST_QUERY_KEY } from '@/constants/pokemons';
 import { getQueryClient } from '@/lib/tanstack-query/get-query-client';
 

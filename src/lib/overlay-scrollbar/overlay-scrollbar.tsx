@@ -1,13 +1,10 @@
 'use client';
 
 import { useOverlayScrollbars } from 'overlayscrollbars-react';
-import { ReactNode, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import 'overlayscrollbars/overlayscrollbars.css';
-
-type OverlayScrollbarProps = Readonly<{
-  children: ReactNode;
-}>;
+import { OverlayScrollbarProps } from '@/lib/overlay-scrollbar/types';
 
 export default function OverlayScrollbar({ children }: OverlayScrollbarProps) {
   const [initialize] = useOverlayScrollbars({
@@ -24,5 +21,5 @@ export default function OverlayScrollbar({ children }: OverlayScrollbarProps) {
     initialize(document.body);
   }, [initialize]);
 
-  return <>{children}</>;
+  return children;
 }

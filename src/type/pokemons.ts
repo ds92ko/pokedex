@@ -208,10 +208,15 @@ export type PokemonTypeKey =
   | 'steel'
   | 'fairy';
 
+export type PokemonType = {
+  key: PokemonTypeKey;
+  name: string;
+};
+
 export interface PokemonDetailResponse {
   id: number;
   name: string;
-  types: { key: PokemonTypeKey; name: string }[];
+  types: PokemonType[];
   genus: string;
   description: string;
   evolutionChain: EvolutionChain[];

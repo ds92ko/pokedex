@@ -6,8 +6,8 @@ import Image from 'next/image';
 import { notFound, useParams } from 'next/navigation';
 
 import { fetchPokemonDetail } from '@/api/pokemon';
-import Badges from '@/components/badges';
-import Section from '@/components/section';
+import Badges from '@/components/common/badges';
+import Section from '@/components/layouts/section';
 import { POKEMON_DETAIL_QUERY_KEY } from '@/constants/pokemons';
 import { usePokemonsContext } from '@/stores/pokemons';
 
@@ -21,10 +21,12 @@ export default function Content() {
     enabled: !!id
   });
 
+  // TODO: 에러 & 로딩 처리
   if (!id || isError) return notFound();
   if (!data) return null;
 
   console.log(data);
+  // TODO: 상세 페이지 UI 작업
   return (
     <>
       <Section title="기본 정보">

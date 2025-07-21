@@ -5,7 +5,11 @@ import Content from '@/app/[id]/_components/content';
 import { POKEMON_DETAIL_QUERY_KEY } from '@/constants/pokemons';
 import { getQueryClient } from '@/lib/tanstack-query/get-query-client';
 
-export default async function DetailPage({ params }: { params: Promise<{ id: string }> }) {
+interface DetailPageProps {
+  params: Promise<{ id: string }>;
+}
+
+export default async function DetailPage({ params }: DetailPageProps) {
   const { id } = await params;
   const queryClient = getQueryClient();
 
