@@ -28,7 +28,7 @@ export const pokemonCard = style({
   transition: 'box-shadow 0.3s ease-out, transform 0.3s ease-out',
   selectors: {
     '&:hover': {
-      boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
+      boxShadow: `0 4px 12px ${vars.alpha.shadow}`,
       transform: 'scale3d(1.02, 1.02, 1)'
     }
   }

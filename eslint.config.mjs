@@ -38,6 +38,13 @@ const eslintConfig = [
           'newlines-between': 'always', // import 그룹 사이에 항상 빈 줄 추가
           alphabetize: { order: 'asc', caseInsensitive: true } // 알파벳 오름차순 정렬
         }
+      ],
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_'
+        }
       ]
     }
   }

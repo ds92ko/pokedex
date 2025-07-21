@@ -79,9 +79,37 @@ const colors = {
   }
 };
 
+const alpha = {
+  text: 'rgba(51, 51, 51, 0.5)', // 텍스트 컬러
+  accent: 'rgba(74, 95, 193, 0.7)', // 버튼/링크
+  border: 'rgba(224, 224, 224, 0.5)', // 보더 컬러
+  shadow: 'rgba(0, 0, 0, 0.1)', // 그림자 색상
+  type: {
+    normal: 'rgba(168, 167, 122, 0.3)', // 노멀
+    fire: 'rgba(238, 129, 48, 0.3)', // 불
+    water: 'rgba(99, 144, 240, 0.3)', // 물
+    electric: 'rgba(247, 208, 44, 0.3)', // 전기
+    grass: 'rgba(122, 199, 76, 0.3)', // 풀
+    ice: 'rgba(150, 217, 214, 0.3)', // 얼음
+    fighting: 'rgba(194, 46, 40, 0.3)', // 격투
+    poison: 'rgba(163, 62, 161, 0.3)', // 독
+    ground: 'rgba(226, 191, 101, 0.3)', // 땅
+    flying: 'rgba(169, 143, 243, 0.3)', // 비행
+    psychic: 'rgba(249, 85, 135, 0.3)', // 에스퍼
+    bug: 'rgba(166, 185, 26, 0.3)', // 벌레
+    rock: 'rgba(182, 161, 54, 0.3)', // 바위
+    ghost: 'rgba(115, 87, 151, 0.3)', // 고스트
+    dragon: 'rgba(111, 53, 252, 0.3)', // 드래곤
+    dark: 'rgba(112, 87, 70, 0.3)', // 악
+    steel: 'rgba(183, 183, 206, 0.3)', // 강철
+    fairy: 'rgba(214, 133, 173, 0.3)' // 페어리
+  }
+};
+
 export const vars = createGlobalTheme(':root', {
   layout,
   fonts,
   spacing,
-  colors
+  colors,
+  alpha
 });

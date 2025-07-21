@@ -5,7 +5,7 @@ import { sectionContent, sectionTitle, titleText } from '@/components/section/in
 
 interface SectionProps {
   className?: string;
-  title: string;
+  title?: string;
   titleContent?: ReactNode;
   children: ReactNode;
 }

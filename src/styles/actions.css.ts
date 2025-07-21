@@ -7,20 +7,18 @@ export const buttonBase = style({
   alignItems: 'center',
   justifyContent: 'center',
   gap: vars.spacing.xxs,
-  backgroundColor: vars.colors.accent,
+  background: vars.colors.accent,
   color: vars.colors.white,
   fontWeight: vars.fonts.weight.medium,
-  opacity: 1,
-  transition: 'opacity 0.3s ease-out',
+  transition: 'background 0.3s ease-out, color 0.3s ease-out',
   selectors: {
     '&:not(:disabled):hover': {
-      opacity: 0.7
+      background: vars.alpha.accent
     },
     '&:disabled': {
       cursor: 'not-allowed',
-      background: vars.colors.border,
-      color: vars.colors.text,
-      opacity: 0.5
+      background: vars.alpha.border,
+      color: vars.alpha.text
     }
   }
 });
@@ -59,8 +57,7 @@ export const linkBase = style({
   justifyContent: 'center',
   gap: vars.spacing.xxs,
   color: vars.colors.accent,
-  opacity: 1,
-  transition: 'opacity 0.3s ease-out',
+  transition: 'color 0.3s ease-out',
   selectors: {
     '&::after': {
       content: '',
@@ -70,10 +67,14 @@ export const linkBase = style({
       display: 'block',
       width: '100%',
       height: 2,
-      backgroundColor: vars.colors.accent
+      background: vars.colors.accent,
+      transition: 'background 0.3s ease-out'
     },
     '&:hover': {
-      opacity: 0.7
+      color: vars.alpha.accent
+    },
+    '&:hover::after': {
+      background: vars.alpha.accent
     }
   }
 });
