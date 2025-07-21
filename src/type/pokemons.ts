@@ -50,6 +50,8 @@ export interface PokeApiDetailResponse {
   };
 }
 
+export type GenderRate = -1 | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+
 export interface PokeApiSpeciesResponse {
   id: number;
   name: string;
@@ -62,6 +64,7 @@ export interface PokeApiSpeciesResponse {
     language: { name: string };
     version: { name: string };
   }[];
+  gender_rate: GenderRate;
   genera: {
     genus: string;
     language: { name: string };
@@ -115,6 +118,50 @@ export interface PokeAPITypeResponse {
     };
   }[];
   pokemon: {
+    slot: number;
+    pokemon: {
+      name: string;
+      url: string;
+    };
+  }[];
+}
+
+export interface PokeApiAbilityResponse {
+  id: number;
+  name: string;
+  is_main_series: boolean;
+  generation: {
+    name: string;
+    url: string;
+  };
+  names: {
+    name: string;
+    language: {
+      name: string;
+      url: string;
+    };
+  }[];
+  effect_entries: {
+    effect: string;
+    short_effect: string;
+    language: {
+      name: string;
+      url: string;
+    };
+  }[];
+  flavor_text_entries: {
+    flavor_text: string;
+    language: {
+      name: string;
+      url: string;
+    };
+    version_group: {
+      name: string;
+      url: string;
+    };
+  }[];
+  pokemon: {
+    is_hidden: boolean;
     slot: number;
     pokemon: {
       name: string;
@@ -213,11 +260,23 @@ export type PokemonType = {
   name: string;
 };
 
+export type PokemonAbility = {
+  name: string;
+  isHidden: boolean;
+  description: string;
+};
+
+export type Gender = 'F' | 'M';
+
 export interface PokemonDetailResponse {
   id: number;
   name: string;
   types: PokemonType[];
+  abilities: PokemonAbility[];
   genus: string;
+  genders: Gender[];
+  height: number;
+  weight: number;
   description: string;
   evolutionChain: EvolutionChain[];
   image: string;

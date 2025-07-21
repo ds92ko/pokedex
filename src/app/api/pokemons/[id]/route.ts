@@ -4,6 +4,9 @@ import { POKEAPI_BASE_URL, POKEMON_IMAGE_BASE_URL } from '@/constants/api';
 import { POKE_API_REVALIDATE } from '@/constants/pokemons';
 import {
   EvolutionChain,
+  Gender,
+  GenderRate,
+  PokeApiAbilityResponse,
   PokeApiDetailResponse,
   PokeAPIEvolutionChain,
   PokeAPIEvolutionChainResponse,
@@ -52,6 +55,13 @@ async function checkPokemonExists(id: number): Promise<number | null> {
   return res.ok ? id : null;
 }
 
+function getGenders(genderRate: GenderRate): Gender[] {
+  if (genderRate === -1) return [];
+  if (genderRate === 0) return ['M'];
+  if (genderRate === 8) return ['F'];
+  return ['F', 'M'];
+}
+
 export async function GET(_: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
 
@@ -87,9 +97,23 @@ export async function GET(_: NextRequest, { params }: { params: Promise<{ id: st
       })
     );
 
-    const evolutionChain = species.evolution_chain?.url
-      ? await fetchEvolutionChain(species.evolution_chain.url)
-      : [];
+    const abilities = await Promise.all(
+      pokemon.abilities.map(async ({ ability, is_hidden }) => {
+        const abilityRes = await fetch(ability.url, { next: { revalidate: POKE_API_REVALIDATE } });
+        const abilityData: PokeApiAbilityResponse = await abilityRes.json();
+
+        return {
+          name:
+            abilityData.names.find(({ language }) => language.name === 'ko')?.name || ability.name,
+          isHidden: is_hidden,
+          description:
+            abilityData.flavor_text_entries.find(({ language }) => language.name === 'ko')
+              ?.flavor_text || ''
+        };
+      })
+    );
+
+    const evolutionChain = await fetchEvolutionChain(species.evolution_chain.url);
 
     const [prevId, nextId] = await Promise.all([
       checkPokemonExists(+id - 1),
@@ -100,7 +124,11 @@ export async function GET(_: NextRequest, { params }: { params: Promise<{ id: st
       id: pokemon.id,
       name: species.names.find(({ language }) => language.name === 'ko')?.name || pokemon.name,
       types,
+      abilities,
       genus: species.genera.find(({ language }) => language.name === 'ko')?.genus || '',
+      genders: getGenders(species.gender_rate),
+      height: pokemon.height / 10,
+      weight: pokemon.weight / 10,
       description:
         species.flavor_text_entries
           .find(({ language }) => language.name === 'ko')

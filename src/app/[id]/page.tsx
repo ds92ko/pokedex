@@ -1,7 +1,7 @@
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 
 import { fetchPokemonDetail } from '@/api/pokemon';
-import Content from '@/app/[id]/_components/content';
+import DetailContent from '@/app/[id]/_components/detail-content';
 import { POKEMON_DETAIL_QUERY_KEY } from '@/constants/pokemons';
 import { getQueryClient } from '@/lib/tanstack-query/get-query-client';
 
@@ -20,7 +20,7 @@ export default async function DetailPage({ params }: DetailPageProps) {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <Content />
+      <DetailContent />
     </HydrationBoundary>
   );
 }
