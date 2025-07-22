@@ -16,6 +16,7 @@ import {
 } from 'react-icons/bi';
 
 import { fetchPokemonDetail } from '@/api/pokemon';
+import { POKEMON_NAV_IMAGE_SIZE } from '@/app/[id]/_components/detail-content/constants';
 import {
   buttonGroup,
   descriptionDetails,
@@ -34,8 +35,11 @@ import {
   pokemonDescription,
   pokemonImage,
   pokemonName,
-  pokemonNav,
   pokemonNavItem,
+  pokemonNavLink,
+  pokemonNavLinkImage,
+  pokemonNavLinkSpan,
+  pokemonNavLinkText,
   pokemonNavList,
   pokemonNumber,
   textBox
@@ -81,7 +85,6 @@ export default function DetailContent() {
   if (!data) return null;
 
   console.log(data);
-  // TODO: 상세 페이지 UI 작업
 
   const handleShare = async () => {
     if (navigator.share) {
@@ -257,28 +260,56 @@ export default function DetailContent() {
         </ul>
       </Section>
       <Section>
-        <nav className={pokemonNav}>
+        <nav>
           <ul className={pokemonNavList}>
-            {data.prevId && (
-              <li className={pokemonNavItem}>
-                <Link href={`/${data.prevId}`}>
-                  이전 포켓몬
-                  <span>No. {data.prevId.toString().padStart(total.toString().length, '0')}</span>
-                </Link>
-              </li>
-            )}
             <li className={pokemonNavItem}>
-              <Link href="/">목록으로</Link>
-            </li>
-            {data.nextId && (
-              <li className={pokemonNavItem}>
-                <Link href={`/${data.nextId}`}>
-                  <span>
-                    다음 포켓몬 No. {data.nextId.toString().padStart(total.toString().length, '0')}
-                  </span>
+              {data.prev && (
+                <Link
+                  className={pokemonNavLink}
+                  href={`/${data.prev.id}`}
+                >
+                  <Image
+                    className={pokemonNavLinkImage}
+                    src={data.prev.image}
+                    alt={data.prev.name}
+                    width={POKEMON_NAV_IMAGE_SIZE}
+                    height={POKEMON_NAV_IMAGE_SIZE}
+                  />
+                  <div className={pokemonNavLinkText}>
+                    <span className={pokemonNavLinkSpan}>이전</span>
+                    <strong>{data.prev.name}</strong>
+                  </div>
                 </Link>
-              </li>
-            )}
+              )}
+            </li>
+            <li className={pokemonNavItem}>
+              <Link
+                className={pokemonNavLink}
+                href="/"
+              >
+                목록
+              </Link>
+            </li>
+            <li className={pokemonNavItem}>
+              {data.next && (
+                <Link
+                  className={pokemonNavLink}
+                  href={`/${data.next.id}`}
+                >
+                  <Image
+                    className={pokemonNavLinkImage}
+                    src={data.next.image}
+                    alt={data.next.name}
+                    width={POKEMON_NAV_IMAGE_SIZE}
+                    height={POKEMON_NAV_IMAGE_SIZE}
+                  />
+                  <div className={pokemonNavLinkText}>
+                    <span className={pokemonNavLinkSpan}>다음</span>
+                    <strong>{data.next.name}</strong>
+                  </div>
+                </Link>
+              )}
+            </li>
           </ul>
         </nav>
       </Section>

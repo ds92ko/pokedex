@@ -6,6 +6,7 @@ import {
   EvolutionChain,
   Gender,
   GenderRate,
+  NeighboringPokemon,
   PokeApiAbilityResponse,
   PokeApiDetailResponse,
   PokeAPIEvolutionChain,
@@ -46,13 +47,20 @@ async function fetchEvolutionChain(url: string): Promise<EvolutionChain[]> {
   return result;
 }
 
-async function checkPokemonExists(id: number): Promise<number | null> {
-  const res = await fetch(`${POKEAPI_BASE_URL}/pokemon/${id}`, {
-    method: 'HEAD',
+async function getNeighboringPokemon(id: number): Promise<NeighboringPokemon> {
+  const res = await fetch(`${POKEAPI_BASE_URL}/pokemon-species/${id}`, {
     next: { revalidate: POKE_API_REVALIDATE }
   });
 
-  return res.ok ? id : null;
+  if (!res.ok) return null;
+
+  const data: PokeApiSpeciesResponse = await res.json();
+
+  return {
+    id: data.id,
+    name: data.names.find(({ language }) => language.name === 'ko')?.name || '',
+    image: `${POKEMON_IMAGE_BASE_URL}/${data.id}.png`
+  };
 }
 
 function getGenders(genderRate: GenderRate): Gender[] {
@@ -115,9 +123,9 @@ export async function GET(_: NextRequest, { params }: { params: Promise<{ id: st
 
     const evolutionChain = await fetchEvolutionChain(species.evolution_chain.url);
 
-    const [prevId, nextId] = await Promise.all([
-      checkPokemonExists(+id - 1),
-      checkPokemonExists(+id + 1)
+    const [prev, next] = await Promise.all([
+      getNeighboringPokemon(+id - 1),
+      getNeighboringPokemon(+id + 1)
     ]);
 
     const response: PokemonDetailResponse = {
@@ -137,8 +145,8 @@ export async function GET(_: NextRequest, { params }: { params: Promise<{ id: st
           ?.flavor_text.replace(/\n/g, ' ') || '',
       evolutionChain,
       image: `${POKEMON_IMAGE_BASE_URL}/${id}.png`,
-      prevId,
-      nextId
+      prev,
+      next
     };
 
     return NextResponse.json(response);

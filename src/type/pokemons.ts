@@ -270,6 +270,12 @@ export type PokemonAbility = {
 
 export type Gender = 'F' | 'M';
 
+export type NeighboringPokemon = {
+  id: number;
+  name: string;
+  image: string;
+} | null;
+
 export interface PokemonDetailResponse {
   id: number;
   name: string;
@@ -284,8 +290,8 @@ export interface PokemonDetailResponse {
   description: string;
   evolutionChain: EvolutionChain[];
   image: string;
-  prevId: number | null;
-  nextId: number | null;
+  prev: NeighboringPokemon;
+  next: NeighboringPokemon;
 }
 
 export type FetchPokemonDetail = QueryFunction<

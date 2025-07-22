@@ -1,6 +1,7 @@
 import { style } from '@vanilla-extract/css';
 
-import { vars } from '@/styles/vars.css';
+import { POKEMON_NAV_IMAGE_SIZE } from '@/app/[id]/_components/detail-content/constants';
+import { icons, vars } from '@/styles/vars.css';
 
 export const buttonGroup = style({
   display: 'flex',
@@ -141,10 +142,12 @@ export const pokemonAbility = style({
   alignItems: 'center'
 });
 
+const evolutionListGap = '1%';
+
 export const evolutionList = style({
   display: 'flex',
   alignItems: 'center',
-  gap: '1%',
+  gap: evolutionListGap,
   '@media': {
     'screen and (max-width: 480px)': {
       flexDirection: 'column',
@@ -168,7 +171,13 @@ export const evolutionSeparator = style({
 });
 
 export const evolutionItem = style({
-  flexGrow: 1
+  flexGrow: 1,
+  maxWidth: `calc((100% - (${evolutionListGap} * 4) - (${icons.size.lg} * 2)) / 3)`,
+  '@media': {
+    'screen and (max-width: 480px)': {
+      maxWidth: '100%'
+    }
+  }
 });
 
 export const evolutionCard = style({
@@ -180,7 +189,7 @@ export const evolutionCard = style({
   transition: `box-shadow 0.3s ease-out`,
   selectors: {
     '&:hover': {
-      boxShadow: `0 2px 4px ${vars.alpha.shadow}`
+      boxShadow: `0 4px 12px ${vars.alpha.shadow}`
     },
     '&.current': {
       borderColor: vars.colors.secondary,
@@ -208,21 +217,82 @@ export const evolutionPokemon = style({
   fontWeight: vars.fonts.weight.medium
 });
 
-export const pokemonNav = style({});
 export const pokemonNavList = style({
   display: 'grid',
-  gridTemplateColumns: 'repeat(3, 1fr)',
-  gap: vars.spacing.md
+  gridTemplateColumns: '1fr minmax(20%, auto) 1fr'
 });
 
 export const pokemonNavItem = style({
-  border: `1px solid ${vars.colors.border}`,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  border: `1px solid ${vars.colors.white}`,
+  padding: vars.spacing.sm,
+  background: vars.colors.accent,
+  color: vars.colors.white,
+  transition: `background 0.3s ease-out`,
   selectors: {
+    '&:hover': {
+      background: vars.alpha.accent
+    },
+    '&:not(:first-of-type)': {
+      borderLeft: 0
+    },
+    '&:first-of-type': {
+      borderRadius: `${POKEMON_NAV_IMAGE_SIZE}px 0 0 ${POKEMON_NAV_IMAGE_SIZE}px`
+    },
     '&:nth-of-type(2)': {
       textAlign: 'center'
     },
-    '&:nth-of-type(3)': {
-      textAlign: 'right'
+    '&:last-of-type': {
+      textAlign: 'right',
+      borderRadius: `0 ${POKEMON_NAV_IMAGE_SIZE}px ${POKEMON_NAV_IMAGE_SIZE}px 0`
     }
   }
+});
+
+export const pokemonNavLink = style({
+  width: '100%',
+  display: 'flex',
+  alignItems: 'center',
+  gap: vars.spacing.sm,
+  fontWeight: vars.fonts.weight.medium,
+  selectors: {
+    [`${pokemonNavItem}:nth-of-type(2) &`]: {
+      justifyContent: 'center'
+    },
+    [`${pokemonNavItem}:last-of-type &`]: {
+      flexDirection: 'row-reverse'
+    }
+  }
+});
+
+export const pokemonNavLinkImage = style({
+  background: vars.colors.white,
+  borderRadius: '50%',
+  padding: vars.spacing.xs,
+  width: POKEMON_NAV_IMAGE_SIZE,
+  height: POKEMON_NAV_IMAGE_SIZE,
+  '@media': {
+    'screen and (max-width: 480px)': {
+      padding: vars.spacing.xxs,
+      width: 50,
+      height: 50
+    }
+  }
+});
+
+export const pokemonNavLinkText = style({
+  '@media': {
+    'screen and (max-width: 480px)': {
+      display: 'none'
+    }
+  }
+});
+
+export const pokemonNavLinkSpan = style({
+  display: 'inline-block',
+  width: '100%',
+  fontSize: vars.fonts.size.sm,
+  fontWeight: vars.fonts.weight.normal
 });
