@@ -1,4 +1,6 @@
-export const BADGE_ICONS = {
+import { BadgeIcons } from '@/components/common/badges/types';
+
+export const BADGE_ICONS: BadgeIcons = {
   normal: '⚪️', // 노멀: 흰 원
   fire: '🔥', // 불
   water: '💧', // 물방울
@@ -16,5 +18,7 @@ export const BADGE_ICONS = {
   dragon: '🐉', // 드래곤
   dark: '🌑', // 어둠
   steel: '⚙️', // 톱니바퀴
-  fairy: '🧚‍♀️' // 요정
+  fairy: '🧚‍♀️', // 요정
+  legendary: '⭐️', // 전설의 포켓몬
+  mythical: '🦄' // 환상의 포켓몬
 };
