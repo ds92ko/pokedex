@@ -41,7 +41,7 @@ export const tooltipPopupBase = style({
   boxShadow: `0 2px 4px ${vars.alpha.shadow}`,
   opacity: 0,
   visibility: 'hidden',
-  transition: 'opacity 0.2s ease-in-out',
+  transition: 'opacity 0.3s ease-out',
   zIndex: 10,
   selectors: {
     [`${tooltipButton}:hover + &, ${tooltipButton}:focus + &`]: {
