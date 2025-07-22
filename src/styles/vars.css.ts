@@ -94,7 +94,11 @@ const colors = {
 };
 
 const alpha = {
+  primary: 'rgba(217, 76, 76, 0.3)', // 포인트 컬러
+  secondary: 'rgba(243, 201, 59, 0.3)', // 보조 포인트 컬러
+  background: 'rgba(250, 250, 250, 0.5)', // 배경 컬러
   text: 'rgba(51, 51, 51, 0.5)', // 텍스트 컬러
+  caption: 'rgba(119, 119, 119, 0.5)', // 캡션 컬러
   accent: 'rgba(74, 95, 193, 0.7)', // 버튼/링크
   border: 'rgba(224, 224, 224, 0.5)', // 보더 컬러
   shadow: 'rgba(0, 0, 0, 0.1)', // 그림자 색상
