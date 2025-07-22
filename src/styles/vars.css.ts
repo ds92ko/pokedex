@@ -76,6 +76,20 @@ const colors = {
     dark: '#705746', // 악 타입
     steel: '#B7B7CE', // 강철 타입
     fairy: '#D685AD' // 페어리 타입
+  },
+
+  // 카테고리별 색상
+  category: {
+    legendary: {
+      // 전설의 포켓몬
+      background: '#FBC02D',
+      text: '#8B5A00'
+    },
+    mythical: {
+      // 환상의 포켓몬
+      background: '#8CC8FF',
+      text: '#7B1FA2'
+    }
   }
 };
 
@@ -106,10 +120,31 @@ const alpha = {
   }
 };
 
+const gradient = {
+  skeleton: 'linear-gradient(90deg, #eee, #f5f5f5, #eee)',
+  category: {
+    legendary: `linear-gradient(135deg,
+        #FBC02D 0%,
+        #F8E1B0 35%,
+        #FFFFFF 50%,
+        #F8E1B0 65%,
+        #FBC02D 100%
+      );`,
+    mythical: `linear-gradient(135deg,
+        #8CC8FF 0%,
+        #F8BBD0 35%,
+        #FFFFFF 50%,
+        #F8BBD0 65%,
+        #8CC8FF 100%
+      );`
+  }
+};
+
 export const vars = createGlobalTheme(':root', {
   layout,
   fonts,
   spacing,
   colors,
-  alpha
+  alpha,
+  gradient
 });
