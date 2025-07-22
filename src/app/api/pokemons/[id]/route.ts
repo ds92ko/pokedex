@@ -125,6 +125,8 @@ export async function GET(_: NextRequest, { params }: { params: Promise<{ id: st
       name: species.names.find(({ language }) => language.name === 'ko')?.name || pokemon.name,
       types,
       abilities,
+      isLegendary: species.is_legendary,
+      isMythical: species.is_mythical,
       genus: species.genera.find(({ language }) => language.name === 'ko')?.genus || '',
       genders: getGenders(species.gender_rate),
       height: pokemon.height / 10,

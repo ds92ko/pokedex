@@ -54,6 +54,8 @@ export async function GET(request: NextRequest) {
 
         return {
           id: Number(id),
+          isLegendary: species.is_legendary,
+          isMythical: species.is_mythical,
           name: species.names.find(({ language }) => language.name === 'ko')?.name || pokemon.name,
           genus: species.genera.find(({ language }) => language.name === 'ko')?.genus || '',
           description:

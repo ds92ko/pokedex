@@ -211,6 +211,8 @@ export interface PokeAPIEvolutionChainResponse {
 // Next API Route에서 사용하는 타입 정의
 export interface PokemonResultResponse {
   id: number;
+  isLegendary: boolean;
+  isMythical: boolean;
   name: string;
   genus: string;
   description: string;
@@ -273,6 +275,8 @@ export interface PokemonDetailResponse {
   name: string;
   types: PokemonType[];
   abilities: PokemonAbility[];
+  isLegendary: boolean;
+  isMythical: boolean;
   genus: string;
   genders: Gender[];
   height: number;
