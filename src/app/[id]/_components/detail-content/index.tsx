@@ -34,6 +34,9 @@ import {
   pokemonDescription,
   pokemonImage,
   pokemonName,
+  pokemonNav,
+  pokemonNavItem,
+  pokemonNavList,
   pokemonNumber,
   textBox
 } from '@/app/[id]/_components/detail-content/index.css';
@@ -254,27 +257,30 @@ export default function DetailContent() {
         </ul>
       </Section>
       <Section>
-        <ul>
-          {data.prevId && (
-            <li>
-              <Link href={`/${data.prevId}`}>
-                No. {data.prevId.toString().padStart(total.toString().length, '0')}
-                이전 포켓몬
-              </Link>
+        <nav className={pokemonNav}>
+          <ul className={pokemonNavList}>
+            {data.prevId && (
+              <li className={pokemonNavItem}>
+                <Link href={`/${data.prevId}`}>
+                  이전 포켓몬
+                  <span>No. {data.prevId.toString().padStart(total.toString().length, '0')}</span>
+                </Link>
+              </li>
+            )}
+            <li className={pokemonNavItem}>
+              <Link href="/">목록으로</Link>
             </li>
-          )}
-          <li>
-            <Link href="/">목록으로</Link>
-          </li>
-          {data.nextId && (
-            <li>
-              <Link href={`/${data.nextId}`}>
-                No. {data.nextId.toString().padStart(total.toString().length, '0')}
-                다음 포켓몬
-              </Link>
-            </li>
-          )}
-        </ul>
+            {data.nextId && (
+              <li className={pokemonNavItem}>
+                <Link href={`/${data.nextId}`}>
+                  <span>
+                    다음 포켓몬 No. {data.nextId.toString().padStart(total.toString().length, '0')}
+                  </span>
+                </Link>
+              </li>
+            )}
+          </ul>
+        </nav>
       </Section>
     </>
   );

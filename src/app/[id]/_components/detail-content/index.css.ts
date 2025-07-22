@@ -207,3 +207,22 @@ export const evolutionPokemon = style({
   fontSize: vars.fonts.size.md,
   fontWeight: vars.fonts.weight.medium
 });
+
+export const pokemonNav = style({});
+export const pokemonNavList = style({
+  display: 'grid',
+  gridTemplateColumns: 'repeat(3, 1fr)',
+  gap: vars.spacing.md
+});
+
+export const pokemonNavItem = style({
+  border: `1px solid ${vars.colors.border}`,
+  selectors: {
+    '&:nth-of-type(2)': {
+      textAlign: 'center'
+    },
+    '&:nth-of-type(3)': {
+      textAlign: 'right'
+    }
+  }
+});
