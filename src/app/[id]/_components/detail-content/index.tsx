@@ -4,7 +4,9 @@ import { useQuery } from '@tanstack/react-query';
 import Link from 'next/dist/client/link';
 import Image from 'next/image';
 import { notFound, useParams } from 'next/navigation';
+import { Fragment } from 'react';
 import {
+  BiChevronRight,
   BiFemaleSign,
   BiLink,
   BiLock,
@@ -19,7 +21,13 @@ import {
   descriptionDetails,
   descriptionList,
   descriptionTerm,
+  evolutionCard,
+  evolutionImage,
+  evolutionItem,
   evolutionList,
+  evolutionPokemon,
+  evolutionSeparator,
+  evolutionText,
   imageBox,
   infoContent,
   pokemonAbility,
@@ -215,19 +223,33 @@ export default function DetailContent() {
       </Section>
       <Section title="진화 단계">
         <ul className={evolutionList}>
-          {data.evolutionChain.map(evolution => (
-            <li key={evolution.id}>
-              <Link href={`/pokemon/${evolution.id}`}>
-                <div>{evolution.stage}단계</div>
-                <Image
-                  src={evolution.image}
-                  alt={evolution.name}
-                  width="100"
-                  height="100"
-                />
-                <div>{evolution.name}</div>
-              </Link>
-            </li>
+          {data.evolutionChain.map((evolution, index) => (
+            <Fragment key={evolution.id}>
+              {!!index && (
+                <li className={evolutionSeparator}>
+                  <BiChevronRight size={icons.size.lg} />
+                </li>
+              )}
+              <li className={evolutionItem}>
+                <Link
+                  className={`${evolutionCard} ${data.id === evolution.id ? 'current' : ''}`}
+                  href={`/${evolution.id}`}
+                >
+                  <Image
+                    className={evolutionImage}
+                    src={evolution.image}
+                    alt={evolution.name}
+                    width={0}
+                    height={0}
+                    sizes="100vw"
+                  />
+                  <span className={evolutionText}>
+                    {!evolution.stage ? '기본형' : `${evolution.stage}차 진화`}
+                  </span>
+                  <strong className={evolutionPokemon}>{evolution.name}</strong>
+                </Link>
+              </li>
+            </Fragment>
           ))}
         </ul>
       </Section>

@@ -29,7 +29,7 @@ async function fetchEvolutionChain(url: string): Promise<EvolutionChain[]> {
     return speciesData.names.find(({ language }) => language.name === 'ko')?.name || '';
   }
 
-  async function traverse(chain: PokeAPIEvolutionChain, stage = 1) {
+  async function traverse(chain: PokeAPIEvolutionChain, stage = 0) {
     const speciesUrl = chain.species.url;
     const idMatch = speciesUrl.match(/\/pokemon-species\/(\d+)\//);
     const id = idMatch ? parseInt(idMatch[1], 10) : 0;
