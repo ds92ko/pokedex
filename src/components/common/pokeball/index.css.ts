@@ -22,7 +22,7 @@ export const pokeballLine = style({
   left: '50%',
   transform: 'translate3d(-50%, -50%, 0)',
   background: vars.colors.text,
-  zIndex: 1
+  zIndex: 10
 });
 
 export const pokeballButton = style({
@@ -40,5 +40,5 @@ export const pokeballButton = style({
   );`,
   border: `0 solid ${vars.colors.text}`,
   borderRadius: '50%',
-  zIndex: 2
+  zIndex: 20
 });
