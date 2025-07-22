@@ -7,8 +7,7 @@ export const sectionTitle = style({
   alignItems: 'center',
   justifyContent: 'space-between',
   flexWrap: 'wrap',
-  paddingTop: vars.spacing.xxl,
-  paddingBottom: vars.spacing.lg,
+  marginTop: vars.spacing.xxl,
   gap: vars.spacing.sm
 });
 
@@ -18,9 +17,10 @@ export const titleText = style({
 });
 
 export const sectionContent = style({
+  marginBlock: vars.spacing.xxl,
   selectors: {
-    'section:last-of-type &': {
-      paddingBottom: vars.spacing.xxl
+    [`${sectionTitle} + &`]: {
+      marginTop: vars.spacing.lg
     }
   }
 });

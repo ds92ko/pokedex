@@ -6,10 +6,12 @@ export default function Section({ className = '', title, titleContent, children 
   return (
     <section className={className}>
       <Container>
-        <div className={sectionTitle}>
-          <h2 className={titleText}>{title}</h2>
-          {titleContent}
-        </div>
+        {title && (
+          <div className={sectionTitle}>
+            <h2 className={titleText}>{title}</h2>
+            {titleContent}
+          </div>
+        )}
         <div className={sectionContent}>{children}</div>
       </Container>
     </section>
