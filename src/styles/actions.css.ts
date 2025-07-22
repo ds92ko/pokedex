@@ -6,7 +6,6 @@ export const buttonBase = style({
   display: 'inline-flex',
   alignItems: 'center',
   justifyContent: 'center',
-  gap: vars.spacing.xxs,
   background: vars.colors.accent,
   color: vars.colors.white,
   fontWeight: vars.fonts.weight.medium,
@@ -27,6 +26,7 @@ export const button = styleVariants({
   sm: [
     buttonBase,
     {
+      gap: vars.spacing.xxs,
       fontSize: vars.fonts.size.sm,
       padding: `${vars.spacing.xxs} ${vars.spacing.sm}`,
       borderRadius: `calc((${vars.fonts.size.sm} + (${vars.spacing.xxs} * 2)) / 2)`
@@ -35,6 +35,7 @@ export const button = styleVariants({
   md: [
     buttonBase,
     {
+      gap: vars.spacing.xxs,
       fontSize: vars.fonts.size.md,
       padding: `${vars.spacing.xs} ${vars.spacing.md}`,
       borderRadius: `calc((${vars.fonts.size.md} + (${vars.spacing.xs} * 2)) / 2)`
@@ -43,6 +44,7 @@ export const button = styleVariants({
   lg: [
     buttonBase,
     {
+      gap: vars.spacing.xs,
       fontSize: vars.fonts.size.lg,
       padding: `${vars.spacing.sm} ${vars.spacing.lg}`,
       borderRadius: `calc((${vars.fonts.size.lg} + (${vars.spacing.sm} * 2)) / 2)`

@@ -57,7 +57,8 @@ globalStyle('button', {
   padding: 0,
   border: 0,
   outline: 0,
-  background: 'transparent'
+  background: 'transparent',
+  cursor: 'pointer'
 });
 
 globalStyle('input', {
