@@ -4,11 +4,12 @@ import { vars } from '@/styles/vars.css';
 
 export const footer = style({
   position: 'relative',
+  background: vars.colors.background,
   zIndex: 200
 });
 
 export const content = style({
-  paddingBottom: vars.spacing.xl
+  paddingBlock: vars.spacing.xxl
 });
 
 export const copyright = style({
