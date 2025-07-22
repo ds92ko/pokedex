@@ -3,6 +3,7 @@ import { style } from '@vanilla-extract/css';
 import { vars } from '@/styles/vars.css';
 
 export const pokemonCard = style({
+  position: 'relative',
   display: 'flex',
   flexDirection: 'column',
   height: '100%',
@@ -16,15 +17,34 @@ export const pokemonCard = style({
     '&:hover': {
       boxShadow: `0 4px 12px ${vars.alpha.shadow}`,
       transform: 'scale3d(1.02, 1.02, 1)'
+    },
+    '&.legendary': {
+      background: vars.gradient.category.legendary
+    },
+    '&.mythical': {
+      background: vars.gradient.category.mythical
     }
   }
+});
+
+export const pokemonCardBadge = style({
+  position: 'absolute',
+  top: `calc(${vars.spacing.sm} * -1)`,
+  right: `calc(${vars.spacing.sm} * -1)`,
+  zIndex: 20
 });
 
 export const pokemonCardImage = style({
   position: 'relative',
   width: '100%',
   height: 'auto',
-  aspectRatio: '1 / 1'
+  aspectRatio: '1 / 1',
+  zIndex: 10
+});
+
+export const pokemonCardText = style({
+  position: 'relative',
+  zIndex: 10
 });
 
 export const pokemonCardNumber = style({

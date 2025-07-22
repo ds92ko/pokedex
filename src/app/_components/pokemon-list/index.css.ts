@@ -5,7 +5,7 @@ import { vars } from '@/styles/vars.css';
 export const pokemonList = style({
   display: 'grid',
   gridTemplateColumns: 'repeat(4, 1fr)',
-  gap: vars.spacing.md,
+  gap: vars.spacing.lg,
   '@media': {
     'screen and (max-width: 1024px)': {
       gridTemplateColumns: 'repeat(2, 1fr)'
