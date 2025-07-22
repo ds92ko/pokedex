@@ -1,4 +1,4 @@
-import { style } from '@vanilla-extract/css';
+import { style, styleVariants } from '@vanilla-extract/css';
 
 import { fontFamily, vars } from '@/styles/vars.css';
 
@@ -18,6 +18,7 @@ export const content = style({
   alignItems: 'center',
   justifyContent: 'space-between',
   gap: vars.spacing.md,
+  height: '100%',
   paddingBlock: vars.spacing.sm
 });
 
@@ -32,11 +33,36 @@ export const logoLink = style({
   gap: vars.spacing.xs
 });
 
-export const logoText = style({
+export const logoTextBase = style({
+  width: 0,
   fontFamily: `${fontFamily.logo}, sans-serif`,
   fontWeight: vars.fonts.weight.medium,
   fontSize: vars.fonts.size.xxl,
   color: vars.colors.secondary,
   WebkitTextStroke: `2px ${vars.colors.accent}`,
-  paddingBottom: vars.spacing.xs
+  paddingBottom: vars.spacing.xs,
+  transition: 'opacity 0.3s ease-out',
+  '@media': {
+    'screen and (max-width: 480px)': {
+      display: 'none'
+    }
+  }
+});
+
+export const logoText = styleVariants({
+  open: [
+    logoTextBase,
+    {
+      opacity: 0,
+      visibility: 'hidden'
+    }
+  ],
+  close: [
+    logoTextBase,
+    {
+      transitionDelay: '0.3s',
+      opacity: 1,
+      visibility: 'visible'
+    }
+  ]
 });

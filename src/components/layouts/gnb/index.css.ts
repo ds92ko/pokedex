@@ -5,21 +5,28 @@ import { vars } from '@/styles/vars.css';
 export const gnbBase = style({
   position: 'relative',
   transition: 'opacity 0.3s ease-out',
-  zIndex: 100
+  zIndex: 100,
+  '@media': {
+    'screen and (max-width: 1024px)': {
+      display: 'none'
+    }
+  }
 });
 
 export const gnb = styleVariants({
   open: [
     gnbBase,
     {
-      opacity: 0
+      opacity: 0,
+      visibility: 'hidden'
     }
   ],
   close: [
     gnbBase,
     {
       transitionDelay: '0.3s',
-      opacity: 1
+      opacity: 1,
+      visibility: 'visible'
     }
   ]
 });
