@@ -23,6 +23,7 @@ export const tooltipButton = style({
 
 export const tooltipPopup = style({
   width: 'max-content',
+  maxWidth: `calc(100vw - (${vars.spacing.lg} * 2))`,
   fontSize: vars.fonts.size.xxs,
   paddingBlock: vars.spacing.xxs,
   paddingInline: vars.spacing.sm,
