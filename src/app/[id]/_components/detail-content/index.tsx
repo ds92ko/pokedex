@@ -149,6 +149,8 @@ export default function DetailContent() {
               src={data.image}
               alt={data.name}
               fill
+              sizes="100%"
+              priority
             />
           </div>
           <div className={textBox}>

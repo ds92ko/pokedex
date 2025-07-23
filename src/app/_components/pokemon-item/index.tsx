@@ -39,6 +39,8 @@ export default function PokemonItem({ count, result }: PokemonItemProps) {
             src={result.image}
             alt={result.name}
             fill
+            sizes="100%"
+            priority={result.id < 5}
           />
         </div>
         <div className={pokemonCardText}>
