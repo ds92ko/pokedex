@@ -7,7 +7,7 @@ export const searchHistory = style({
   top: vars.layout.header.height,
   left: 0,
   width: '100%',
-  height: `calc(100vh - ${vars.layout.header.height})`,
+  height: `calc(100dvh - ${vars.layout.header.height})`,
   background: vars.colors.white,
   overflow: 'auto',
   zIndex: 300

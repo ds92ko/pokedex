@@ -39,7 +39,7 @@ export const mobileGnbBackdrop = style({
   left: 0,
   display: 'none',
   width: '100%',
-  height: `calc(100vh - ${vars.layout.header.height})`,
+  height: `calc(100dvh - ${vars.layout.header.height})`,
   background: vars.alpha.shadow,
   backdropFilter: 'blur(3px)',
   overflow: 'auto',
