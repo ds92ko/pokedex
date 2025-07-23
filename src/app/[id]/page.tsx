@@ -1,9 +1,9 @@
-import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
+import { Suspense } from 'react';
 
 import { fetchPokemonDetail } from '@/api/pokemon';
 import DetailContent from '@/app/[id]/_components/detail-content';
+import { PrefetchBoundary } from '@/components/query-boundary/prefetch';
 import { POKEMON_DETAIL_QUERY_KEY } from '@/constants/pokemons';
-import { getQueryClient } from '@/lib/tanstack-query/get-query-client';
 
 interface DetailPageProps {
   params: Promise<{ id: string }>;
@@ -11,16 +11,17 @@ interface DetailPageProps {
 
 export default async function DetailPage({ params }: DetailPageProps) {
   const { id } = await params;
-  const queryClient = getQueryClient();
-
-  await queryClient.prefetchQuery({
-    queryKey: POKEMON_DETAIL_QUERY_KEY(id),
-    queryFn: fetchPokemonDetail
-  });
 
   return (
-    <HydrationBoundary state={dehydrate(queryClient)}>
-      <DetailContent />
-    </HydrationBoundary>
+    <Suspense fallback={<div>Loading...</div>}>
+      <PrefetchBoundary
+        options={{
+          queryKey: POKEMON_DETAIL_QUERY_KEY(id),
+          queryFn: fetchPokemonDetail
+        }}
+      >
+        <DetailContent />
+      </PrefetchBoundary>
+    </Suspense>
   );
 }
