@@ -1,5 +1,6 @@
 import { style, styleVariants } from '@vanilla-extract/css';
 
+import { fade, slide } from '@/styles/animations.css';
 import { vars } from '@/styles/vars.css';
 
 export const mobileGnbButtonBase = style({
@@ -33,7 +34,7 @@ export const mobileGnbButton = styleVariants({
   ]
 });
 
-export const mobileGnbBackdrop = style({
+export const mobileGnbBackdropBase = style({
   position: 'fixed',
   top: vars.layout.header.height,
   left: 0,
@@ -42,7 +43,9 @@ export const mobileGnbBackdrop = style({
   height: `calc(100dvh - ${vars.layout.header.height})`,
   background: vars.alpha.shadow,
   backdropFilter: 'blur(3px)',
-  overflow: 'auto',
+  overflow: 'hidden',
+  opacity: 0,
+  willChange: 'opacity',
   zIndex: 300,
   '@media': {
     'screen and (max-width: 1024px)': {
@@ -51,7 +54,22 @@ export const mobileGnbBackdrop = style({
   }
 });
 
-export const mobileGnb = style({
+export const mobileGnbBackdrop = styleVariants({
+  open: [
+    mobileGnbBackdropBase,
+    {
+      animation: `${fade.in} 0.3s ease-in-out forwards`
+    }
+  ],
+  close: [
+    mobileGnbBackdropBase,
+    {
+      animation: `${fade.out} 0.3s ease-in-out forwards`
+    }
+  ]
+});
+
+export const mobileGnbBase = style({
   position: 'absolute',
   top: 0,
   right: 0,
@@ -60,7 +78,24 @@ export const mobileGnb = style({
   height: '100%',
   padding: vars.spacing.md,
   background: vars.colors.white,
-  boxShadow: `-4px 0 8px ${vars.alpha.shadow}`
+  boxShadow: `-4px 0 8px ${vars.alpha.shadow}`,
+  transform: 'translateX(100%)',
+  willChange: 'transform'
+});
+
+export const mobileGnb = styleVariants({
+  open: [
+    mobileGnbBase,
+    {
+      animation: `${slide.in.left} 0.3s ease-in-out forwards`
+    }
+  ],
+  close: [
+    mobileGnbBase,
+    {
+      animation: `${slide.out.right} 0.3s ease-in-out forwards`
+    }
+  ]
 });
 
 export const mobileGnbList = style({

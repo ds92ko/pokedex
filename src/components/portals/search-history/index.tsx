@@ -18,8 +18,11 @@ export default function SearchHistory() {
   const { removeHistory } = useSearchActions();
 
   return (
-    <Portal conditional={open}>
-      <div className={searchHistory}>
+    <Portal
+      conditional={open}
+      delay={300}
+    >
+      <div className={searchHistory[open ? 'open' : 'close']}>
         <Section title="검색 안내">
           <ul>
             <li>포켓몬 도감 번호 기준으로 검색합니다.</li>
