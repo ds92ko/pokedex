@@ -224,11 +224,7 @@ export interface PokemonListResponse {
   results: PokemonResultResponse[];
 }
 
-export type FetchPokemonList = QueryFunction<
-  PokemonListResponse,
-  typeof POKEMON_LIST_QUERY_KEY,
-  number
->;
+export type FetchPokemonList = QueryFunction<PokemonListResponse, typeof POKEMON_LIST_QUERY_KEY>;
 
 export interface EvolutionChain {
   id: number;
