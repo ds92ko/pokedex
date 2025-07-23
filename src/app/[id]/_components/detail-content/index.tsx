@@ -262,8 +262,8 @@ export default function DetailContent() {
       <Section>
         <nav>
           <ul className={pokemonNavList}>
-            <li className={pokemonNavItem}>
-              {data.prev && (
+            <li className={`${pokemonNavItem} ${data.prev ? '' : 'disabled'}`}>
+              {data.prev ? (
                 <Link
                   className={pokemonNavLink}
                   href={`/${data.prev.id}`}
@@ -280,6 +280,14 @@ export default function DetailContent() {
                     <strong>{data.prev.name}</strong>
                   </div>
                 </Link>
+              ) : (
+                <div className={pokemonNavLink}>
+                  <Pokeball size={POKEMON_NAV_IMAGE_SIZE} />
+                  <div className={pokemonNavLinkText}>
+                    <span className={pokemonNavLinkSpan}>이전</span>
+                    <strong>X</strong>
+                  </div>
+                </div>
               )}
             </li>
             <li className={pokemonNavItem}>
@@ -290,8 +298,8 @@ export default function DetailContent() {
                 목록
               </Link>
             </li>
-            <li className={pokemonNavItem}>
-              {data.next && (
+            <li className={`${pokemonNavItem} ${data.next ? '' : 'disabled'}`}>
+              {data.next ? (
                 <Link
                   className={pokemonNavLink}
                   href={`/${data.next.id}`}
@@ -308,6 +316,14 @@ export default function DetailContent() {
                     <strong>{data.next.name}</strong>
                   </div>
                 </Link>
+              ) : (
+                <div className={pokemonNavLink}>
+                  <Pokeball size={POKEMON_NAV_IMAGE_SIZE} />
+                  <div className={pokemonNavLinkText}>
+                    <span className={pokemonNavLinkSpan}>다음</span>
+                    <strong>X</strong>
+                  </div>
+                </div>
               )}
             </li>
           </ul>

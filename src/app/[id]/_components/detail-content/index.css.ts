@@ -232,7 +232,7 @@ export const pokemonNavItem = style({
   color: vars.colors.white,
   transition: `background 0.3s ease-out`,
   selectors: {
-    '&:hover': {
+    '&:hover, &:active, &:focus, &.disabled': {
       background: vars.alpha.accent
     },
     '&:not(:first-of-type)': {
@@ -263,6 +263,9 @@ export const pokemonNavLink = style({
     },
     [`${pokemonNavItem}:last-of-type &`]: {
       flexDirection: 'row-reverse'
+    },
+    [`${pokemonNavItem}.disabled &`]: {
+      cursor: 'not-allowed'
     }
   }
 });
