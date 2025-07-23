@@ -1,6 +1,11 @@
 import { QueryFunction } from '@tanstack/react-query';
 
-import { POKEMON_DETAIL_QUERY_KEY, POKEMON_LIST_QUERY_KEY } from '@/constants/pokemons';
+import {
+  POKEMON_DETAIL_QUERY_KEY,
+  POKEMON_EVOLUTION_QUERY_KEY,
+  POKEMON_LIST_QUERY_KEY,
+  POKEMON_NEIGHBOR_QUERY_KEY
+} from '@/constants/pokemons';
 
 // PokeAPI
 export interface PokeApiListResponse {
@@ -293,4 +298,25 @@ export interface PokemonDetailResponse {
 export type FetchPokemonDetail = QueryFunction<
   PokemonDetailResponse,
   ReturnType<typeof POKEMON_DETAIL_QUERY_KEY>
+>;
+
+export interface EvolutionChainResponse {
+  id: number;
+  evolutionChain: EvolutionChain[];
+}
+
+export type FetchPokemonEvolution = QueryFunction<
+  EvolutionChainResponse,
+  ReturnType<typeof POKEMON_EVOLUTION_QUERY_KEY>
+>;
+
+export interface NeighboringPokemonResponse {
+  id: number;
+  prev: NeighboringPokemon;
+  next: NeighboringPokemon;
+}
+
+export type FetchPokemonNeighbor = QueryFunction<
+  NeighboringPokemonResponse,
+  ReturnType<typeof POKEMON_NEIGHBOR_QUERY_KEY>
 >;
