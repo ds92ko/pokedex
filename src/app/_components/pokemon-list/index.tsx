@@ -25,7 +25,7 @@ export default function PokemonList() {
 
   if (data?.pages[0].count && !total) setTotal(data?.pages[0].count);
 
-  const observerRef = useRef<HTMLLIElement | null>(null);
+  const observerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(entries => {
@@ -38,21 +38,23 @@ export default function PokemonList() {
   }, [fetchNextPage, hasNextPage, isFetchingNextPage]);
 
   return (
-    <ul className={pokemonList}>
-      {data?.pages.flatMap(({ count, results }) =>
-        results.map(result => (
-          <PokemonItem
-            key={result.id}
-            count={count}
-            result={result}
-          />
-        ))
-      )}
-      <li ref={observerRef} />
-      {isFetchingNextPage &&
-        Array(POKEMON_LIST_LIMIT)
-          .fill('pokemon-item-skeleton')
-          .map((val, idx) => <PokemonItemSkeleton key={`${val}-${idx}`} />)}
-    </ul>
+    <>
+      <ul className={pokemonList}>
+        {data?.pages.flatMap(({ count, results }) =>
+          results.map(result => (
+            <PokemonItem
+              key={result.id}
+              count={count}
+              result={result}
+            />
+          ))
+        )}
+        {isFetchingNextPage &&
+          Array(POKEMON_LIST_LIMIT)
+            .fill('pokemon-item-skeleton')
+            .map((val, idx) => <PokemonItemSkeleton key={`${val}-${idx}`} />)}
+      </ul>
+      <div ref={observerRef} />
+    </>
   );
 }
