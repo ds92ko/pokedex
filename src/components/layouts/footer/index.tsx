@@ -15,7 +15,7 @@ export default async function Footer() {
           <div>
             <p className={copyright}>&copy; 2025 Dasom Ko</p>
             <p>
-              This is an unofficial fan project and is not affiliated with{' '}
+              This is an unofficial fan project and is not affiliated with&nbsp;
               <a
                 className={link.sm}
                 href="https://www.nintendo.com"
@@ -23,8 +23,8 @@ export default async function Footer() {
                 rel="noopener noreferrer"
               >
                 Nintendo
-              </a>{' '}
-              or{' '}
+              </a>
+              &nbsp;or&nbsp;
               <a
                 className={link.sm}
                 href="https://www.pokemon.com"
@@ -35,7 +35,7 @@ export default async function Footer() {
               </a>
               .
               <br />
-              Pokémon data is provided by{' '}
+              Pokémon data is provided by&nbsp;
               <a
                 className={link.sm}
                 href="https://pokeapi.co/"
