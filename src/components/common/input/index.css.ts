@@ -34,7 +34,6 @@ export const inputAddon = styleVariants({
 
 export const inputField = style({
   flexGrow: 1,
-  width: '100%',
   paddingInline: vars.spacing.md,
   marginBlock: vars.spacing.xs
 });
