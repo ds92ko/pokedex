@@ -18,7 +18,7 @@ import {
   pokemonName,
   pokemonNumber,
   textBox
-} from '@/app/[id]/_components/detail-content/index.css';
+} from '@/app/[id]/_components/pokemon-profile/index.css';
 import Badges from '@/components/common/badges';
 import Pokeball from '@/components/common/pokeball';
 import Tooltip from '@/components/common/tooltip';
@@ -73,7 +73,7 @@ export default function PokemonProfile() {
             No.{data.id.toString().padStart(total.toString().length, '0')}
           </span>
           <h3 className={pokemonName}>
-            {data.name}
+            <span>{data.name}</span>
             {(data.isLegendary || data.isMythical) && (
               <Badges
                 badges={[
