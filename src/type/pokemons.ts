@@ -236,6 +236,10 @@ export interface EvolutionChain {
   name: string;
   stage: number;
   image: string;
+  from: {
+    id: number;
+    name: string;
+  } | null;
 }
 
 export type PokemonTypeKey =
@@ -289,10 +293,7 @@ export interface PokemonDetailResponse {
   height: number;
   weight: number;
   description: string;
-  evolutionChain: EvolutionChain[];
   image: string;
-  prev: NeighboringPokemon;
-  next: NeighboringPokemon;
 }
 
 export type FetchPokemonDetail = QueryFunction<

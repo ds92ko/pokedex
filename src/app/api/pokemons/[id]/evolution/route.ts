@@ -24,20 +24,30 @@ async function fetchEvolutionChain(url: string): Promise<EvolutionChain[]> {
     return speciesData.names.find(({ language }) => language.name === 'ko')?.name || '';
   }
 
-  async function traverse(chain: PokeAPIEvolutionChain, stage = 0) {
+  async function traverse(
+    chain: PokeAPIEvolutionChain,
+    stage: number = 0,
+    from: {
+      id: number;
+      name: string;
+    } | null = null
+  ) {
     const speciesUrl = chain.species.url;
     const idMatch = speciesUrl.match(/\/pokemon-species\/(\d+)\//);
     const id = idMatch ? parseInt(idMatch[1], 10) : 0;
     const name = await getKoreanName(speciesUrl);
     const image = `${POKEMON_IMAGE_BASE_URL}/${id}.png`;
 
-    result.push({ id, name, stage, image });
+    const evolution = { id, name, stage, image, from };
 
-    for (const evo of chain.evolves_to) await traverse(evo, stage + 1);
+    result.push(evolution);
+
+    for (const evo of chain.evolves_to) {
+      await traverse(evo, stage + 1, { id, name });
+    }
   }
 
   await traverse(data.chain);
-
   return result;
 }
 

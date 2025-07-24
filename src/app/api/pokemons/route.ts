@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+import { getPokemonDescription } from '@/app/api/pokemons/_utils/translate';
 import { POKEAPI_BASE_URL, POKEMON_IMAGE_BASE_URL } from '@/constants/api';
 import { POKE_API_REVALIDATE, POKEMON_LIST_LIMIT } from '@/constants/pokemons';
 import {
@@ -45,12 +46,14 @@ export async function GET(request: NextRequest) {
       })
     );
 
-    const results = list.results
-      .map((pokemon, index) => {
+    const results = await Promise.all(
+      list.results.map(async (pokemon, index) => {
         const id = pokemon.url.split('/').at(-2);
         const species = speciesList[index];
 
         if (!id || !species) return null;
+
+        const description = await getPokemonDescription(species.flavor_text_entries);
 
         return {
           id: Number(id),
@@ -58,18 +61,15 @@ export async function GET(request: NextRequest) {
           isMythical: species.is_mythical,
           name: species.names.find(({ language }) => language.name === 'ko')?.name || pokemon.name,
           genus: species.genera.find(({ language }) => language.name === 'ko')?.genus || '',
-          description:
-            species.flavor_text_entries
-              .find(({ language }) => language.name === 'ko')
-              ?.flavor_text.replace(/\n/g, ' ') || '',
+          description,
           image: `${POKEMON_IMAGE_BASE_URL}/${id}.png`
         };
       })
-      .filter(Boolean) as NonNullable<PokemonResultResponse[]>;
+    );
 
     const response: PokemonListResponse = {
       count: list.count,
-      results
+      results: results.filter(Boolean) as NonNullable<PokemonResultResponse[]>
     };
 
     return NextResponse.json(response);
