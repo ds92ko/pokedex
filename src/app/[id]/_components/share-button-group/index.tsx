@@ -2,7 +2,7 @@
 
 import { BiLink, BiShareAlt } from 'react-icons/bi';
 
-import { buttonGroup } from '@/app/[id]/_components/detail-content/index.css';
+import { buttonGroup } from '@/app/[id]/_components/pokemon-profile/index.css';
 import { button } from '@/styles/actions.css';
 import { icons } from '@/styles/vars.css';
 

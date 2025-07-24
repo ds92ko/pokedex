@@ -1,8 +1,11 @@
 import { Suspense } from 'react';
 
 import { fetchPokemonDetail, fetchPokemonEvolution, fetchPokemonNeighbor } from '@/api/pokemon';
-import DetailContent from '@/app/[id]/_components/detail-content';
+import PokemonEvolution from '@/app/[id]/_components/pokemon-evolution';
+import PokemonEvolutionSkeleton from '@/app/[id]/_components/pokemon-evolution/skeleton';
+import PokemonNavigation from '@/app/[id]/_components/pokemon-nevigation';
 import PokemonProfile from '@/app/[id]/_components/pokemon-profile';
+import PokemonProfileSkeleton from '@/app/[id]/_components/pokemon-profile/skeleton';
 import ShareButtonGroup from '@/app/[id]/_components/share-button-group';
 import Section from '@/components/layouts/section';
 import { PrefetchBoundary } from '@/components/query-boundary/prefetch';
@@ -25,7 +28,7 @@ export default async function DetailPage({ params }: DetailPageProps) {
         title="기본 정보"
         titleContent={<ShareButtonGroup id={id} />}
       >
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<PokemonProfileSkeleton />}>
           <PrefetchBoundary
             options={{
               queryKey: POKEMON_DETAIL_QUERY_KEY(id),
@@ -36,26 +39,31 @@ export default async function DetailPage({ params }: DetailPageProps) {
           </PrefetchBoundary>
         </Suspense>
       </Section>
-      <Suspense fallback={<div>Loading evolution...</div>}>
-        <PrefetchBoundary
-          options={{
-            queryKey: POKEMON_EVOLUTION_QUERY_KEY(id),
-            queryFn: fetchPokemonEvolution
-          }}
-        >
-          <DetailContent />
-        </PrefetchBoundary>
-      </Suspense>
-      <Suspense fallback={<div>Loading neighbors...</div>}>
-        <PrefetchBoundary
-          options={{
-            queryKey: POKEMON_NEIGHBOR_QUERY_KEY(id),
-            queryFn: fetchPokemonNeighbor
-          }}
-        >
-          <DetailContent />
-        </PrefetchBoundary>
-      </Suspense>
+      <Section title="진화 단계">
+        <Suspense fallback={<PokemonEvolutionSkeleton />}>
+          <PrefetchBoundary
+            options={{
+              queryKey: POKEMON_EVOLUTION_QUERY_KEY(id),
+              queryFn: fetchPokemonEvolution
+            }}
+          >
+            <PokemonEvolution />
+          </PrefetchBoundary>
+        </Suspense>
+      </Section>
+      <Section>
+        {/* TODO: 스켈레톤 제작 */}
+        <Suspense fallback={<div>Loading neighbors...</div>}>
+          <PrefetchBoundary
+            options={{
+              queryKey: POKEMON_NEIGHBOR_QUERY_KEY(id),
+              queryFn: fetchPokemonNeighbor
+            }}
+          >
+            <PokemonNavigation />
+          </PrefetchBoundary>
+        </Suspense>
+      </Section>
     </>
   );
 }
