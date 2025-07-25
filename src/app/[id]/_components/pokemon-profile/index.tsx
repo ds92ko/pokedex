@@ -2,7 +2,7 @@
 
 import { useSuspenseQuery } from '@tanstack/react-query';
 import Image from 'next/image';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { BiFemaleSign, BiLock, BiMaleSign, BiQuestionMark } from 'react-icons/bi';
 
 import { fetchPokemonDetail } from '@/api/pokemon';
@@ -23,6 +23,7 @@ import Badges from '@/components/common/badges';
 import Pokeball from '@/components/common/pokeball';
 import Tooltip from '@/components/common/tooltip';
 import { POKEMON_DETAIL_QUERY_KEY } from '@/constants/pokemons';
+import { useDialogActions } from '@/stores/dialog';
 import { usePokemonsContext } from '@/stores/pokemons';
 import { button } from '@/styles/actions.css';
 import { icons, vars } from '@/styles/vars.css';
@@ -47,11 +48,24 @@ const GenderIcon = {
 export default function PokemonProfile() {
   const { id } = useParams();
   const { total } = usePokemonsContext();
+  const { openConfirm } = useDialogActions();
+  const router = useRouter();
 
   const { data } = useSuspenseQuery({
     queryKey: POKEMON_DETAIL_QUERY_KEY(id),
     queryFn: fetchPokemonDetail
   });
+
+  const catchPokemon = async () => {
+    const confirmed = await openConfirm({
+      title: `${data.name}, 넌 내 거야!`,
+      content: '방금 잡은 포켓몬을 확인하러 갈까요?'
+    });
+
+    if (confirmed) {
+      router.push(`/favorites`);
+    }
+  };
 
   return (
     <div className={infoContent}>
@@ -135,10 +149,10 @@ export default function PokemonProfile() {
           type="button"
           className={button.lg}
           style={{ width: '100%' }}
+          onClick={catchPokemon}
         >
           <Pokeball size={30} />
           몬스터볼 던지기
-          {/* {data.name}, 넌 내 거야! */}
         </button>
       </div>
     </div>
