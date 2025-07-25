@@ -85,3 +85,7 @@ export const pokemonNavLinkSpan = style({
   fontSize: vars.fonts.size.sm,
   fontWeight: vars.fonts.weight.normal
 });
+
+export const NeighboringPokemonName = style({
+  display: 'inline-block'
+});

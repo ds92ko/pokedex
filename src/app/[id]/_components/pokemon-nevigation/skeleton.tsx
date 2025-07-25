@@ -1,9 +1,8 @@
-'use client';
-
 import Link from 'next/dist/client/link';
 
 import { POKEMON_NAV_IMAGE_SIZE } from '@/app/[id]/_components/pokemon-nevigation/constants';
 import {
+  NeighboringPokemonName,
   pokemonNavItem,
   pokemonNavLink,
   pokemonNavLinkSpan,
@@ -22,7 +21,7 @@ export default function PokemonNavigationSkeleton() {
             <Pokeball size={POKEMON_NAV_IMAGE_SIZE} />
             <div className={pokemonNavLinkText}>
               <span className={pokemonNavLinkSpan}>이전</span>
-              <strong className={skeleton}></strong>
+              <strong className={`${NeighboringPokemonName} ${skeleton}`}>이전 포켓몬 이름</strong>
             </div>
           </div>
         </li>
@@ -39,7 +38,7 @@ export default function PokemonNavigationSkeleton() {
             <Pokeball size={POKEMON_NAV_IMAGE_SIZE} />
             <div className={pokemonNavLinkText}>
               <span className={pokemonNavLinkSpan}>다음</span>
-              <strong className={skeleton}></strong>
+              <strong className={`${NeighboringPokemonName} ${skeleton}`}>다음 포켓몬 이름</strong>
             </div>
           </div>
         </li>
