@@ -7,13 +7,13 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ start, end, className = '', ...props }, ref) => {
     return (
       <div className={`${inputBox} ${className}`}>
-        {start && <div className={inputAddon.start}>{start}</div>}
+        {start && <div className={inputAddon}>{start}</div>}
         <input
           ref={ref}
           className={inputField}
           {...props}
         />
-        {end && <div className={inputAddon.end}>{end}</div>}
+        {end && <div className={inputAddon}>{end}</div>}
       </div>
     );
   }

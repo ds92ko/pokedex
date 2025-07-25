@@ -1,4 +1,4 @@
-import { style, styleVariants } from '@vanilla-extract/css';
+import { style } from '@vanilla-extract/css';
 
 import { vars } from '@/styles/vars.css';
 
@@ -6,34 +6,21 @@ export const inputBox = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
+  gap: vars.spacing.md,
+  padding: `${vars.spacing.xs} ${vars.spacing.md}`,
   border: `1px solid ${vars.colors.border}`,
   borderRadius: `calc((${vars.fonts.size.md} + (${vars.spacing.xs} * 2)) / 2)`,
-  background: vars.colors.white
+  background: vars.colors.white,
+  width: '100%'
 });
 
-export const inputAddonBase = style({
+export const inputAddon = style({
   flexShrink: 0,
   display: 'flex',
   alignItems: 'center'
 });
 
-export const inputAddon = styleVariants({
-  start: [
-    inputAddonBase,
-    {
-      paddingLeft: vars.spacing.md
-    }
-  ],
-  end: [
-    inputAddonBase,
-    {
-      paddingRight: vars.spacing.md
-    }
-  ]
-});
-
 export const inputField = style({
   flexGrow: 1,
-  paddingInline: vars.spacing.md,
-  marginBlock: vars.spacing.xs
+  width: '100%'
 });

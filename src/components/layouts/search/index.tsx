@@ -5,7 +5,7 @@ import { ChangeEvent, FormEvent, useEffect, useRef } from 'react';
 import { BiSearch } from 'react-icons/bi';
 
 import Input from '@/components/common/input';
-import { searchBar, searchForm } from '@/components/layouts/search/index.css';
+import { searchForm } from '@/components/layouts/search/index.css';
 import SearchHistory from '@/components/portals/search-history';
 import { usePokemonsContext } from '@/stores/pokemons';
 import { useSearchActions, useSearchContext } from '@/stores/search';
@@ -58,7 +58,6 @@ export default function Search() {
         start={<BiSearch size={icons.size.md} />}
         type="search"
         placeholder={open ? '포켓몬 ID를 검색하세요.' : 'Search'}
-        className={searchBar}
         value={value}
         onChange={handleChange}
         onFocus={openSearch}

@@ -2,6 +2,7 @@ import { style, styleVariants } from '@vanilla-extract/css';
 
 const searchFormBase = style({
   transition: 'width 0.3s ease-out',
+  willChange: 'width, position',
   zIndex: 200
 });
 
@@ -17,11 +18,7 @@ export const searchForm = styleVariants({
     searchFormBase,
     {
       position: 'relative',
-      width: 135
+      width: 143
     }
   ]
-});
-
-export const searchBar = style({
-  width: '100%'
 });
