@@ -1,6 +1,6 @@
 import { BiLogoGithub } from 'react-icons/bi';
 
-export const GNB = [
+export const ROUTES = [
   {
     id: 'home',
     href: '/',

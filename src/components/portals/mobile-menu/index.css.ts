@@ -3,39 +3,7 @@ import { style, styleVariants } from '@vanilla-extract/css';
 import { fade, slide } from '@/styles/animations.css';
 import { vars } from '@/styles/vars.css';
 
-export const mobileGnbButtonBase = style({
-  position: 'relative',
-  display: 'none',
-  alignItems: 'center',
-  justifyContent: 'center',
-  willChange: 'opacity, visibility',
-  zIndex: 100,
-  '@media': {
-    'screen and (max-width: 1024px)': {
-      display: 'flex'
-    }
-  }
-});
-
-export const mobileGnbButton = styleVariants({
-  open: [
-    mobileGnbButtonBase,
-    {
-      opacity: 0,
-      visibility: 'hidden'
-    }
-  ],
-  close: [
-    mobileGnbButtonBase,
-    {
-      transitionDelay: '0.3s',
-      opacity: 1,
-      visibility: 'visible'
-    }
-  ]
-});
-
-export const mobileGnbBackdropBase = style({
+export const mobileMenuBackdropBase = style({
   position: 'fixed',
   top: vars.layout.header.height,
   left: 0,
@@ -55,22 +23,22 @@ export const mobileGnbBackdropBase = style({
   }
 });
 
-export const mobileGnbBackdrop = styleVariants({
+export const mobileMenuBackdrop = styleVariants({
   open: [
-    mobileGnbBackdropBase,
+    mobileMenuBackdropBase,
     {
       animation: `${fade.in} 0.3s ease-in-out forwards`
     }
   ],
   close: [
-    mobileGnbBackdropBase,
+    mobileMenuBackdropBase,
     {
       animation: `${fade.out} 0.3s ease-in-out forwards`
     }
   ]
 });
 
-export const mobileGnbBase = style({
+export const mobileMenuBase = style({
   position: 'absolute',
   top: 0,
   right: 0,
@@ -84,29 +52,29 @@ export const mobileGnbBase = style({
   willChange: 'transform'
 });
 
-export const mobileGnb = styleVariants({
+export const mobileMenu = styleVariants({
   open: [
-    mobileGnbBase,
+    mobileMenuBase,
     {
       animation: `${slide.in.left} 0.3s ease-in-out forwards`
     }
   ],
   close: [
-    mobileGnbBase,
+    mobileMenuBase,
     {
       animation: `${slide.out.right} 0.3s ease-in-out forwards`
     }
   ]
 });
 
-export const mobileGnbList = style({
+export const mobileMenuList = style({
   display: 'flex',
   flexDirection: 'column',
   height: '100%',
   gap: vars.spacing.sm
 });
 
-export const mobileGnbItem = style({
+export const mobileMenuItem = style({
   selectors: {
     '&:last-of-type': {
       marginTop: 'auto'
@@ -114,6 +82,6 @@ export const mobileGnbItem = style({
   }
 });
 
-export const mobileGnbLink = style({
+export const mobileMenuLink = style({
   width: '100%'
 });
