@@ -4,6 +4,7 @@ import { fetchPokemonDetail, fetchPokemonEvolution, fetchPokemonNeighbor } from 
 import PokemonEvolution from '@/app/[id]/_components/pokemon-evolution';
 import PokemonEvolutionSkeleton from '@/app/[id]/_components/pokemon-evolution/skeleton';
 import PokemonNavigation from '@/app/[id]/_components/pokemon-nevigation';
+import PokemonNavigationSkeleton from '@/app/[id]/_components/pokemon-nevigation/skeleton';
 import PokemonProfile from '@/app/[id]/_components/pokemon-profile';
 import PokemonProfileSkeleton from '@/app/[id]/_components/pokemon-profile/skeleton';
 import ShareButtonGroup from '@/app/[id]/_components/share-button-group';
@@ -52,8 +53,7 @@ export default async function DetailPage({ params }: DetailPageProps) {
         </Suspense>
       </Section>
       <Section>
-        {/* TODO: 스켈레톤 제작 */}
-        <Suspense fallback={<div>Loading neighbors...</div>}>
+        <Suspense fallback={<PokemonNavigationSkeleton />}>
           <PrefetchBoundary
             options={{
               queryKey: POKEMON_NEIGHBOR_QUERY_KEY(id),
