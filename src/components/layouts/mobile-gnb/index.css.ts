@@ -8,6 +8,7 @@ export const mobileGnbButtonBase = style({
   display: 'none',
   alignItems: 'center',
   justifyContent: 'center',
+  willChange: 'opacity, visibility',
   zIndex: 100,
   '@media': {
     'screen and (max-width: 1024px)': {

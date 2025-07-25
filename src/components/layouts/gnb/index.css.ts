@@ -5,6 +5,7 @@ import { vars } from '@/styles/vars.css';
 export const gnbBase = style({
   position: 'relative',
   transition: 'opacity 0.3s ease-out',
+  willChange: 'opacity, visibility',
   zIndex: 100,
   '@media': {
     'screen and (max-width: 1024px)': {
