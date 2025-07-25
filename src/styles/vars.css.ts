@@ -101,6 +101,7 @@ const alpha = {
   text: 'rgba(51, 51, 51, 0.5)', // 텍스트 컬러
   caption: 'rgba(119, 119, 119, 0.5)', // 캡션 컬러
   accent: 'rgba(74, 95, 193, 0.7)', // 버튼/링크
+  accentSoft: 'rgba(74, 95, 193, 0.3)', // 버튼/링크 연한 버전
   border: 'rgba(224, 224, 224, 0.5)', // 보더 컬러
   shadow: 'rgba(0, 0, 0, 0.1)', // 그림자 색상
   type: {

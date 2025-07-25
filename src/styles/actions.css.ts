@@ -20,6 +20,9 @@ export const buttonBase = style({
     '&:not(:disabled):hover': {
       background: vars.alpha.accent
     },
+    '&.outline:not(:disabled):hover': {
+      background: vars.alpha.accentSoft
+    },
     '&:disabled': {
       cursor: 'not-allowed',
       background: vars.alpha.border,

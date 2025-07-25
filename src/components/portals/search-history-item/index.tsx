@@ -57,7 +57,7 @@ export default function SearchHistoryItem({ history }: HistoryItemProps) {
           </div>
         </div>
         <span
-          className={button.sm}
+          className={`${button.sm} outline`}
           onClick={e => {
             e.stopPropagation();
             removeHistory(id);
