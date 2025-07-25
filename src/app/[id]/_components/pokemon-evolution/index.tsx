@@ -16,7 +16,6 @@ import {
   evolutionTHead,
   evolutionTHeadCell
 } from '@/app/[id]/_components/pokemon-evolution/index.css';
-import { assignGridRows } from '@/app/[id]/_components/pokemon-evolution/utils';
 import { POKEMON_EVOLUTION_QUERY_KEY } from '@/constants/pokemons';
 import { usePokemonsContext } from '@/stores/pokemons';
 
@@ -28,8 +27,6 @@ export default function PokemonEvolution() {
     queryKey: POKEMON_EVOLUTION_QUERY_KEY(id),
     queryFn: fetchPokemonEvolution
   });
-
-  const positionedData = assignGridRows(data.evolutionChain);
 
   return (
     <div className={evolutionTable}>
@@ -44,7 +41,7 @@ export default function PokemonEvolution() {
         ))}
       </ul>
       <ul className={evolutionTbody}>
-        {positionedData.map(evolution => {
+        {data.evolutionChain.map(evolution => {
           return (
             <li
               key={evolution.id}

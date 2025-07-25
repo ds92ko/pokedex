@@ -7,7 +7,8 @@ import {
   EvolutionChainResponse,
   PokeAPIEvolutionChain,
   PokeAPIEvolutionChainResponse,
-  PokeApiSpeciesResponse
+  PokeApiSpeciesResponse,
+  PositionedEvolutionChain
 } from '@/type/pokemons';
 
 async function fetchEvolutionChain(url: string): Promise<EvolutionChain[]> {
@@ -51,6 +52,67 @@ async function fetchEvolutionChain(url: string): Promise<EvolutionChain[]> {
   return result;
 }
 
+function assignEvolutionGrid(nodes: EvolutionChain[]): PositionedEvolutionChain[] {
+  const nodeMap = new Map<number, EvolutionChain>();
+  nodes.forEach(n => nodeMap.set(n.id, n));
+
+  const childrenMap = new Map<number | null, EvolutionChain[]>();
+  nodes.forEach(n => {
+    const parentId = n.from?.id || null;
+    if (!childrenMap.has(parentId)) childrenMap.set(parentId, []);
+    childrenMap.get(parentId)!.push(n);
+  });
+
+  const positionedNodes: PositionedEvolutionChain[] = [];
+  let rowCounter = 1;
+
+  const assignedRows = new Map<number, number>();
+
+  function dfs(currentId: number | null): number {
+    const children = childrenMap.get(currentId) || [];
+
+    if (children.length === 0) {
+      const leafNode = nodeMap.get(currentId!);
+      if (!leafNode) return rowCounter++;
+
+      const row = rowCounter++;
+      positionedNodes.push({
+        ...leafNode,
+        gridColumn: leafNode.stage + 1,
+        gridRow: row
+      });
+
+      assignedRows.set(leafNode.id, row);
+      return row;
+    }
+
+    const childRows: number[] = [];
+    for (const child of children) {
+      const childRow = dfs(child.id);
+      childRows.push(childRow);
+    }
+
+    const minChildRow = Math.min(...childRows);
+
+    if (currentId !== null) {
+      const currentNode = nodeMap.get(currentId)!;
+      positionedNodes.push({
+        ...currentNode,
+        gridColumn: currentNode.stage + 1,
+        gridRow: minChildRow
+      });
+
+      assignedRows.set(currentNode.id, minChildRow);
+    }
+
+    return minChildRow;
+  }
+
+  dfs(null);
+
+  return positionedNodes;
+}
+
 export async function GET(_: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
 
@@ -71,7 +133,7 @@ export async function GET(_: NextRequest, { params }: { params: Promise<{ id: st
 
     const response: EvolutionChainResponse = {
       id: species.id,
-      evolutionChain
+      evolutionChain: assignEvolutionGrid(evolutionChain)
     };
 
     return NextResponse.json(response);

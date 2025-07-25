@@ -242,6 +242,11 @@ export interface EvolutionChain {
   } | null;
 }
 
+export interface PositionedEvolutionChain extends EvolutionChain {
+  gridColumn: number;
+  gridRow: number;
+}
+
 export type PokemonTypeKey =
   | 'normal'
   | 'fire'
@@ -303,7 +308,7 @@ export type FetchPokemonDetail = QueryFunction<
 
 export interface EvolutionChainResponse {
   id: number;
-  evolutionChain: EvolutionChain[];
+  evolutionChain: PositionedEvolutionChain[];
 }
 
 export type FetchPokemonEvolution = QueryFunction<
