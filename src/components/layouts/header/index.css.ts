@@ -34,7 +34,6 @@ export const logoLink = style({
 });
 
 export const logoTextBase = style({
-  width: 0,
   fontFamily: `${fontFamily.logo}, sans-serif`,
   fontWeight: vars.fonts.weight.medium,
   fontSize: vars.fonts.size.xxl,
@@ -42,6 +41,7 @@ export const logoTextBase = style({
   WebkitTextStroke: `2px ${vars.colors.accent}`,
   paddingBottom: vars.spacing.xs,
   transition: 'opacity 0.3s ease-out',
+  willChange: 'opacity, visibility, width',
   '@media': {
     'screen and (max-width: 480px)': {
       display: 'none'
@@ -54,7 +54,8 @@ export const logoText = styleVariants({
     logoTextBase,
     {
       opacity: 0,
-      visibility: 'hidden'
+      visibility: 'hidden',
+      width: 0
     }
   ],
   close: [
@@ -62,7 +63,8 @@ export const logoText = styleVariants({
     {
       transitionDelay: '0.3s',
       opacity: 1,
-      visibility: 'visible'
+      visibility: 'visible',
+      width: 'max-content'
     }
   ]
 });
