@@ -15,6 +15,8 @@ export function assignGridRows(nodes: EvolutionChain[]): PositionedEvolution[] {
   const positionedNodes: PositionedEvolution[] = [];
   let rowCounter = 1;
 
+  const assignedRows = new Map<number, number>();
+
   function dfs(currentId: number | null): number {
     const children = childrenMap.get(currentId) || [];
 
@@ -22,12 +24,15 @@ export function assignGridRows(nodes: EvolutionChain[]): PositionedEvolution[] {
       const leafNode = nodeMap.get(currentId!);
       if (!leafNode) return rowCounter++;
 
+      const row = rowCounter++;
       positionedNodes.push({
         ...leafNode,
         gridColumn: leafNode.stage + 1,
-        gridRow: rowCounter
+        gridRow: row
       });
-      return rowCounter++;
+
+      assignedRows.set(leafNode.id, row);
+      return row;
     }
 
     const childRows: number[] = [];
@@ -45,6 +50,8 @@ export function assignGridRows(nodes: EvolutionChain[]): PositionedEvolution[] {
         gridColumn: currentNode.stage + 1,
         gridRow: minChildRow
       });
+
+      assignedRows.set(currentNode.id, minChildRow);
     }
 
     return minChildRow;
