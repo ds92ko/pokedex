@@ -6,6 +6,7 @@ import { buttonGroup } from '@/app/[id]/_components/pokemon-profile/index.css';
 import { button } from '@/styles/actions.css';
 import { icons } from '@/styles/vars.css';
 
+// TODO: alert을 Dialog 혹은 Toast로 변경
 export default function ShareButtonGroup({ id }: { id: string }) {
   const handleShare = async () => {
     if (navigator.share) {
@@ -37,6 +38,7 @@ export default function ShareButtonGroup({ id }: { id: string }) {
       alert('링크 복사에 실패했습니다. 다시 시도해주세요.');
     }
   };
+
   return (
     <div className={buttonGroup}>
       <button
