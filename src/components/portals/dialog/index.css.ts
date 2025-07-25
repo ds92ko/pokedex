@@ -38,6 +38,7 @@ export const DialogBackdrop = styleVariants({
 export const dialog = style({
   width: 'max-content',
   maxWidth: '80%',
+  minWidth: '50%',
   padding: vars.spacing.lg,
   background: vars.colors.white,
   border: `1px solid ${vars.colors.border}`,
