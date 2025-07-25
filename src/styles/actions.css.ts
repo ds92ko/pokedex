@@ -8,9 +8,15 @@ export const buttonBase = style({
   justifyContent: 'center',
   background: vars.colors.accent,
   color: vars.colors.white,
+  border: '1px solid transparent',
   fontWeight: vars.fonts.weight.medium,
   transition: 'background 0.3s ease-out, color 0.3s ease-out',
   selectors: {
+    '&.outline': {
+      background: vars.colors.white,
+      color: vars.colors.accent,
+      border: `1px solid ${vars.colors.accent}`
+    },
     '&:not(:disabled):hover': {
       background: vars.alpha.accent
     },

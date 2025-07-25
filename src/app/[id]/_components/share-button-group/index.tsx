@@ -3,39 +3,65 @@
 import { BiLink, BiShareAlt } from 'react-icons/bi';
 
 import { buttonGroup } from '@/app/[id]/_components/pokemon-profile/index.css';
+import { useDialogActions } from '@/stores/dialog';
 import { button } from '@/styles/actions.css';
 import { icons } from '@/styles/vars.css';
 
-// TODO: alert을 Dialog 혹은 Toast로 변경
+const action = (type: 'share' | 'copy') => (type === 'share' ? '공유' : '복사');
+
 export default function ShareButtonGroup({ id }: { id: string }) {
+  const { openAlert } = useDialogActions();
+
+  const unsupportedAlert = (type: 'share' | 'copy') =>
+    openAlert({
+      title: `${action(type)} 불가`,
+      content: `이 브라우저는 ${action(type)} 기능을 지원하지 않습니다.`
+    });
+
+  const failureAlert = (type: 'share' | 'copy', error?: Error) => {
+    // TODO: 취소일 경우 Toast로 변경
+    const result = error?.name === 'AbortError' ? '취소' : '실패';
+    const postposition = error?.name === 'AbortError' ? '를' : '에';
+    openAlert({
+      title: `${action(type)} ${result}`,
+      content: `${action(type)}${postposition} ${result}했습니다. 다시 시도해주세요.`
+    });
+  };
+
+  // TODO: Toast로 변경
+  const successAlert = (type: 'share' | 'copy') =>
+    openAlert({
+      title: `${action(type)} 성공`,
+      content: `${action(type)}가 성공적으로 완료되었습니다.`
+    });
+
   const handleShare = async () => {
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: `Pokédex`,
-          text: `Check out No.${id} on Pokédex!`,
-          url: window.location.href
-        });
-      } catch (err) {
-        console.warn('공유 취소 또는 실패:', err);
-        alert('공유에 실패했습니다. 다시 시도해주세요.');
-      }
-    } else {
-      alert('이 브라우저는 공유 기능을 지원하지 않습니다.');
+    if (!navigator.share) {
+      unsupportedAlert('share');
+      return;
+    }
+    try {
+      await navigator.share({
+        title: `Pokédex`,
+        text: `Check out No.${id} on Pokédex!`,
+        url: window.location.href
+      });
+      successAlert('share');
+    } catch (error) {
+      failureAlert('share', error as Error);
     }
   };
 
   const handleCopyLink = async () => {
     if (!navigator.clipboard) {
-      alert('이 브라우저는 클립보드 API를 지원하지 않습니다.');
+      unsupportedAlert('copy');
       return;
     }
     try {
       await navigator.clipboard.writeText(window.location.href);
-      alert('링크가 복사되었습니다.');
-    } catch (err) {
-      console.log(err);
-      alert('링크 복사에 실패했습니다. 다시 시도해주세요.');
+      successAlert('copy');
+    } catch {
+      failureAlert('copy');
     }
   };
 

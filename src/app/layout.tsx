@@ -4,6 +4,7 @@ import { ReactNode } from 'react';
 import { cherryBombOne, dongle } from '@/app/fonts';
 import Footer from '@/components/layouts/footer';
 import Header from '@/components/layouts/header';
+import Dialog from '@/components/portals/dialog';
 import OverlayScrollbar from '@/lib/overlay-scrollbar/overlay-scrollbar';
 import { QueryProvider } from '@/lib/tanstack-query/query-provider';
 import { main } from '@/styles/layout.css';
@@ -35,7 +36,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
             <Header />
             <main className={main}>{children}</main>
             <Footer />
-            <div id="portal" />
+            <div id="portal">
+              <Dialog />
+            </div>
           </OverlayScrollbar>
         </QueryProvider>
       </body>
