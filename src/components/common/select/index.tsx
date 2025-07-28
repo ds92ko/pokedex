@@ -24,7 +24,13 @@ import {
 import { SelectProps } from '@/components/common/select/types';
 import { icons, vars } from '@/styles/vars.css';
 
-export default function Select({ options, placeholder = '', selected, onChange }: SelectProps) {
+export default function Select({
+  options,
+  placeholder = '',
+  selected,
+  onChange,
+  disabled
+}: SelectProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const { refs, floatingStyles, context } = useFloating({
@@ -41,7 +47,9 @@ export default function Select({ options, placeholder = '', selected, onChange }
     whileElementsMounted: autoUpdate
   });
 
-  const click = useClick(context);
+  const click = useClick(context, {
+    enabled: !disabled
+  });
   const dismiss = useDismiss(context);
   const role = useRole(context, {
     role: 'listbox'
@@ -60,6 +68,7 @@ export default function Select({ options, placeholder = '', selected, onChange }
           end={
             isOpen ? <BiChevronUp size={icons.size.md} /> : <BiChevronDown size={icons.size.md} />
           }
+          disabled={disabled}
           readOnly
           value={options.find(option => option.value === selected)?.label || ''}
           placeholder={placeholder}

@@ -11,7 +11,13 @@ export const inputBox = style({
   border: `1px solid ${vars.colors.border}`,
   borderRadius: `calc((${vars.fonts.size.md} + (${vars.spacing.xs} * 2)) / 2)`,
   background: vars.colors.white,
-  width: '100%'
+  width: '100%',
+  selectors: {
+    '&.disabled': {
+      background: vars.colors.background,
+      color: vars.alpha.text
+    }
+  }
 });
 
 export const inputAddon = style({

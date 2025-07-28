@@ -6,4 +6,5 @@ export interface SelectProps {
   placeholder?: string;
   selected?: string;
   onChange?: (value: string) => void;
+  disabled?: boolean;
 }

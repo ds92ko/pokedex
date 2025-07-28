@@ -4,13 +4,14 @@ import { inputAddon, inputBox, inputField } from '@/components/common/input/inde
 import { InputProps } from '@/components/common/input/types';
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ start, end, className = '', ...props }, ref) => {
+  ({ start, end, disabled, className = '', ...props }, ref) => {
     return (
-      <div className={`${inputBox} ${className}`}>
+      <div className={`${inputBox} ${disabled ? 'disabled' : ''} ${className}`}>
         {start && <div className={inputAddon}>{start}</div>}
         <input
           ref={ref}
           className={inputField}
+          disabled={disabled}
           {...props}
         />
         {end && <div className={inputAddon}>{end}</div>}
