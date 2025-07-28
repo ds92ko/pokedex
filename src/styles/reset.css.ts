@@ -58,6 +58,7 @@ globalStyle('button', {
   border: 0,
   outline: 0,
   background: 'transparent',
+  color: 'inherit',
   cursor: 'pointer'
 });
 
