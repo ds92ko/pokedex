@@ -1,6 +1,9 @@
+import { PokemonCategory } from '@/type/pokemons';
+
 export interface FavoritePokemon {
   id: number;
   name: string;
+  category: PokemonCategory | null;
   image: string;
   datetime: string;
 }

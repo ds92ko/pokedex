@@ -214,6 +214,8 @@ export interface PokeAPIEvolutionChainResponse {
 }
 
 // Next API Route에서 사용하는 타입 정의
+export type PokemonCategory = 'legendary' | 'mythical';
+
 export interface PokemonResultResponse {
   id: number;
   isLegendary: boolean;

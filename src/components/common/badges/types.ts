@@ -1,6 +1,4 @@
-import { PokemonTypeKey } from '@/type/pokemons';
-
-type PokemonCategory = 'legendary' | 'mythical';
+import { PokemonCategory, PokemonTypeKey } from '@/type/pokemons';
 
 export interface TypeBadge {
   kind?: 'type';

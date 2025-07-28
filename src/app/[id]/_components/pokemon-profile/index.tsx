@@ -81,7 +81,11 @@ export default function PokemonProfile() {
   };
 
   const catchPokemon = async () => {
-    addFavorite({ id: data.id, name: data.name });
+    addFavorite({
+      id: data.id,
+      name: data.name,
+      category: data.isLegendary ? 'legendary' : data.isMythical ? 'mythical' : null
+    });
     const confirmed = await openConfirm({
       title: `${data.name}, 넌 내 거야!`,
       content: '방금 잡은 포켓몬을 확인하러 갈까요?',

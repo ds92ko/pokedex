@@ -18,6 +18,7 @@ const useFavoritesStore = create<FavoritesStore>()(
                 {
                   ...pokemon,
                   image: `${POKEMON_IMAGE_BASE_URL}/${pokemon.id}.png`,
+                  category: pokemon.category,
                   datetime: new Date().toISOString()
                 },
                 ...state.context.favorites
