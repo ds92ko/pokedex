@@ -3,7 +3,7 @@ import Section from '@/components/layouts/section';
 
 export default function FavoritesPage() {
   return (
-    <Section title="Favorites">
+    <Section title="포획한 포켓몬">
       <FavoriteList />
     </Section>
   );
