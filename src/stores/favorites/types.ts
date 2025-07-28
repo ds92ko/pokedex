@@ -15,5 +15,6 @@ export interface FavoritesStore {
   actions: {
     addFavorite: (pokemon: Omit<FavoritePokemon, 'datetime' | 'image'>) => void;
     removeFavorite: (id?: FavoritePokemon['id']) => void;
+    clearFavorites: () => void;
   };
 }

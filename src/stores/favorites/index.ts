@@ -32,6 +32,9 @@ const useFavoritesStore = create<FavoritesStore>()(
               favorites: state.context.favorites.filter(favorite => favorite.id !== id)
             }
           }));
+        },
+        clearFavorites: () => {
+          set({ context: { favorites: [] } });
         }
       }
     }),
