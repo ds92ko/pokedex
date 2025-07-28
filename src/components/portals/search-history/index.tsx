@@ -1,16 +1,16 @@
 'use client';
 
-import { BiError, BiTrash } from 'react-icons/bi';
+import { BiTrash } from 'react-icons/bi';
 
+import NoData from '@/components/common/no-data';
 import Section from '@/components/layouts/section';
 import Portal from '@/components/portals/portal';
-import { SEARCH_HISTORY_IMAGE_SIZE } from '@/components/portals/search-history/constants';
-import { noSearchHistory, searchHistory } from '@/components/portals/search-history/index.css';
+import { searchHistory } from '@/components/portals/search-history/index.css';
 import SearchHistoryItem from '@/components/portals/search-history-item';
 import { usePokemonsContext } from '@/stores/pokemons';
 import { useSearchActions, useSearchContext } from '@/stores/search';
 import { button } from '@/styles/actions.css';
-import { icons, vars } from '@/styles/vars.css';
+import { icons } from '@/styles/vars.css';
 
 export default function SearchHistory() {
   const { total } = usePokemonsContext();
@@ -52,13 +52,7 @@ export default function SearchHistory() {
               ))}
             </ul>
           ) : (
-            <div className={noSearchHistory}>
-              <BiError
-                size={SEARCH_HISTORY_IMAGE_SIZE}
-                color={vars.colors.primary}
-              />
-              <p>검색 기록이 없습니다.</p>
-            </div>
+            <NoData>검색 기록이 없습니다.</NoData>
           )}
         </Section>
       </div>
