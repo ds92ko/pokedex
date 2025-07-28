@@ -1,7 +1,8 @@
 export interface FavoritePokemon {
   id: number;
-  datetime: string;
   name: string;
+  image: string;
+  datetime: string;
 }
 
 export interface FavoritesStore {
@@ -9,7 +10,7 @@ export interface FavoritesStore {
     favorites: FavoritePokemon[];
   };
   actions: {
-    addFavorite: (pokemon: Omit<FavoritePokemon, 'datetime'>) => void;
+    addFavorite: (pokemon: Omit<FavoritePokemon, 'datetime' | 'image'>) => void;
     removeFavorite: (id?: FavoritePokemon['id']) => void;
   };
 }

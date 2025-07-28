@@ -22,11 +22,14 @@ import {
 import Badges from '@/components/common/badges';
 import Pokeball from '@/components/common/pokeball';
 import Tooltip from '@/components/common/tooltip';
+import { releaseMessage } from '@/constants/favorite';
 import { POKEMON_DETAIL_QUERY_KEY } from '@/constants/pokemons';
 import { useDialogActions } from '@/stores/dialog';
+import { useFavoritesActions, useFavoritesContext } from '@/stores/favorites';
 import { usePokemonsContext } from '@/stores/pokemons';
 import { button } from '@/styles/actions.css';
 import { icons, vars } from '@/styles/vars.css';
+import { postposition } from '@/utils/postposition';
 
 const GenderIcon = {
   F: (
@@ -48,7 +51,9 @@ const GenderIcon = {
 export default function PokemonProfile() {
   const { id } = useParams();
   const { total } = usePokemonsContext();
-  const { openConfirm } = useDialogActions();
+  const { openAlert, openConfirm } = useDialogActions();
+  const { favorites } = useFavoritesContext();
+  const { addFavorite, removeFavorite } = useFavoritesActions();
   const router = useRouter();
 
   const { data } = useSuspenseQuery({
@@ -56,15 +61,36 @@ export default function PokemonProfile() {
     queryFn: fetchPokemonDetail
   });
 
-  const catchPokemon = async () => {
+  const isFavorite = favorites.some(favorite => favorite.id === data.id);
+
+  const releasePokemon = async () => {
     const confirmed = await openConfirm({
-      title: `${data.name}, 넌 내 거야!`,
-      content: '방금 잡은 포켓몬을 확인하러 갈까요?'
+      title: `${postposition(data.name, '과')} 작별하기`,
+      content: releaseMessage[Math.floor(Math.random() * releaseMessage.length)],
+      cancelLabel: '다시 생각하기',
+      confirmLabel: '놓아주기'
     });
 
-    if (confirmed) {
-      router.push(`/favorites`);
-    }
+    if (!confirmed) return;
+    removeFavorite(data.id);
+
+    openAlert({
+      title: `바이바이, ${data.name}!`,
+      content: `${postposition(data.name, '이')} 떠났어요.`
+    });
+  };
+
+  const catchPokemon = async () => {
+    addFavorite({ id: data.id, name: data.name });
+    const confirmed = await openConfirm({
+      title: `${data.name}, 넌 내 거야!`,
+      content: '방금 잡은 포켓몬을 확인하러 갈까요?',
+      cancelLabel: '계속 도감보기',
+      confirmLabel: '확인하러 가기'
+    });
+
+    if (!confirmed) return;
+    router.push(`/favorites`);
   };
 
   return (
@@ -115,7 +141,7 @@ export default function PokemonProfile() {
             {data.abilities.map(({ name, isHidden, description }) => (
               <Tooltip
                 key={name}
-                content={`${isHidden ? '히든 특성' : '일반 특성'} | ${description}`}
+                content={`${isHidden ? '히든' : '일반'} 특성 | ${description}`}
               >
                 <span className={pokemonAbility}>
                   {isHidden && (
@@ -149,10 +175,10 @@ export default function PokemonProfile() {
           type="button"
           className={button.lg}
           style={{ width: '100%' }}
-          onClick={catchPokemon}
+          onClick={isFavorite ? releasePokemon : catchPokemon}
         >
           <Pokeball size={30} />
-          몬스터볼 던지기
+          {isFavorite ? '포켓몬 놓아주기' : '몬스터볼 던지기'}
         </button>
       </div>
     </div>
