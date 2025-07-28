@@ -25,8 +25,11 @@ export const buttonBase = style({
     },
     '&:disabled': {
       cursor: 'not-allowed',
-      background: vars.alpha.border,
+      background: vars.colors.background,
       color: vars.alpha.text
+    },
+    '&.outline:disabled': {
+      borderColor: vars.colors.border
     }
   }
 });
