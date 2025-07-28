@@ -15,12 +15,12 @@ const useFavoritesStore = create<FavoritesStore>()(
           set(state => ({
             context: {
               favorites: [
-                ...state.context.favorites,
                 {
                   ...pokemon,
                   image: `${POKEMON_IMAGE_BASE_URL}/${pokemon.id}.png`,
                   datetime: new Date().toISOString()
-                }
+                },
+                ...state.context.favorites
               ]
             }
           }));
