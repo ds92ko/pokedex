@@ -14,8 +14,7 @@ export const queryClientInstance = () =>
         enabled: true // 기본 자동 실행
       },
       dehydrate: {
-        shouldDehydrateQuery: (query: Query) =>
-          defaultShouldDehydrateQuery(query) || query.state.status === 'pending'
+        shouldDehydrateQuery: (query: Query) => defaultShouldDehydrateQuery(query)
       }
     }
   });

@@ -73,8 +73,7 @@ export async function GET(request: NextRequest) {
     };
 
     return NextResponse.json(response);
-  } catch (error) {
-    console.error('Server error in /api/pokemons:', error);
+  } catch {
     return NextResponse.json({ message: 'Internal Server Error' }, { status: 500 });
   }
 }

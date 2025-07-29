@@ -1,3 +1,5 @@
+import { notFound } from 'next/navigation';
+
 import { getPokemonDescription } from '@/app/api/pokemons/_utils/translate';
 import { POKEAPI_BASE_URL } from '@/constants/api';
 import { POKE_API_REVALIDATE } from '@/constants/pokemons';
@@ -20,12 +22,11 @@ export const fetchPokemonList: FetchPokemonList = async ({ pageParam = 0 }) => {
       }
     );
 
+    if (res.status === 404) notFound();
     if (!res.ok) throw new Error(`Failed to fetch Pokémon list: ${res.status} ${res.statusText}`);
 
     return res.json();
   } catch (error) {
-    console.error('Error fetching Pokémon list:', error);
-
     throw error;
   }
 };
@@ -38,6 +39,7 @@ export const fetchPokemonMetadata = async (id: string) => {
       }
     });
 
+    if (res.status === 404) notFound();
     if (!res.ok) throw new Error(`Failed to fetch Pokémon name: ${res.status} ${res.statusText}`);
 
     const data: PokeApiSpeciesResponse = await res.json();
@@ -48,8 +50,6 @@ export const fetchPokemonMetadata = async (id: string) => {
       description
     };
   } catch (error) {
-    console.error('Error fetching Pokémon name:', error);
-
     throw error;
   }
 };
@@ -64,12 +64,11 @@ export const fetchPokemonDetail: FetchPokemonDetail = async ({ queryKey }) => {
       }
     });
 
+    if (res.status === 404) notFound();
     if (!res.ok) throw new Error(`Failed to fetch Pokémon detail: ${res.status} ${res.statusText}`);
 
     return res.json();
   } catch (error) {
-    console.error('Error fetching Pokémon detail:', error);
-
     throw error;
   }
 };
@@ -84,13 +83,12 @@ export const fetchPokemonEvolution: FetchPokemonEvolution = async ({ queryKey })
       }
     });
 
+    if (res.status === 404) notFound();
     if (!res.ok)
       throw new Error(`Failed to fetch Pokémon evolution: ${res.status} ${res.statusText}`);
 
     return res.json();
   } catch (error) {
-    console.error('Error fetching Pokémon evolution:', error);
-
     throw error;
   }
 };
@@ -105,13 +103,12 @@ export const fetchPokemonNeighbor: FetchPokemonNeighbor = async ({ queryKey }) =
       }
     });
 
+    if (res.status === 404) notFound();
     if (!res.ok)
       throw new Error(`Failed to fetch Pokémon neighbor: ${res.status} ${res.statusText}`);
 
     return res.json();
   } catch (error) {
-    console.error('Error fetching Pokémon neighbor:', error);
-
     throw error;
   }
 };

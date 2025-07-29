@@ -44,8 +44,7 @@ export async function GET(_: NextRequest, { params }: { params: Promise<{ id: st
     };
 
     return NextResponse.json(response);
-  } catch (error) {
-    console.error('Error:', error);
+  } catch {
     return NextResponse.json({ message: 'Failed to fetch pokemon' }, { status: 500 });
   }
 }
