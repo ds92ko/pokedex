@@ -1,7 +1,9 @@
 import { Metadata } from 'next';
+import { Suspense } from 'react';
 
 import ControlBar from '@/app/favorites/_components/control-bar';
 import FavoriteList from '@/app/favorites/_components/favorite-list';
+import FavoriteListSkeleton from '@/app/favorites/_components/favorite-list/skeleton';
 import Section from '@/components/layouts/section';
 
 export const metadata: Metadata = {
@@ -19,7 +21,9 @@ export default function FavoritesPage() {
       title="포획한 포켓몬"
       titleContent={<ControlBar />}
     >
-      <FavoriteList />
+      <Suspense fallback={<FavoriteListSkeleton />}>
+        <FavoriteList />
+      </Suspense>
     </Section>
   );
 }
