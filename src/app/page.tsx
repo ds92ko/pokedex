@@ -9,7 +9,7 @@ import { POKEMON_LIST_QUERY_KEY } from '@/constants/pokemons';
 
 export default async function ListPage() {
   return (
-    <Section title="포켓몬 목록">
+    <Section title="포켓몬 도감">
       <Suspense fallback={<PokemonListSkeleton />}>
         <PrefetchInfiniteBoundary
           options={{
