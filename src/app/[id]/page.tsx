@@ -36,6 +36,10 @@ export async function generateMetadata({ params }: DetailPageProps): Promise<Met
     openGraph: {
       title: pokemonMetadata.title,
       description: pokemonMetadata.description
+    },
+    twitter: {
+      title: pokemonMetadata.title,
+      description: pokemonMetadata.description
     }
   };
 }

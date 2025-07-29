@@ -18,6 +18,9 @@ type RootLayoutProps = Readonly<{
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://pokedex-ds92ko.vercel.app'),
+  alternates: {
+    canonical: 'https://pokedex-ds92ko.vercel.app'
+  },
   formatDetection: {
     email: false,
     address: false,
@@ -28,6 +31,7 @@ export const metadata: Metadata = {
     template: '%s | Pokédex'
   },
   description: 'Pokédex에서 모든 포켓몬을 확인하고, 나만의 포켓몬을 찾아보세요!',
+  keywords: ['포켓몬', '포켓몬스터', '포켓몬 도감', '포켓몬 정보', 'Pokémon', 'Pokédex', 'PokeAPI'],
   authors: [{ name: 'Dasom Ko' }],
   robots: {
     index: true,
@@ -46,6 +50,19 @@ export const metadata: Metadata = {
     description: 'Pokédex에서 모든 포켓몬을 확인하고, 나만의 포켓몬을 찾아보세요!',
     siteName: 'Pokédex',
     locale: 'ko_KR',
+    images: {
+      ...size,
+      alt,
+      url: 'https://pokedex-ds92ko.vercel.app/opengraph-image'
+    },
+    title: {
+      template: `%s | Pokédex`,
+      default: 'Pokédex'
+    }
+  },
+  twitter: {
+    description: 'Pokédex에서 모든 포켓몬을 확인하고, 나만의 포켓몬을 찾아보세요!',
+    card: 'summary_large_image',
     images: {
       ...size,
       alt,

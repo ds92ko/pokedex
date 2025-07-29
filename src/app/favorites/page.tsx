@@ -12,6 +12,10 @@ export const metadata: Metadata = {
   openGraph: {
     title: '포획한 포켓몬',
     description: 'Pokédex에서 포획한 나만의 포켓몬 목록을 확인하세요.'
+  },
+  twitter: {
+    title: '포획한 포켓몬',
+    description: 'Pokédex에서 포획한 나만의 포켓몬 목록을 확인하세요.'
   }
 };
 
