@@ -49,7 +49,9 @@ export default function PokemonNavigation() {
             </Link>
           ) : (
             <div className={pokemonNavLink}>
-              <Pokeball size={POKEMON_NAV_IMAGE_SIZE} />
+              <div className={pokemonNavLinkImage}>
+                <Pokeball />
+              </div>
               <div className={pokemonNavLinkText}>
                 <span className={pokemonNavLinkSpan}>이전</span>
                 <strong>X</strong>
@@ -85,7 +87,9 @@ export default function PokemonNavigation() {
             </Link>
           ) : (
             <div className={pokemonNavLink}>
-              <Pokeball size={POKEMON_NAV_IMAGE_SIZE} />
+              <div className={pokemonNavLinkImage}>
+                <Pokeball />
+              </div>
               <div className={pokemonNavLinkText}>
                 <span className={pokemonNavLinkSpan}>다음</span>
                 <strong>X</strong>
