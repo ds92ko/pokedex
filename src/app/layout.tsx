@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { ReactNode } from 'react';
 
 import { cherryBombOne, dongle } from '@/app/fonts';
+import { alt, size } from '@/app/opengraph-image';
 import Footer from '@/components/layouts/footer';
 import Header from '@/components/layouts/header';
 import Dialog from '@/components/portals/dialog';
@@ -16,9 +17,45 @@ type RootLayoutProps = Readonly<{
 }>;
 
 export const metadata: Metadata = {
-  title: 'Pokédex',
-  description:
-    '모든 세대의 포켓몬 정보를 한눈에! 이름, 타입, 능력치를 검색하고, 나만의 포켓몬을 찾아보세요.'
+  metadataBase: new URL('https://pokedex-ds92ko.vercel.app'),
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false
+  },
+  title: {
+    default: 'Pokédex',
+    template: '%s | Pokédex'
+  },
+  description: 'Pokédex에서 모든 포켓몬을 확인하고, 나만의 포켓몬을 찾아보세요!',
+  authors: [{ name: 'Dasom Ko' }],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1
+    }
+  },
+  openGraph: {
+    type: 'website',
+    url: 'https://pokedex-ds92ko.vercel.app',
+    description: 'Pokédex에서 모든 포켓몬을 확인하고, 나만의 포켓몬을 찾아보세요!',
+    siteName: 'Pokédex',
+    locale: 'ko_KR',
+    images: {
+      ...size,
+      alt,
+      url: 'https://pokedex-ds92ko.vercel.app/opengraph-image'
+    },
+    title: {
+      template: `%s | Pokédex`,
+      default: 'Pokédex'
+    }
+  }
 };
 
 export default function RootLayout({ children }: RootLayoutProps) {
