@@ -1,9 +1,12 @@
+import { getPokemonDescription } from '@/app/api/pokemons/_utils/translate';
+import { POKEAPI_BASE_URL } from '@/constants/api';
 import { POKE_API_REVALIDATE } from '@/constants/pokemons';
 import {
   FetchPokemonDetail,
   FetchPokemonEvolution,
   FetchPokemonList,
-  FetchPokemonNeighbor
+  FetchPokemonNeighbor,
+  PokeApiSpeciesResponse
 } from '@/type/pokemons';
 
 export const fetchPokemonList: FetchPokemonList = async ({ pageParam = 0 }) => {
@@ -22,6 +25,30 @@ export const fetchPokemonList: FetchPokemonList = async ({ pageParam = 0 }) => {
     return res.json();
   } catch (error) {
     console.error('Error fetching Pokémon list:', error);
+
+    throw error;
+  }
+};
+
+export const fetchPokemonMetadata = async (id: string) => {
+  try {
+    const res = await fetch(`${POKEAPI_BASE_URL}/pokemon-species/${id}`, {
+      next: {
+        revalidate: POKE_API_REVALIDATE
+      }
+    });
+
+    if (!res.ok) throw new Error(`Failed to fetch Pokémon name: ${res.status} ${res.statusText}`);
+
+    const data: PokeApiSpeciesResponse = await res.json();
+    const description = await getPokemonDescription(data.flavor_text_entries);
+
+    return {
+      title: data.names.find(({ language }) => language.name === 'ko')?.name || data.name,
+      description
+    };
+  } catch (error) {
+    console.error('Error fetching Pokémon name:', error);
 
     throw error;
   }

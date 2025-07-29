@@ -1,6 +1,12 @@
+import { Metadata } from 'next';
 import { Suspense } from 'react';
 
-import { fetchPokemonDetail, fetchPokemonEvolution, fetchPokemonNeighbor } from '@/api/pokemon';
+import {
+  fetchPokemonDetail,
+  fetchPokemonEvolution,
+  fetchPokemonMetadata,
+  fetchPokemonNeighbor
+} from '@/api/pokemon';
 import PokemonEvolution from '@/app/[id]/_components/pokemon-evolution';
 import PokemonEvolutionSkeleton from '@/app/[id]/_components/pokemon-evolution/skeleton';
 import PokemonNavigation from '@/app/[id]/_components/pokemon-nevigation';
@@ -18,6 +24,20 @@ import {
 
 interface DetailPageProps {
   params: Promise<{ id: string }>;
+}
+
+export async function generateMetadata({ params }: DetailPageProps): Promise<Metadata> {
+  const { id } = await params;
+  const pokemonMetadata = await fetchPokemonMetadata(id);
+
+  return {
+    title: pokemonMetadata.title,
+    description: pokemonMetadata.description,
+    openGraph: {
+      title: pokemonMetadata.title,
+      description: pokemonMetadata.description
+    }
+  };
 }
 
 export default async function DetailPage({ params }: DetailPageProps) {
