@@ -5,36 +5,23 @@ import { SITE_URL } from '@/constants/routes';
 
 const title = 'Pokédex';
 const description = 'Pokédex에서 모든 포켓몬을 확인하고, 나만의 포켓몬을 찾아보세요!';
+const images = {
+  ...size,
+  alt,
+  url: `${SITE_URL}/opengraph-image`
+};
 
 export const openGraph = {
   type: 'website',
   url: SITE_URL,
-  description,
   siteName: title,
   locale: 'ko_KR',
-  images: {
-    ...size,
-    alt,
-    url: `${SITE_URL}/opengraph-image`
-  },
-  title: {
-    template: `%s | ${title}`,
-    default: title
-  }
+  images: { ...images }
 };
 
 export const twitter = {
-  description,
   card: 'summary_large_image',
-  images: {
-    ...size,
-    alt,
-    url: `${SITE_URL}/opengraph-image`
-  },
-  title: {
-    template: `%s | ${title}`,
-    default: title
-  }
+  images: { ...images }
 };
 
 export const layoutMetadata: Metadata = {
@@ -52,7 +39,17 @@ export const layoutMetadata: Metadata = {
     template: `%s | ${title}`
   },
   description,
-  keywords: ['포켓몬', '포켓몬스터', '포켓몬 도감', '포켓몬 정보', 'Pokémon', 'Pokédex', 'PokeAPI'],
+  keywords: [
+    '포켓몬',
+    '포켓몬스터',
+    '포켓몬 도감',
+    '포켓몬 정보',
+    'Pokemon',
+    'Pokémon',
+    'Pokedex',
+    'Pokédex',
+    'PokeAPI'
+  ],
   authors: [{ name: 'Dasom Ko' }],
   robots: {
     index: true,
@@ -65,6 +62,20 @@ export const layoutMetadata: Metadata = {
       'max-snippet': -1
     }
   },
-  openGraph,
-  twitter
+  openGraph: {
+    ...openGraph,
+    title: {
+      template: `%s | ${title}`,
+      default: title
+    },
+    description
+  },
+  twitter: {
+    ...twitter,
+    title: {
+      template: `%s | ${title}`,
+      default: title
+    },
+    description
+  }
 };
