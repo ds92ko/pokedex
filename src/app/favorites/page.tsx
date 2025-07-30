@@ -4,6 +4,7 @@ import { Suspense } from 'react';
 import ControlBar from '@/app/favorites/_components/control-bar';
 import FavoriteList from '@/app/favorites/_components/favorite-list';
 import FavoriteListSkeleton from '@/app/favorites/_components/favorite-list/skeleton';
+import FavoritePokemons from '@/app/favorites/_components/favorite-pokemons';
 import Playground from '@/app/favorites/_components/playground';
 import { openGraph, twitter } from '@/app/metadata';
 import Section from '@/components/layouts/section';
@@ -28,7 +29,7 @@ export const metadata: Metadata = {
 
 export default function FavoritesPage() {
   return (
-    <>
+    <FavoritePokemons>
       <Section title="포켓몬 놀이터">
         <Playground />
       </Section>
@@ -40,6 +41,6 @@ export default function FavoritesPage() {
           <FavoriteList />
         </Suspense>
       </Section>
-    </>
+    </FavoritePokemons>
   );
 }

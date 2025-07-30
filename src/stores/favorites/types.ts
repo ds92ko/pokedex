@@ -20,5 +20,6 @@ export interface FavoritesStore {
     addFavorite: (pokemon: FavoritePokemonBase) => void;
     removeFavorite: (id?: FavoritePokemon['id']) => void;
     clearFavorites: () => void;
+    initializeFavorites: () => void;
   };
 }
