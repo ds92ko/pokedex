@@ -103,6 +103,7 @@ const alpha = {
   accent: 'rgba(74, 95, 193, 0.7)', // 버튼/링크
   accentSoft: 'rgba(74, 95, 193, 0.3)', // 버튼/링크 연한 버전
   border: 'rgba(224, 224, 224, 0.5)', // 보더 컬러
+  white: 'rgba(255, 255, 255, 0.3)', // 흰색
   shadow: 'rgba(0, 0, 0, 0.1)', // 그림자 색상
   type: {
     normal: 'rgba(168, 167, 122, 0.3)', // 노멀

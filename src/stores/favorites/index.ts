@@ -1,7 +1,11 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-import { POKEMON_IMAGE_BASE_URL } from '@/constants/api';
+import {
+  POKEMON_ANIMATED_IMAGE_BASE_URL,
+  POKEMON_IMAGE_BASE_URL,
+  POKEMON_PIXEL_IMAGE_BASE_URL
+} from '@/constants/api';
 import { FavoritesStore } from '@/stores/favorites/types';
 
 const useFavoritesStore = create<FavoritesStore>()(
@@ -18,6 +22,8 @@ const useFavoritesStore = create<FavoritesStore>()(
                 {
                   ...pokemon,
                   image: `${POKEMON_IMAGE_BASE_URL}/${pokemon.id}.png`,
+                  animatedImage: `${POKEMON_ANIMATED_IMAGE_BASE_URL}/${pokemon.id}.gif`,
+                  pixelImage: `${POKEMON_PIXEL_IMAGE_BASE_URL}/${pokemon.id}.png`,
                   category: pokemon.category,
                   datetime: new Date().toISOString()
                 },

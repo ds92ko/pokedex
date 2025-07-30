@@ -4,6 +4,7 @@ import { Suspense } from 'react';
 import ControlBar from '@/app/favorites/_components/control-bar';
 import FavoriteList from '@/app/favorites/_components/favorite-list';
 import FavoriteListSkeleton from '@/app/favorites/_components/favorite-list/skeleton';
+import Playground from '@/app/favorites/_components/playground';
 import { openGraph, twitter } from '@/app/metadata';
 import Section from '@/components/layouts/section';
 
@@ -27,13 +28,18 @@ export const metadata: Metadata = {
 
 export default function FavoritesPage() {
   return (
-    <Section
-      title="포획한 포켓몬"
-      titleContent={<ControlBar />}
-    >
-      <Suspense fallback={<FavoriteListSkeleton />}>
-        <FavoriteList />
-      </Suspense>
-    </Section>
+    <>
+      <Section title="포켓몬 놀이터">
+        <Playground />
+      </Section>
+      <Section
+        title="내 포켓몬 목록"
+        titleContent={<ControlBar />}
+      >
+        <Suspense fallback={<FavoriteListSkeleton />}>
+          <FavoriteList />
+        </Suspense>
+      </Section>
+    </>
   );
 }

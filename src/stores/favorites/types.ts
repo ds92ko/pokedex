@@ -5,6 +5,8 @@ export interface FavoritePokemon {
   name: string;
   category: PokemonCategory | null;
   image: string;
+  animatedImage: string;
+  pixelImage: string;
   datetime: string;
 }
 
