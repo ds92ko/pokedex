@@ -1,9 +1,11 @@
 import { PokemonCategory } from '@/type/pokemons';
 
-export interface FavoritePokemon {
+interface FavoritePokemonBase {
   id: number;
   name: string;
   category: PokemonCategory | null;
+}
+export interface FavoritePokemon extends FavoritePokemonBase {
   image: string;
   animatedImage: string;
   pixelImage: string;
@@ -12,10 +14,10 @@ export interface FavoritePokemon {
 
 export interface FavoritesStore {
   context: {
-    favorites: FavoritePokemon[];
+    favorites: FavoritePokemon[] | null;
   };
   actions: {
-    addFavorite: (pokemon: Omit<FavoritePokemon, 'datetime' | 'image'>) => void;
+    addFavorite: (pokemon: FavoritePokemonBase) => void;
     removeFavorite: (id?: FavoritePokemon['id']) => void;
     clearFavorites: () => void;
   };

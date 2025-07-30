@@ -32,11 +32,13 @@ export default function Playground() {
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
-    setImgSrcs(favorites.map(({ animatedImage }) => animatedImage));
+    if (Array.isArray(favorites)) setImgSrcs(favorites.map(({ animatedImage }) => animatedImage));
   }, [favorites]);
 
   const updateCanvas = useCallback(
     (time?: number) => {
+      if (!Array.isArray(favorites)) return;
+
       const container = containerRef.current;
       if (!container) return;
 
@@ -88,7 +90,7 @@ export default function Playground() {
       ref={containerRef}
       className={playground}
     >
-      {!isReady ? (
+      {!isReady || !Array.isArray(favorites) ? (
         <div className={emptyPlayground}>
           <p>놀이터에 포켓몬을 데려오는 중이에요!</p>
         </div>

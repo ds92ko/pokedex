@@ -25,7 +25,7 @@ export default function SortSelect() {
       placeholder="정렬 선택"
       selected={selected}
       onChange={handleChange}
-      disabled={!favorites.length}
+      disabled={!Array.isArray(favorites) || !favorites.length}
     />
   );
 }

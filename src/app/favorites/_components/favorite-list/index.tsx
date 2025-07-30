@@ -4,6 +4,7 @@ import { useSearchParams } from 'next/navigation';
 
 import FavoriteItem from '@/app/favorites/_components/favorite-item';
 import { favoriteList } from '@/app/favorites/_components/favorite-list/index.css';
+import FavoriteListSkeleton from '@/app/favorites/_components/favorite-list/skeleton';
 import { sortedFavorites } from '@/app/favorites/_components/favorite-list/utils';
 import { DEFAULT_SORT } from '@/app/favorites/_components/sort-select/constants';
 import NoData from '@/components/common/no-data';
@@ -14,6 +15,7 @@ export default function FavoriteList() {
   const { favorites } = useFavoritesContext();
   const sort = searchParams.get('sort') || DEFAULT_SORT;
 
+  if (!Array.isArray(favorites)) return <FavoriteListSkeleton />;
   if (!favorites.length) return <NoData>포획한 포켓몬이 없습니다.</NoData>;
 
   return (

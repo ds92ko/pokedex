@@ -61,7 +61,8 @@ export default function PokemonProfile() {
     queryFn: fetchPokemonDetail
   });
 
-  const isFavorite = favorites.some(favorite => favorite.id === data.id);
+  const isFavorite =
+    Array.isArray(favorites) && favorites.some(favorite => favorite.id === data.id);
 
   const releasePokemon = async () => {
     const confirmed = await openConfirm({

@@ -32,7 +32,7 @@ export default function ReleasePokemons() {
       type="button"
       className={`${button.md} outline`}
       onClick={handleClick}
-      disabled={!favorites.length}
+      disabled={!Array.isArray(favorites) || !favorites.length}
     >
       전체 놓아주기
     </button>
