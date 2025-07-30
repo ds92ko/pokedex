@@ -12,5 +12,5 @@ export const skeleton = style({
   backgroundSize: '200% 100%',
   animation: `${shimmer} 1.5s infinite`,
   borderRadius: '4px',
-  color: 'transparent'
+  color: 'transparent !important'
 });
