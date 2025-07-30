@@ -14,6 +14,7 @@ import PokemonNavigationSkeleton from '@/app/[id]/_components/pokemon-nevigation
 import PokemonProfile from '@/app/[id]/_components/pokemon-profile';
 import PokemonProfileSkeleton from '@/app/[id]/_components/pokemon-profile/skeleton';
 import ShareButtonGroup from '@/app/[id]/_components/share-button-group';
+import { openGraph, twitter } from '@/app/metadata';
 import Section from '@/components/layouts/section';
 import { PrefetchBoundary } from '@/components/query-boundary/prefetch';
 import {
@@ -28,18 +29,20 @@ interface DetailPageProps {
 
 export async function generateMetadata({ params }: DetailPageProps): Promise<Metadata> {
   const { id } = await params;
-  const pokemonMetadata = await fetchPokemonMetadata(id);
+  const { title, description } = await fetchPokemonMetadata(id);
 
   return {
-    title: pokemonMetadata.title,
-    description: pokemonMetadata.description,
+    title,
+    description,
     openGraph: {
-      title: pokemonMetadata.title,
-      description: pokemonMetadata.description
+      ...openGraph,
+      title,
+      description
     },
     twitter: {
-      title: pokemonMetadata.title,
-      description: pokemonMetadata.description
+      ...twitter,
+      title,
+      description
     }
   };
 }

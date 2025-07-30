@@ -4,18 +4,24 @@ import { Suspense } from 'react';
 import ControlBar from '@/app/favorites/_components/control-bar';
 import FavoriteList from '@/app/favorites/_components/favorite-list';
 import FavoriteListSkeleton from '@/app/favorites/_components/favorite-list/skeleton';
+import { openGraph, twitter } from '@/app/metadata';
 import Section from '@/components/layouts/section';
 
+const title = '포획한 포켓몬';
+const description = 'Pokédex에서 포획한 나만의 포켓몬 목록을 확인하세요!';
+
 export const metadata: Metadata = {
-  title: '포획한 포켓몬',
-  description: 'Pokédex에서 포획한 나만의 포켓몬 목록을 확인하세요.',
+  title,
+  description,
   openGraph: {
-    title: '포획한 포켓몬',
-    description: 'Pokédex에서 포획한 나만의 포켓몬 목록을 확인하세요.'
+    ...openGraph,
+    title,
+    description
   },
   twitter: {
-    title: '포획한 포켓몬',
-    description: 'Pokédex에서 포획한 나만의 포켓몬 목록을 확인하세요.'
+    ...twitter,
+    title,
+    description
   }
 };
 
