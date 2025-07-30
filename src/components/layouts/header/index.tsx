@@ -19,6 +19,7 @@ export default function Header() {
             <Link
               className={logoLink}
               href="/"
+              aria-label="Pokédex"
             >
               <Pokeball size={30} />
               <span className={logoText[open ? 'open' : 'close']}>Pokédex</span>

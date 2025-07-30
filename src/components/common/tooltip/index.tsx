@@ -58,6 +58,7 @@ export default function Tooltip({ children, content, placement = 'right' }: Tool
         ref={refs.setReference}
         className={tooltipButton}
         {...getReferenceProps()}
+        aria-label="정보 보기"
       >
         <BiInfoCircle size={icons.size.lg} />
       </button>
