@@ -9,8 +9,8 @@ Pokédex는 PokeAPI를 활용해 제작된 포켓몬 도감 어플리케이션�
 
 ### 🚀 Live Demo
 
-앱은 아래 URL에서 실제로 사용해볼 수 있습니다.
-https://pokedex-ds92ko.vercel.app
+> 앱은 아래 URL에서 실제로 사용해볼 수 있습니다.
+> https://pokedex-ds92ko.vercel.app
 
 ### 🌟 Features
 
@@ -53,7 +53,7 @@ https://pokedex-ds92ko.vercel.app
 
 ### 📦 API Reference
 
-본 프로젝트는 [PokeAPI](https://pokeapi.co/)를 기반으로 데이터를 가져옵니다.
+> 본 프로젝트는 [PokeAPI](https://pokeapi.co/)를 기반으로 데이터를 가져옵니다.
 
 **사용된 엔드포인트**
 
