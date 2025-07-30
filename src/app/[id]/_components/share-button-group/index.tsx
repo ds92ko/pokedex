@@ -1,15 +1,19 @@
 'use client';
 
+import { useQueryClient } from '@tanstack/react-query';
 import { BiLink, BiShareAlt } from 'react-icons/bi';
 
 import { buttonGroup } from '@/app/[id]/_components/pokemon-profile/index.css';
+import { POKEMON_DETAIL_QUERY_KEY } from '@/constants/pokemons';
 import { useDialogActions } from '@/stores/dialog';
 import { button } from '@/styles/actions.css';
 import { icons } from '@/styles/vars.css';
+import { PokemonDetailResponse } from '@/type/pokemons';
 
 const action = (type: 'share' | 'copy') => (type === 'share' ? '공유' : '복사');
 
 export default function ShareButtonGroup({ id }: { id: string }) {
+  const queryClient = useQueryClient();
   const { openAlert } = useDialogActions();
 
   const unsupportedAlert = (type: 'share' | 'copy') =>
@@ -41,9 +45,13 @@ export default function ShareButtonGroup({ id }: { id: string }) {
       return;
     }
     try {
+      const pokemon: PokemonDetailResponse | undefined = queryClient.getQueryData(
+        POKEMON_DETAIL_QUERY_KEY(id)
+      );
+
       await navigator.share({
-        title: `Pokédex`,
-        text: `Check out No.${id} on Pokédex!`,
+        title: `${pokemon?.name || `No.${id}`} | Pokédex`,
+        text: `Pokédex에서 ${pokemon?.name || `No.${id}`} 포켓몬을 확인해보세요!${pokemon?.description ? ` ${pokemon?.description}` : ''}`,
         url: window.location.href
       });
       successAlert('share');
