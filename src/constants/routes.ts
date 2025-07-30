@@ -1,5 +1,7 @@
 import { BiLogoGithub } from 'react-icons/bi';
 
+export const SITE_URL = 'https://pokedex-ds92ko.vercel.app';
+
 export const ROUTES = [
   {
     id: 'home',

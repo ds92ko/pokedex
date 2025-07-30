@@ -1,5 +1,7 @@
 import type { MetadataRoute } from 'next';
 
+import { SITE_URL } from '@/constants/routes';
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
@@ -7,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: '/api/'
     },
-    sitemap: 'https://pokedex-ds92ko.vercel.app/sitemap.xml'
+    sitemap: `${SITE_URL}/sitemap.xml`
   };
 }

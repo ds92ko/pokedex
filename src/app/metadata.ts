@@ -1,8 +1,7 @@
 import { Metadata } from 'next';
 
 import { alt, size } from '@/app/opengraph-image';
-
-const SITE_URL = 'https://pokedex-ds92ko.vercel.app';
+import { SITE_URL } from '@/constants/routes';
 
 const title = 'Pokédex';
 const description = 'Pokédex에서 모든 포켓몬을 확인하고, 나만의 포켓몬을 찾아보세요!';
