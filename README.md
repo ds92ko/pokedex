@@ -10,7 +10,8 @@ Pokédex는 PokeAPI를 활용해 제작된 포켓몬 도감 어플리케이션�
 ### 🚀 Live Demo
 
 > 앱은 아래 URL에서 실제로 사용해볼 수 있습니다.
-> https://pokedex-ds92ko.vercel.app
+
+https://pokedex-ds92ko.vercel.app
 
 ### 🌟 Features
 
