@@ -18,6 +18,13 @@ export const ROUTES = [
     external: false
   },
   {
+    id: 'quiz',
+    href: '/quiz',
+    icon: null,
+    name: 'Quiz',
+    external: false
+  },
+  {
     id: 'github',
     href: 'https://github.com/ds92ko/pokedex',
     icon: BiLogoGithub,

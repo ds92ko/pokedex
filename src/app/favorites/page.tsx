@@ -8,17 +8,23 @@ import FavoritePokemons from '@/app/favorites/_components/favorite-pokemons';
 import Playground from '@/app/favorites/_components/playground';
 import { openGraph, twitter } from '@/app/metadata';
 import Section from '@/components/layouts/section';
+import { SITE_URL } from '@/constants/routes';
 
 const title = '포획한 포켓몬';
 const description = 'Pokédex에서 포획한 나만의 포켓몬 목록을 확인하세요!';
+const url = `${SITE_URL}/favorites`;
 
 export const metadata: Metadata = {
   title,
   description,
+  alternates: {
+    canonical: url
+  },
   openGraph: {
     ...openGraph,
     title,
-    description
+    description,
+    url
   },
   twitter: {
     ...twitter,

@@ -13,7 +13,6 @@ const images = {
 
 export const openGraph = {
   type: 'website',
-  url: SITE_URL,
   siteName: title,
   locale: 'ko_KR',
   images: { ...images }
@@ -44,6 +43,8 @@ export const layoutMetadata: Metadata = {
     '포켓몬스터',
     '포켓몬 도감',
     '포켓몬 정보',
+    '포켓몬 놀이터',
+    '포켓몬 퀴즈',
     'Pokemon',
     'Pokémon',
     'Pokedex',
@@ -68,7 +69,8 @@ export const layoutMetadata: Metadata = {
       template: `%s | ${title}`,
       default: title
     },
-    description
+    description,
+    url: SITE_URL
   },
   twitter: {
     ...twitter,

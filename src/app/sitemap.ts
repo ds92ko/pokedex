@@ -14,6 +14,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${SITE_URL}/favorites`,
       lastModified: new Date(),
       changeFrequency: 'daily',
+      priority: 0.8
+    },
+    {
+      url: `${SITE_URL}/quiz`,
+      lastModified: new Date(),
+      changeFrequency: 'daily',
       priority: 0.9
     }
   ];

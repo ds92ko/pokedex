@@ -22,6 +22,7 @@ import {
   POKEMON_EVOLUTION_QUERY_KEY,
   POKEMON_NEIGHBOR_QUERY_KEY
 } from '@/constants/pokemons';
+import { SITE_URL } from '@/constants/routes';
 
 interface DetailPageProps {
   params: Promise<{ id: string }>;
@@ -30,14 +31,19 @@ interface DetailPageProps {
 export async function generateMetadata({ params }: DetailPageProps): Promise<Metadata> {
   const { id } = await params;
   const { title, description } = await fetchPokemonMetadata(id);
+  const url = `${SITE_URL}/${id}`;
 
   return {
     title,
     description,
+    alternates: {
+      canonical: url
+    },
     openGraph: {
       ...openGraph,
       title,
-      description
+      description,
+      url
     },
     twitter: {
       ...twitter,
