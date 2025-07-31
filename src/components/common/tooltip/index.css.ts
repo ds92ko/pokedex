@@ -17,6 +17,10 @@ export const tooltipButton = style({
   selectors: {
     '&:hover, &:focus': {
       color: vars.alpha.accent
+    },
+    '&:disabled': {
+      color: vars.alpha.text,
+      cursor: 'not-allowed'
     }
   }
 });
