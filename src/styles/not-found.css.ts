@@ -8,7 +8,7 @@ export const notFoundContainer = style({
   alignItems: 'center',
   justifyContent: 'center',
   gap: vars.spacing.xxl,
-  height: `calc(100dvh - ${vars.layout.header.height} - (${vars.spacing.xxl} * 2))`,
+  height: `calc(100dvh - ${vars.layout.header.height} - ${vars.layout.section.spacing.onlyContent})`,
   textAlign: 'center'
 });
 

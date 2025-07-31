@@ -14,12 +14,6 @@ export const icons = {
   }
 };
 
-const layout = {
-  header: {
-    height: '68px'
-  }
-};
-
 const fonts = {
   size: {
     xxs: '20px',
@@ -45,6 +39,28 @@ const spacing = {
   lg: '24px',
   xl: '32px',
   xxl: '40px'
+};
+
+const layout = {
+  header: {
+    height: '68px'
+  },
+  section: {
+    spacing: {
+      onlyContent: `${parseInt(spacing.xxl, 10) * 2}px`, // 80px
+      hasTitle: `${parseInt(spacing.xxl, 10) * 2 + parseInt(fonts.size.xl, 10) + parseInt(spacing.lg, 10)}px`
+    }
+  },
+  input: {
+    height: `${parseInt(spacing.xs, 10) * 2 + parseInt(fonts.size.md, 10) + 2}px`
+  },
+  button: {
+    height: {
+      sm: `${parseInt(spacing.xxs, 10) * 2 + parseInt(fonts.size.sm, 10) + 2}px`,
+      md: `${parseInt(spacing.xs, 10) * 2 + parseInt(fonts.size.md, 10) + 2}px`,
+      lg: `${parseInt(spacing.sm, 10) * 2 + parseInt(fonts.size.lg, 10) + 2}px`
+    }
+  }
 };
 
 const colors = {
