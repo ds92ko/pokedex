@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { ReactNode } from 'react';
 
 import { cherryBombOne, dongle } from '@/app/fonts';
@@ -17,6 +17,13 @@ type RootLayoutProps = Readonly<{
 }>;
 
 export const metadata: Metadata = { ...layoutMetadata };
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false
+};
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
