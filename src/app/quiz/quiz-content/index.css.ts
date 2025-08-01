@@ -58,26 +58,12 @@ export const loadingMessage = style({
   textAlign: 'center'
 });
 
-export const pokemonImageSize = `calc(
-  100vh
-  - ${vars.layout.header.height}
-  - ${vars.layout.section.spacing.hasTitle}
-  - ${vars.layout.input.height}
-  - ${vars.layout.button.height.md}
-  - ${vars.layout.button.height.lg}
-  - (${vars.spacing.lg} * 2)
-  - ${vars.spacing.md}
-  - (${vars.spacing.sm} * 4)
-  - ${vars.fonts.size.xl}
-  - ${vars.fonts.size.md}
-)`;
-
 export const pokemonImage = style({
   display: 'block',
   width: '100%',
   height: 'auto',
-  maxWidth: pokemonImageSize,
-  maxHeight: pokemonImageSize,
+  maxWidth: 400,
+  maxHeight: 400,
   aspectRatio: '1 / 1',
   marginInline: 'auto',
   objectFit: 'contain'
