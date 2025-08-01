@@ -59,7 +59,7 @@ export const loadingMessage = style({
 });
 
 export const pokemonImageSize = `calc(
-  100dvh
+  100vh
   - ${vars.layout.header.height}
   - ${vars.layout.section.spacing.hasTitle}
   - ${vars.layout.input.height}

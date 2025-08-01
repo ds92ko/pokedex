@@ -5,7 +5,7 @@ import { vars } from '@/styles/vars.css';
 export const playground = style({
   position: 'relative',
   width: '100%',
-  height: `calc(100dvh - ${vars.layout.header.height} - ${vars.layout.section.spacing.hasTitle})`,
+  height: `calc(100vh - ${vars.layout.header.height} - ${vars.layout.section.spacing.hasTitle})`,
   background: `url('/images/grass.png') center / 30% repeat`,
   border: `1px solid ${vars.colors.border}`,
   borderRadius: vars.spacing.md,
