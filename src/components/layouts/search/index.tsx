@@ -1,38 +1,46 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { ChangeEvent, FormEvent, useEffect, useRef } from 'react';
+import { FormEvent, useEffect, useRef } from 'react';
 import { BiSearch } from 'react-icons/bi';
 
-import Input from '@/components/common/input';
+import Datalist from '@/components/common/datalist';
+import { DatalistOption } from '@/components/common/datalist/types';
 import { searchForm } from '@/components/layouts/search/index.css';
 import SearchHistory from '@/components/portals/search-history';
-import { usePokemonsContext } from '@/stores/pokemons';
+import { usePokemonsActions, usePokemonsContext } from '@/stores/pokemons';
 import { useSearchActions, useSearchContext } from '@/stores/search';
 import { icons } from '@/styles/vars.css';
+import pokemonNames from '@public/data/pokemon-name.json';
 
 export default function Search() {
   const router = useRouter();
+  const { total } = usePokemonsContext();
+  const { setTotal } = usePokemonsActions();
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const { total } = usePokemonsContext();
-  const { value, open } = useSearchContext();
-  const { setValue, openSearch, closeSearch, addHistory } = useSearchActions();
+  const { keyword, selected, open } = useSearchContext();
+  const { setKeyword, openSearch, closeSearch, addHistory } = useSearchActions();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    addHistory(`${+value}`);
-    router.push(`/${+value}`);
+    if (!selected.id) return;
+    addHistory(selected);
+    router.push(`/${selected.id}`);
     closeSearch();
     inputRef.current?.blur();
   };
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value;
-    if (/^\d*$/.test(newValue)) {
-      setValue(newValue);
-    }
+  const handleChange = (keyword: string, option: DatalistOption) => {
+    setKeyword(keyword, {
+      id: option.value,
+      name: option.label
+    });
   };
+
+  useEffect(() => {
+    if (!total || total !== pokemonNames.length) setTotal(pokemonNames.length);
+  }, [total, setTotal]);
 
   useEffect(() => {
     const listener = (e: MouseEvent) => {
@@ -50,18 +58,23 @@ export default function Search() {
 
   return (
     <form
+      id="searchForm"
       className={searchForm[open ? 'open' : 'close']}
       onSubmit={handleSubmit}
     >
-      <Input
+      <Datalist
         ref={inputRef}
         start={<BiSearch size={icons.size.md} />}
         type="search"
-        placeholder={open ? '포켓몬 ID를 검색하세요.' : 'Search'}
-        value={value}
+        placeholder={open ? '포켓몬 이름 혹은 도감 번호를 검색하세요.' : 'Search'}
+        value={keyword}
         onChange={handleChange}
         onFocus={openSearch}
-        maxLength={total.toString().length}
+        options={pokemonNames.map(pokemon => ({
+          value: pokemon.id.toString(),
+          label: pokemon.name
+        }))}
+        formId="searchForm"
       />
       <SearchHistory />
     </form>

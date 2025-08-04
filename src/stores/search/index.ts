@@ -9,14 +9,18 @@ const useSearchStore = create<SearchStore>()(
   persist(
     set => ({
       context: {
-        value: '',
         open: false,
+        keyword: '',
+        selected: {
+          id: '',
+          name: ''
+        },
         history: []
       },
       actions: {
-        setValue: value =>
+        setKeyword: (keyword, selected) =>
           set(({ context }) => ({
-            context: { ...context, value }
+            context: { ...context, keyword, selected }
           })),
         openSearch: () =>
           set(({ context }) => ({
@@ -24,22 +28,22 @@ const useSearchStore = create<SearchStore>()(
           })),
         closeSearch: () =>
           set(({ context }) => ({
-            context: { ...context, value: '', open: false }
+            context: { ...context, keyword: '', selected: { id: '', name: '' }, open: false }
           })),
-        addHistory: value =>
+        addHistory: selected =>
           set(({ context }) => {
-            const existing = context.history.find(h => h.value === value);
+            const existing = context.history.find(h => h.id === selected.id);
 
             return {
               context: {
                 ...context,
                 history: existing
-                  ? [existing, ...context.history.filter(h => h.value !== value)]
+                  ? [existing, ...context.history.filter(h => h.id !== selected.id)]
                   : [
                       {
-                        id: uuidv4(),
-                        image: `${POKEMON_IMAGE_BASE_URL}/${value}.png`,
-                        value
+                        id: selected.id,
+                        image: `${POKEMON_IMAGE_BASE_URL}/${selected.id}.png`,
+                        name: selected.name
                       },
                       ...context.history
                     ]

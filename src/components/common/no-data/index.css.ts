@@ -1,5 +1,6 @@
 import { style } from '@vanilla-extract/css';
 
+import { datalist } from '@/components/common/datalist/index.css';
 import { vars } from '@/styles/vars.css';
 
 export const noData = style({
@@ -9,5 +10,10 @@ export const noData = style({
   justifyContent: 'center',
   gap: vars.spacing.sm,
   paddingBlock: vars.spacing.lg,
-  borderBlock: `1px solid ${vars.colors.border}`
+  borderBlock: `1px solid ${vars.colors.border}`,
+  selectors: {
+    [`${datalist} &`]: {
+      borderColor: 'transparent'
+    }
+  }
 });

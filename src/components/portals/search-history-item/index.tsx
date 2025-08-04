@@ -24,9 +24,9 @@ export default function SearchHistoryItem({ history }: HistoryItemProps) {
   const { closeSearch, removeHistory } = useSearchActions();
   const [error, setError] = useState(false);
 
-  const { id, image, value } = history;
+  const { id, image, name } = history;
 
-  const formattedId = value.toString().padStart(total.toString().length, '0');
+  const formattedId = id.toString().padStart(total.toString().length, '0');
 
   return (
     <li className={`searchHistoryItem ${error ? 'error' : ''}`}>
@@ -34,7 +34,7 @@ export default function SearchHistoryItem({ history }: HistoryItemProps) {
         className={searchHistoryButton}
         onClick={() => {
           if (error) return;
-          router.push(`/${value}`);
+          router.push(`/${id}`);
           closeSearch();
         }}
       >
@@ -53,7 +53,7 @@ export default function SearchHistoryItem({ history }: HistoryItemProps) {
           <div>
             <span className={searchHistoryText}>No.{formattedId}</span>
             <br />
-            {error ? '검색 결과 없음' : '포켓몬 상세 보기'}
+            {error ? '검색 결과 없음' : `${name} 상세 보기`}
           </div>
         </div>
         <span

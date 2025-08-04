@@ -8,11 +8,8 @@ import PokemonItem from '@/app/_components/pokemon-item';
 import PokemonItemsSkeleton from '@/app/_components/pokemon-item/skeleton';
 import { pokemonList } from '@/app/_components/pokemon-list/index.css';
 import { POKEMON_LIST_LIMIT, POKEMON_LIST_QUERY_KEY } from '@/constants/pokemons';
-import { usePokemonsActions, usePokemonsContext } from '@/stores/pokemons';
 
 export default function PokemonList() {
-  const { total } = usePokemonsContext();
-  const { setTotal } = usePokemonsActions();
   const observerRef = useRef<HTMLDivElement | null>(null);
   const { data, isFetchingNextPage, fetchNextPage, hasNextPage } = useSuspenseInfiniteQuery({
     queryKey: POKEMON_LIST_QUERY_KEY,
@@ -23,10 +20,6 @@ export default function PokemonList() {
       return nextOffset < lastPage.count ? nextOffset : undefined;
     }
   });
-
-  useEffect(() => {
-    if (data?.pages[0].count && !total) setTotal(data?.pages[0].count);
-  }, [data, setTotal, total]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(entries => {
