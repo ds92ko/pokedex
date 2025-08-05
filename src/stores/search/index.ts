@@ -1,22 +1,15 @@
-import { v4 as uuidv4 } from 'uuid';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
 import { POKEMON_IMAGE_BASE_URL } from '@/constants/api';
+import { STORE_VERSION } from '@/constants/stores';
+import { initialSearchContext } from '@/stores/search/constants';
 import { SearchStore } from '@/stores/search/types';
 
 const useSearchStore = create<SearchStore>()(
   persist(
     set => ({
-      context: {
-        open: false,
-        keyword: '',
-        selected: {
-          id: '',
-          name: ''
-        },
-        history: []
-      },
+      context: initialSearchContext,
       actions: {
         setKeyword: (keyword, selected) =>
           set(({ context }) => ({
@@ -61,7 +54,14 @@ const useSearchStore = create<SearchStore>()(
     }),
     {
       name: 'search-history-store',
-      partialize: ({ context }) => ({ context })
+      version: STORE_VERSION,
+      partialize: ({ context }) => ({ context }),
+      migrate: (persistedState, version) => {
+        if (version < STORE_VERSION) {
+          return { context: initialSearchContext };
+        }
+        return persistedState;
+      }
     }
   )
 );

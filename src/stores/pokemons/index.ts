@@ -1,14 +1,14 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
+import { STORE_VERSION } from '@/constants/stores';
+import { initialPokemonsContext } from '@/stores/pokemons/constants';
 import { PokemonsStore } from '@/stores/pokemons/types';
 
 const usePokemonsStore = create<PokemonsStore>()(
   persist(
     set => ({
-      context: {
-        total: 0
-      },
+      context: initialPokemonsContext,
       actions: {
         setTotal: total =>
           set(({ context }) => ({
@@ -18,7 +18,14 @@ const usePokemonsStore = create<PokemonsStore>()(
     }),
     {
       name: 'pokemons-store',
-      partialize: ({ context }) => ({ context })
+      version: STORE_VERSION,
+      partialize: ({ context }) => ({ context }),
+      migrate: (persistedState, version) => {
+        if (version < STORE_VERSION) {
+          return { context: initialPokemonsContext };
+        }
+        return persistedState;
+      }
     }
   )
 );

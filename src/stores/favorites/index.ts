@@ -6,14 +6,14 @@ import {
   POKEMON_IMAGE_BASE_URL,
   POKEMON_PIXEL_IMAGE_BASE_URL
 } from '@/constants/api';
+import { STORE_VERSION } from '@/constants/stores';
+import { initialFavoritesContext } from '@/stores/favorites/constants';
 import { FavoritesStore } from '@/stores/favorites/types';
 
 const useFavoritesStore = create<FavoritesStore>()(
   persist(
     set => ({
-      context: {
-        favorites: null
-      },
+      context: initialFavoritesContext,
       actions: {
         addFavorite: pokemon => {
           set(state => {
@@ -56,7 +56,14 @@ const useFavoritesStore = create<FavoritesStore>()(
     }),
     {
       name: 'favorites-store',
-      partialize: ({ context }) => ({ context })
+      version: STORE_VERSION,
+      partialize: ({ context }) => ({ context }),
+      migrate: (persistedState, version) => {
+        if (version < STORE_VERSION) {
+          return { context: initialFavoritesContext };
+        }
+        return persistedState;
+      }
     }
   )
 );
