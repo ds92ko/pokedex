@@ -1,4 +1,4 @@
-interface SelectedOption {
+export interface SelectedOption {
   id: string;
   name: string;
 }
@@ -11,7 +11,7 @@ export interface SearchStore {
   context: {
     open: boolean;
     keyword: string;
-    selected: { id: string; name: string };
+    selected: SelectedOption;
     history: SearchHistory[];
   };
   actions: {

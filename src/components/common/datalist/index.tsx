@@ -25,7 +25,7 @@ import NoData from '@/components/common/no-data';
 import { usePokemonsContext } from '@/stores/pokemons';
 
 const Datalist = forwardRef<HTMLInputElement, DatalistProps>(
-  ({ value, onChange, options, disabled, formId = '', ...props }, ref) => {
+  ({ value, onChange, onSelect, options, disabled, ...props }, ref) => {
     const { total } = usePokemonsContext();
     const [isOpen, setIsOpen] = useState(false);
 
@@ -68,12 +68,8 @@ const Datalist = forwardRef<HTMLInputElement, DatalistProps>(
     };
 
     const handleClick = (option: DatalistOption) => {
-      onChange?.('', option);
+      onSelect?.(option);
       setIsOpen(false);
-
-      if (!formId) return;
-      const form = document.getElementById(formId) as HTMLFormElement;
-      form?.requestSubmit();
     };
 
     return (
@@ -87,7 +83,6 @@ const Datalist = forwardRef<HTMLInputElement, DatalistProps>(
             value={value}
             onChange={handleChange}
             disabled={disabled}
-            form={formId}
             {...props}
           />
         </div>
@@ -102,7 +97,6 @@ const Datalist = forwardRef<HTMLInputElement, DatalistProps>(
               filteredOptions.map(option => (
                 <li key={option.value}>
                   <button
-                    form={formId}
                     type="button"
                     role="option"
                     aria-selected={option.label === value}
