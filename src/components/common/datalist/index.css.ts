@@ -28,7 +28,7 @@ export const datalistOption = style({
   padding: `${vars.spacing.xs} ${vars.spacing.md}`,
   transition: 'background 0.3s ease-out, color 0.3s ease-out',
   selectors: {
-    '&:hover, &:focus, &:active': {
+    '&:hover, &:active, &:focus, &[aria-selected=true]': {
       background: vars.colors.background
     },
     [`${datalistOptions} > li:not(:last-of-type) &`]: {
