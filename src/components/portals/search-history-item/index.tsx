@@ -1,7 +1,6 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
 import { BiTrash } from 'react-icons/bi';
 
 import OptimizedImage from '@/components/common/OptimizedImage';
@@ -17,16 +16,15 @@ import { usePokemonsContext } from '@/stores/pokemons';
 import { useSearchActions } from '@/stores/search';
 import { button } from '@/styles/actions.css';
 import { icons } from '@/styles/vars.css';
+import pokemonNames from '@public/data/pokemon-name.json';
 
 export default function SearchHistoryItem({ history }: HistoryItemProps) {
   const router = useRouter();
   const { total } = usePokemonsContext();
   const { closeSearch, removeHistory } = useSearchActions();
-  const [error, setError] = useState(false);
-
   const { id, image, name } = history;
-
   const formattedId = id.toString().padStart(total.toString().length, '0');
+  const error = !pokemonNames.find(pokemon => pokemon.id === +id);
 
   return (
     <li className={`searchHistoryItem ${error ? 'error' : ''}`}>
@@ -44,10 +42,9 @@ export default function SearchHistoryItem({ history }: HistoryItemProps) {
           ) : (
             <OptimizedImage
               src={image}
-              alt={`No.${formattedId} 포켓몬`}
+              alt={`No.${formattedId} ${name}`}
               width={SEARCH_HISTORY_IMAGE_SIZE}
               height={SEARCH_HISTORY_IMAGE_SIZE}
-              onError={() => setError(true)}
             />
           )}
           <div>
