@@ -13,6 +13,8 @@ import {
   emptyPlayground,
   playground,
   pokemon,
+  pokemonImage,
+  pokemonImageBox,
   pokemonName
 } from '@/app/favorites/_components/playground/index.css';
 import { Position } from '@/app/favorites/_components/playground/types';
@@ -139,11 +141,10 @@ export default function Playground() {
                   {name}
                 </span>
                 <motion.div
+                  className={pokemonImageBox}
                   style={{
                     width: pokemonSize,
-                    height: pokemonSize,
-                    display: 'inline-block',
-                    transformOrigin: 'center'
+                    height: pokemonSize
                   }}
                   animate={{
                     y: imgSrcs[idx] === pixelImage ? [0, pokemonSize * -0.1, 0] : 0
@@ -172,7 +173,13 @@ export default function Playground() {
                         return copy;
                       });
                     }}
-                    style={{ transform: flipStates[idx] ? 'scaleX(-1)' : 'scaleX(1)' }}
+                    className={pokemonImage}
+                    style={{
+                      transform: flipStates[idx]
+                        ? 'scaleX(-1) translateY(-50%)'
+                        : 'scaleX(1) translateY(-50%)',
+                      width: pokemonSize
+                    }}
                   />
                 </motion.div>
               </motion.div>
