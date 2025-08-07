@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 import {
   getPokemonAbilityDescription,
+  getPokemonAbilityName,
   getPokemonDescription
 } from '@/app/api/pokemons/_utils/translate';
 import { POKEAPI_BASE_URL, POKEMON_IMAGE_BASE_URL } from '@/constants/api';
@@ -62,11 +63,11 @@ export async function GET(_: NextRequest, { params }: { params: Promise<{ id: st
       pokemon.abilities.map(async ({ ability, is_hidden }) => {
         const abilityRes = await fetch(ability.url, { next: { revalidate: POKE_API_REVALIDATE } });
         const abilityData: PokeApiAbilityResponse = await abilityRes.json();
+        const name = await getPokemonAbilityName(abilityData.names);
         const description = await getPokemonAbilityDescription(abilityData.flavor_text_entries);
 
         return {
-          name:
-            abilityData.names.find(({ language }) => language.name === 'ko')?.name || ability.name,
+          name,
           isHidden: is_hidden,
           description
         };
