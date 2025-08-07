@@ -1,6 +1,5 @@
 'use client';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import {
@@ -18,6 +17,7 @@ import {
 } from '@/app/favorites/_components/playground/index.css';
 import { Position } from '@/app/favorites/_components/playground/types';
 import { getRandomPosition } from '@/app/favorites/_components/playground/utils';
+import OptimizedImage from '@/components/common/OptimizedImage';
 import { useFavoritesContext } from '@/stores/favorites';
 
 export default function Playground() {
@@ -159,7 +159,7 @@ export default function Playground() {
                       : { duration: 0, type: 'tween' }
                   }
                 >
-                  <Image
+                  <OptimizedImage
                     src={imgSrcs[idx]}
                     alt={name}
                     width={pokemonSize}

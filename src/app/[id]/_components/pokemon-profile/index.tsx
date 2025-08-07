@@ -1,7 +1,6 @@
 'use client';
 
 import { useSuspenseQuery } from '@tanstack/react-query';
-import Image from 'next/image';
 import { useParams, useRouter } from 'next/navigation';
 import { BiFemaleSign, BiLock, BiMaleSign, BiQuestionMark } from 'react-icons/bi';
 
@@ -20,6 +19,7 @@ import {
   textBox
 } from '@/app/[id]/_components/pokemon-profile/index.css';
 import Badges from '@/components/common/badges';
+import OptimizedImage from '@/components/common/OptimizedImage';
 import Pokeball from '@/components/common/pokeball';
 import Tooltip from '@/components/common/tooltip';
 import { releaseMessage } from '@/constants/favorite';
@@ -103,7 +103,7 @@ export default function PokemonProfile() {
       <div
         className={`${imageBox} ${data.isLegendary ? 'legendary' : data.isMythical ? 'mythical' : ''}`}
       >
-        <Image
+        <OptimizedImage
           className={pokemonImage}
           src={data.image}
           alt={data.name}

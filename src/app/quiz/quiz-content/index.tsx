@@ -1,7 +1,6 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
@@ -26,6 +25,7 @@ import {
   statusBar
 } from '@/app/quiz/quiz-content/index.css';
 import Input from '@/components/common/input';
+import OptimizedImage from '@/components/common/OptimizedImage';
 import Pokeball from '@/components/common/pokeball';
 import Tooltip from '@/components/common/tooltip';
 import { POKEMON_IMAGE_BASE_URL } from '@/constants/api';
@@ -178,7 +178,7 @@ export default function QuizContent() {
               <p>후후.. 오늘의 포켓몬을 뭘로 할지 꽤 고민되는구먼!</p>
             </div>
           )}
-          <Image
+          <OptimizedImage
             src={`${POKEMON_IMAGE_BASE_URL}/${randomId}.png`}
             alt={data?.name || ''}
             width={0}

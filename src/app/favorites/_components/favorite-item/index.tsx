@@ -1,7 +1,6 @@
 'use client';
 
 import { format } from 'date-fns';
-import Image from 'next/image';
 import Link from 'next/link';
 
 import {
@@ -13,6 +12,7 @@ import {
   favoriteCardTitle
 } from '@/app/favorites/_components/favorite-item/index.css';
 import { FavoriteItemProps } from '@/app/favorites/_components/favorite-item/types';
+import OptimizedImage from '@/components/common/OptimizedImage';
 import { releaseMessage } from '@/constants/favorite';
 import { useDialogActions } from '@/stores/dialog';
 import { useFavoritesActions } from '@/stores/favorites';
@@ -45,7 +45,7 @@ export default function FavoriteItem({ pokemon }: FavoriteItemProps) {
   return (
     <li className={`${favoriteCard} ${pokemon.category}`}>
       <div className={favoriteCardImage}>
-        <Image
+        <OptimizedImage
           src={pokemon.image}
           alt={pokemon.name}
           fill

@@ -2,7 +2,6 @@
 
 import { useSuspenseQuery } from '@tanstack/react-query';
 import Link from 'next/dist/client/link';
-import Image from 'next/image';
 import { useParams } from 'next/navigation';
 
 import { fetchPokemonNeighbor } from '@/api/pokemon';
@@ -15,6 +14,7 @@ import {
   pokemonNavLinkText,
   pokemonNavList
 } from '@/app/[id]/_components/pokemon-nevigation/index.css';
+import OptimizedImage from '@/components/common/OptimizedImage';
 import Pokeball from '@/components/common/pokeball';
 import { POKEMON_NEIGHBOR_QUERY_KEY } from '@/constants/pokemons';
 
@@ -35,7 +35,7 @@ export default function PokemonNavigation() {
               className={pokemonNavLink}
               href={`/${data.prev.id}`}
             >
-              <Image
+              <OptimizedImage
                 className={pokemonNavLinkImage}
                 src={data.prev.image}
                 alt={data.prev.name}
@@ -73,7 +73,7 @@ export default function PokemonNavigation() {
               className={pokemonNavLink}
               href={`/${data.next.id}`}
             >
-              <Image
+              <OptimizedImage
                 className={pokemonNavLinkImage}
                 src={data.next.image}
                 alt={data.next.name}

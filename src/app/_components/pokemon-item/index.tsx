@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 
 import {
@@ -12,6 +11,7 @@ import {
 } from '@/app/_components/pokemon-item/index.css';
 import { PokemonItemProps } from '@/app/_components/pokemon-item/types';
 import Badges from '@/components/common/badges';
+import OptimizedImage from '@/components/common/OptimizedImage';
 
 export default function PokemonItem({ count, result }: PokemonItemProps) {
   const badges = [
@@ -35,7 +35,7 @@ export default function PokemonItem({ count, result }: PokemonItemProps) {
           </div>
         )}
         <div className={pokemonCardImage}>
-          <Image
+          <OptimizedImage
             src={result.image}
             alt={result.name}
             fill

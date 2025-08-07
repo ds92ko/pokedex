@@ -1,10 +1,10 @@
 'use client';
 
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { BiTrash } from 'react-icons/bi';
 
+import OptimizedImage from '@/components/common/OptimizedImage';
 import Pokeball from '@/components/common/pokeball';
 import { SEARCH_HISTORY_IMAGE_SIZE } from '@/components/portals/search-history/constants';
 import {
@@ -42,7 +42,7 @@ export default function SearchHistoryItem({ history }: HistoryItemProps) {
           {error ? (
             <Pokeball size={SEARCH_HISTORY_IMAGE_SIZE} />
           ) : (
-            <Image
+            <OptimizedImage
               src={image}
               alt={`No.${formattedId} 포켓몬`}
               width={SEARCH_HISTORY_IMAGE_SIZE}

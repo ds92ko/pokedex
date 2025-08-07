@@ -2,7 +2,6 @@
 
 import { useSuspenseQuery } from '@tanstack/react-query';
 import Link from 'next/dist/client/link';
-import Image from 'next/image';
 import { useParams } from 'next/navigation';
 
 import { fetchPokemonEvolution } from '@/api/pokemon';
@@ -16,6 +15,7 @@ import {
   evolutionTHead,
   evolutionTHeadCell
 } from '@/app/[id]/_components/pokemon-evolution/index.css';
+import OptimizedImage from '@/components/common/OptimizedImage';
 import { POKEMON_EVOLUTION_QUERY_KEY } from '@/constants/pokemons';
 import { usePokemonsContext } from '@/stores/pokemons';
 
@@ -55,7 +55,7 @@ export default function PokemonEvolution() {
                 className={evolutionCard}
                 href={`/${evolution.id}`}
               >
-                <Image
+                <OptimizedImage
                   className={`${evolutionImage} ${data.id === evolution.id ? 'current' : ''}`}
                   src={evolution.image}
                   alt={evolution.name}
