@@ -19,7 +19,7 @@ import {
   textBox
 } from '@/app/[id]/_components/pokemon-profile/index.css';
 import Badges from '@/components/common/badges';
-import OptimizedImage from '@/components/common/OptimizedImage';
+import OptimizedImage from '@/components/common/optimized-image';
 import Pokeball from '@/components/common/pokeball';
 import Tooltip from '@/components/common/tooltip';
 import { releaseMessage } from '@/constants/favorite';

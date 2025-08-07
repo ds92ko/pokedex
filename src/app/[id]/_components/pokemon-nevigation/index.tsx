@@ -14,7 +14,7 @@ import {
   pokemonNavLinkText,
   pokemonNavList
 } from '@/app/[id]/_components/pokemon-nevigation/index.css';
-import OptimizedImage from '@/components/common/OptimizedImage';
+import OptimizedImage from '@/components/common/optimized-image';
 import Pokeball from '@/components/common/pokeball';
 import { POKEMON_NEIGHBOR_QUERY_KEY } from '@/constants/pokemons';
 

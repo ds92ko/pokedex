@@ -15,7 +15,7 @@ import {
   evolutionTHead,
   evolutionTHeadCell
 } from '@/app/[id]/_components/pokemon-evolution/index.css';
-import OptimizedImage from '@/components/common/OptimizedImage';
+import OptimizedImage from '@/components/common/optimized-image';
 import { POKEMON_EVOLUTION_QUERY_KEY } from '@/constants/pokemons';
 import { usePokemonsContext } from '@/stores/pokemons';
 

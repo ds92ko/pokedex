@@ -12,7 +12,7 @@ import {
   favoriteCardTitle
 } from '@/app/favorites/_components/favorite-item/index.css';
 import { FavoriteItemProps } from '@/app/favorites/_components/favorite-item/types';
-import OptimizedImage from '@/components/common/OptimizedImage';
+import OptimizedImage from '@/components/common/optimized-image';
 import { releaseMessage } from '@/constants/favorite';
 import { useDialogActions } from '@/stores/dialog';
 import { useFavoritesActions } from '@/stores/favorites';

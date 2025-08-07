@@ -16,6 +16,18 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: 'Failed to fetch image' }, { status: response.status });
 
     const buffer = Buffer.from(await response.arrayBuffer());
+    const contentType = response.headers.get('content-type') || '';
+
+    if (contentType.includes('gif')) {
+      return new Response(buffer, {
+        status: 200,
+        headers: {
+          'Content-Type': contentType,
+          'Cache-Control': 'public, max-age=86400'
+        }
+      });
+    }
+
     const optimizedBuffer = await sharp(buffer).resize({ width }).webp({ quality: 80 }).toBuffer();
 
     return new Response(optimizedBuffer, {

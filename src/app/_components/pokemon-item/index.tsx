@@ -11,7 +11,7 @@ import {
 } from '@/app/_components/pokemon-item/index.css';
 import { PokemonItemProps } from '@/app/_components/pokemon-item/types';
 import Badges from '@/components/common/badges';
-import OptimizedImage from '@/components/common/OptimizedImage';
+import OptimizedImage from '@/components/common/optimized-image';
 
 export default function PokemonItem({ count, result }: PokemonItemProps) {
   const badges = [

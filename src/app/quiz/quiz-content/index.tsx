@@ -25,7 +25,7 @@ import {
   statusBar
 } from '@/app/quiz/quiz-content/index.css';
 import Input from '@/components/common/input';
-import OptimizedImage from '@/components/common/OptimizedImage';
+import OptimizedImage from '@/components/common/optimized-image';
 import Pokeball from '@/components/common/pokeball';
 import Tooltip from '@/components/common/tooltip';
 import { POKEMON_IMAGE_BASE_URL } from '@/constants/api';

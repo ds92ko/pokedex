@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { BiTrash } from 'react-icons/bi';
 
-import OptimizedImage from '@/components/common/OptimizedImage';
+import OptimizedImage from '@/components/common/optimized-image';
 import Pokeball from '@/components/common/pokeball';
 import { SEARCH_HISTORY_IMAGE_SIZE } from '@/components/portals/search-history/constants';
 import {

@@ -17,7 +17,7 @@ import {
 } from '@/app/favorites/_components/playground/index.css';
 import { Position } from '@/app/favorites/_components/playground/types';
 import { getRandomPosition } from '@/app/favorites/_components/playground/utils';
-import OptimizedImage from '@/components/common/OptimizedImage';
+import OptimizedImage from '@/components/common/optimized-image';
 import { useFavoritesContext } from '@/stores/favorites';
 
 export default function Playground() {
