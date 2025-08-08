@@ -1,8 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 
-export default function GuestbookForm() {
+import { FormContentProps } from '@/stores/dialog/types';
+
+export default function GuestbookForm({ dialogId }: FormContentProps) {
   const [formData, setFormData] = useState({
     name: '',
     satisfaction: 1,
@@ -10,8 +12,16 @@ export default function GuestbookForm() {
     password: ''
   });
 
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log('Form submitted:', formData);
+  };
+
   return (
-    <form>
+    <form
+      id={dialogId}
+      onSubmit={handleSubmit}
+    >
       <div>
         <label htmlFor="name">트레이너 이름</label>
         <small>트레이너분의 이름을 입력해주세요.</small>
