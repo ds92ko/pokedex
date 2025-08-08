@@ -1,9 +1,12 @@
-export const INITIAL_DIALOG_CONTEXT = {
-  type: undefined,
+import { DialogContext } from '@/stores/dialog/types';
+
+export const INITIAL_DIALOG_CONTEXT: DialogContext = {
+  type: 'alert',
   open: false,
   title: '',
   content: '',
   cancelLabel: '',
   confirmLabel: '',
-  resolve: undefined
+  resolve: undefined,
+  disabled: false
 };

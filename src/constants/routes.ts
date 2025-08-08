@@ -25,6 +25,13 @@ export const ROUTES = [
     external: false
   },
   {
+    id: 'guestbook',
+    href: '/guestbook',
+    icon: null,
+    name: 'Guestbook',
+    external: false
+  },
+  {
     id: 'github',
     href: 'https://github.com/ds92ko/pokedex',
     icon: BiLogoGithub,

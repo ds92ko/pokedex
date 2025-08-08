@@ -1,5 +1,8 @@
 'use client';
 
+import { useId } from 'react';
+import React from 'react';
+
 import {
   dialog,
   DialogBackdrop,
@@ -12,8 +15,10 @@ import { useDialogActions, useDialogContext } from '@/stores/dialog';
 import { button } from '@/styles/actions.css';
 
 export default function Dialog() {
-  const { type, open, title, content, cancelLabel, confirmLabel, resolve } = useDialogContext();
+  const { type, open, title, content, cancelLabel, confirmLabel, resolve, disabled } =
+    useDialogContext();
   const { closeDialog } = useDialogActions();
+  const dialogId = useId();
 
   const handleCancel = () => {
     resolve?.(false);
@@ -33,9 +38,9 @@ export default function Dialog() {
       <div className={DialogBackdrop[open ? 'open' : 'close']}>
         <div className={dialog}>
           <h2 className={dialogTitle}>{title}</h2>
-          <div className={dialogContent}>{content}</div>
+          <div className={dialogContent}>{type === 'form' ? content(dialogId) : content}</div>
           <div className={dialogButtonGroup}>
-            {type === 'confirm' && (
+            {type !== 'alert' && (
               <button
                 type="button"
                 className={`${button.md} outline`}
@@ -45,9 +50,11 @@ export default function Dialog() {
               </button>
             )}
             <button
-              type="button"
+              form={type === 'form' ? dialogId : undefined}
+              type={type === 'form' ? 'submit' : 'button'}
               className={button.md}
-              onClick={handleConfirm}
+              onClick={type === 'form' ? undefined : handleConfirm}
+              disabled={disabled}
             >
               {confirmLabel || '확인'}
             </button>

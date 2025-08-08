@@ -74,6 +74,17 @@ globalStyle('input', {
   height: vars.fonts.size.md
 });
 
+globalStyle('textarea', {
+  font: 'inherit',
+  padding: 0,
+  border: 0,
+  borderRadius: 0,
+  outline: 'none',
+  color: 'inherit',
+  backgroundColor: 'transparent',
+  boxSizing: 'border-box'
+});
+
 globalStyle('[class*="skeleton"], [class*="skeleton"] *', {
   color: 'transparent !important'
 });

@@ -1,23 +1,49 @@
-import { ReactNode } from 'react';
+import { ReactElement, ReactNode } from 'react';
 
-interface DialogProps {
-  title: string;
-  content: ReactNode;
-  cancelLabel?: string;
-  confirmLabel?: string;
+export interface FormContentProps {
+  dialogId: string;
 }
 
-interface DialogContext extends DialogProps {
-  type?: 'alert' | 'confirm';
+interface DialogPropsBase {
+  title: string;
+  cancelLabel?: string;
+  confirmLabel?: string;
+  disabled?: boolean;
+}
+
+export interface AlertConfirmProps extends DialogPropsBase {
+  content: ReactNode;
+}
+
+export interface FormProps extends DialogPropsBase {
+  content: (dialogId: string) => ReactElement<FormContentProps>;
+}
+
+interface DialogContextBase extends DialogPropsBase {
+  type: 'alert' | 'confirm' | 'form';
   open: boolean;
   resolve?: (value: boolean) => void;
 }
 
+export interface AlertConfirmDialogContext extends DialogContextBase {
+  type: 'alert' | 'confirm';
+  content: ReactNode;
+}
+
+export interface FormDialogContext extends DialogContextBase {
+  type: 'form';
+  content: (dialogId: string) => ReactElement<FormContentProps>;
+}
+
+export type DialogContext = AlertConfirmDialogContext | FormDialogContext;
+
 export interface DialogStore {
   context: DialogContext;
   actions: {
-    openAlert: (options: DialogProps) => Promise<boolean>;
-    openConfirm: (options: DialogProps) => Promise<boolean>;
+    openAlert: (options: AlertConfirmProps) => Promise<boolean>;
+    openConfirm: (options: AlertConfirmProps) => Promise<boolean>;
+    openForm: (options: FormProps) => Promise<boolean>;
     closeDialog: () => void;
+    setDisabled: (disabled: boolean) => void;
   };
 }
