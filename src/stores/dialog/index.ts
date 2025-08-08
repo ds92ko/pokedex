@@ -34,6 +34,20 @@ const useDialogStore = create<DialogStore>(set => ({
           }
         })
       ),
+    openForm: ({ title, content, cancelLabel, confirmLabel }) =>
+      new Promise<boolean>(resolve =>
+        set({
+          context: {
+            type: 'form',
+            open: true,
+            title,
+            content,
+            cancelLabel,
+            confirmLabel,
+            resolve: confirmed => resolve(confirmed)
+          }
+        })
+      ),
     closeDialog: () =>
       set(state => ({
         context: { ...state.context, open: false, resolve: undefined }
