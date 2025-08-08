@@ -7,6 +7,8 @@ export interface GuestbookFormData {
   password: string;
 }
 
+export type GuestbookFormErrors = Record<keyof GuestbookFormData, string>;
+
 export type GuestbooksValidation = {
   [K in keyof GuestbookFormData]: (value: GuestbookFormData[K]) => boolean;
 };

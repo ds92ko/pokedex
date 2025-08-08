@@ -12,7 +12,8 @@ export default function GuestbookRegister() {
       title: '방명록 작성',
       content: dialogId => <GuestbookForm dialogId={dialogId} />,
       cancelLabel: '취소하기',
-      confirmLabel: '등록하기'
+      confirmLabel: '등록하기',
+      disabled: true
     });
   };
 
