@@ -8,6 +8,7 @@ interface DialogPropsBase {
   title: string;
   cancelLabel?: string;
   confirmLabel?: string;
+  disabled?: boolean;
 }
 
 export interface AlertConfirmProps extends DialogPropsBase {
@@ -43,5 +44,6 @@ export interface DialogStore {
     openConfirm: (options: AlertConfirmProps) => Promise<boolean>;
     openForm: (options: FormProps) => Promise<boolean>;
     closeDialog: () => void;
+    setDisabled: (disabled: boolean) => void;
   };
 }

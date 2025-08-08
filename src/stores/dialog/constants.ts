@@ -7,5 +7,6 @@ export const INITIAL_DIALOG_CONTEXT: DialogContext = {
   content: '',
   cancelLabel: '',
   confirmLabel: '',
-  resolve: undefined
+  resolve: undefined,
+  disabled: false
 };

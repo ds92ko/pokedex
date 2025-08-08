@@ -6,7 +6,7 @@ import { DialogStore } from '@/stores/dialog/types';
 const useDialogStore = create<DialogStore>(set => ({
   context: { ...INITIAL_DIALOG_CONTEXT },
   actions: {
-    openAlert: ({ title, content, cancelLabel, confirmLabel }) =>
+    openAlert: ({ title, content, cancelLabel, confirmLabel, disabled }) =>
       new Promise<boolean>(resolve =>
         set({
           context: {
@@ -16,11 +16,12 @@ const useDialogStore = create<DialogStore>(set => ({
             content,
             cancelLabel,
             confirmLabel,
+            disabled,
             resolve: () => resolve(true)
           }
         })
       ),
-    openConfirm: ({ title, content, cancelLabel, confirmLabel }) =>
+    openConfirm: ({ title, content, cancelLabel, confirmLabel, disabled }) =>
       new Promise<boolean>(resolve =>
         set({
           context: {
@@ -30,11 +31,12 @@ const useDialogStore = create<DialogStore>(set => ({
             content,
             cancelLabel,
             confirmLabel,
+            disabled,
             resolve: confirmed => resolve(confirmed)
           }
         })
       ),
-    openForm: ({ title, content, cancelLabel, confirmLabel }) =>
+    openForm: ({ title, content, cancelLabel, confirmLabel, disabled }) =>
       new Promise<boolean>(resolve =>
         set({
           context: {
@@ -44,6 +46,7 @@ const useDialogStore = create<DialogStore>(set => ({
             content,
             cancelLabel,
             confirmLabel,
+            disabled,
             resolve: confirmed => resolve(confirmed)
           }
         })
@@ -51,6 +54,10 @@ const useDialogStore = create<DialogStore>(set => ({
     closeDialog: () =>
       set(state => ({
         context: { ...state.context, open: false, resolve: undefined }
+      })),
+    setDisabled: (disabled: boolean) =>
+      set(state => ({
+        context: { ...state.context, disabled }
       }))
   }
 }));

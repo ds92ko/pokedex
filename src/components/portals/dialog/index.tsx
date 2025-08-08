@@ -15,7 +15,8 @@ import { useDialogActions, useDialogContext } from '@/stores/dialog';
 import { button } from '@/styles/actions.css';
 
 export default function Dialog() {
-  const { type, open, title, content, cancelLabel, confirmLabel, resolve } = useDialogContext();
+  const { type, open, title, content, cancelLabel, confirmLabel, resolve, disabled } =
+    useDialogContext();
   const { closeDialog } = useDialogActions();
   const dialogId = useId();
 
@@ -53,6 +54,7 @@ export default function Dialog() {
               type={type === 'form' ? 'submit' : 'button'}
               className={button.md}
               onClick={type === 'form' ? undefined : handleConfirm}
+              disabled={disabled}
             >
               {confirmLabel || '확인'}
             </button>
