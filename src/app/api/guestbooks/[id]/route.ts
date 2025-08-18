@@ -116,7 +116,7 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
       data: {
         id: updatedRow[0],
         name: updatedRow[1],
-        satisfaction: updatedRow[2],
+        satisfaction: Number(updatedRow[2]),
         content: updatedRow[3],
         createdAt: updatedRow[5],
         updatedAt: updatedRow[6]
