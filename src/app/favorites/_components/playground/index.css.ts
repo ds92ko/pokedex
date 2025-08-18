@@ -38,3 +38,15 @@ export const pokemonName = style({
   fontWeight: vars.fonts.weight.bold,
   textAlign: 'center'
 });
+
+export const pokemonImageBox = style({
+  display: 'inline-block',
+  transformOrigin: 'center'
+});
+
+export const pokemonImage = style({
+  position: 'absolute',
+  top: '50%',
+  left: 0,
+  height: 'auto'
+});
