@@ -1,6 +1,6 @@
 'use client';
 
-import { useMutation } from '@tanstack/react-query';
+import { InfiniteData, useMutation, useQueryClient } from '@tanstack/react-query';
 import { ChangeEvent, FormEvent, useState } from 'react';
 
 import { createGuestbook } from '@/api/guestbooks';
@@ -20,24 +20,46 @@ import Input from '@/components/common/input';
 import Pokeball from '@/components/common/pokeball';
 import Rating from '@/components/common/rating';
 import Textarea from '@/components/common/textarea';
-import { GUESTBOOK_ERRORS } from '@/constants/guestbooks';
+import { GUESTBOOK_ERRORS, GUESTBOOK_LIST_QUERY_KEY } from '@/constants/guestbooks';
 import { useDialogActions } from '@/stores/dialog';
 import { FormContentProps } from '@/stores/dialog/types';
-import { GuestbookFormData, GuestbookFormErrors } from '@/type/guestbooks';
+import { GuestbookFormData, GuestbookFormErrors, GuestbookListResponse } from '@/type/guestbooks';
 import { guestbooksValidation, validateGuestbookForm } from '@/utils/validate/guestbooks';
 
 export default function GuestbookForm({ dialogId }: FormContentProps) {
   const { setDisabled, openAlert } = useDialogActions();
   const [formData, setFormData] = useState<GuestbookFormData>(GUESTBOOK_FORM_DEFAULTS);
   const [errors, setErrors] = useState<GuestbookFormErrors>(GUESTBOOK_ERROR_DEFAULTS);
-
+  const queryClient = useQueryClient();
   const { mutate, isPending } = useMutation({
     mutationFn: createGuestbook,
-    onSuccess: () =>
+    onSuccess: data => {
+      queryClient.setQueryData<InfiniteData<GuestbookListResponse>>(
+        GUESTBOOK_LIST_QUERY_KEY,
+        oldData => {
+          if (!oldData) return oldData;
+
+          const firstPage = oldData.pages[0];
+
+          return {
+            ...oldData,
+            pages: [
+              {
+                ...firstPage,
+                data: [data, ...firstPage.data],
+                total: firstPage.total + 1
+              },
+              ...oldData.pages.slice(1)
+            ]
+          };
+        }
+      );
+
       openAlert({
         title: '방명록 작성 완료',
         content: '방명록이 성공적으로 등록되었습니다.'
-      }),
+      });
+    },
     onError: () =>
       openAlert({
         title: '방명록 작성 실패',

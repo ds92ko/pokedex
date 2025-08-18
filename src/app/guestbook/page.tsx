@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 
 import ControlBar from '@/app/guestbook/_components/control-bar';
 import GuestbookIntro from '@/app/guestbook/_components/guestbook-intro';
+import GuestbookList from '@/app/guestbook/_components/guestbook-list';
 import { openGraph, twitter } from '@/app/metadata';
 import Section from '@/components/layouts/section';
 import { SITE_URL } from '@/constants/routes';
@@ -37,7 +38,7 @@ export default function GuestbookPage() {
         title="트레이너 방명록"
         titleContent={<ControlBar />}
       >
-        방명록 목록
+        <GuestbookList />
       </Section>
     </>
   );

@@ -4,3 +4,6 @@ export const GUESTBOOK_ERRORS = {
   content: '모험 내용은 필수 입력입니다.',
   password: '비밀번호는 4자 이상, 20자 이하여야 합니다.'
 };
+
+export const GUESTBOOK_LIST_LIMIT = 20;
+export const GUESTBOOK_LIST_QUERY_KEY = ['guestbook'] as const;

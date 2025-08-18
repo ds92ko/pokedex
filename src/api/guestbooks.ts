@@ -1,4 +1,4 @@
-import { CreateGuestbook } from '@/type/guestbooks';
+import { CreateGuestbook, FetchGuestbookList } from '@/type/guestbooks';
 
 export const createGuestbook: CreateGuestbook = async data => {
   try {
@@ -12,7 +12,27 @@ export const createGuestbook: CreateGuestbook = async data => {
 
     if (!res.ok) throw new Error(`Failed to create guestbook: ${res.status} ${res.statusText}`);
 
-    return res;
+    const json = await res.json();
+
+    if (!json.success) throw new Error(`Failed to create guestbook: ${json.errors}`);
+
+    return json.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const fetchGuestbookList: FetchGuestbookList = async ({ pageParam = 0 }) => {
+  try {
+    const res = await fetch(`/api/guestbooks?page=${pageParam}`, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    if (!res.ok) throw new Error(`Failed to fetch guestbooks: ${res.status} ${res.statusText}`);
+
+    return res.json();
   } catch (error) {
     throw error;
   }
