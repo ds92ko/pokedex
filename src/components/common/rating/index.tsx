@@ -7,7 +7,15 @@ import { star, starIcon, starInput, stars } from '@/components/common/rating/ind
 import { RatingProps } from '@/components/common/rating/types';
 import { icons, vars } from '@/styles/vars.css';
 
-export default function Rating({ id, name, checked, onChange, disabled }: RatingProps) {
+export default function Rating({
+  id,
+  name,
+  checked,
+  onChange,
+  disabled,
+  readOnly,
+  size = 'xl'
+}: RatingProps) {
   const [hovered, setHovered] = useState<number | null>(null);
 
   return (
@@ -16,8 +24,13 @@ export default function Rating({ id, name, checked, onChange, disabled }: Rating
         <li key={i}>
           <label
             className={star}
-            onMouseEnter={() => setHovered(i)}
-            onMouseLeave={() => setHovered(null)}
+            style={{
+              transform: `scale(${!disabled && !readOnly && hovered === i ? 1.1 : 1})`
+            }}
+            {...(!readOnly && {
+              onMouseEnter: () => setHovered(i),
+              onMouseLeave: () => setHovered(null)
+            })}
           >
             <input
               id={`${id}-${i}`}
@@ -28,10 +41,11 @@ export default function Rating({ id, name, checked, onChange, disabled }: Rating
               checked={checked === i + 1}
               onChange={onChange}
               disabled={disabled}
+              readOnly={readOnly}
             />
             <span>
               <BiStar
-                size={icons.size.xl}
+                size={icons.size[size]}
                 color={vars.colors.border}
               />
             </span>
@@ -39,7 +53,7 @@ export default function Rating({ id, name, checked, onChange, disabled }: Rating
               className={`${starIcon} ${typeof hovered === 'number' ? (hovered >= i ? 'active' : '') : typeof checked === 'number' && checked > i ? 'active' : ''}`}
             >
               <BiSolidStar
-                size={icons.size.xl}
+                size={icons.size[size]}
                 color={disabled ? vars.colors.border : vars.colors.secondary}
               />
             </span>

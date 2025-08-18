@@ -1,7 +1,8 @@
 import { style } from '@vanilla-extract/css';
 
 export const stars = style({
-  display: 'flex'
+  display: 'flex',
+  alignItems: 'center'
 });
 
 export const starInput = style({
@@ -10,13 +11,10 @@ export const starInput = style({
 
 export const star = style({
   position: 'relative',
-  display: 'inline-block',
-  transition: 'transform 0.3s ease-out',
-  selectors: {
-    '&:not(:disabled):hover': {
-      transform: 'scale(1.1)'
-    }
-  }
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  transition: 'transform 0.3s ease-out'
 });
 
 export const starIcon = style({
