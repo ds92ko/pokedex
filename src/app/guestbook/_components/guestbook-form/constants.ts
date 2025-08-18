@@ -1,6 +1,6 @@
 export const GUESTBOOK_FORM_DEFAULTS = {
   name: '',
-  satisfaction: 1,
+  satisfaction: null,
   content: '',
   password: ''
 };

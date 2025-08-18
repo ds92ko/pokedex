@@ -2,7 +2,7 @@ import { MutationFunction } from '@tanstack/react-query';
 
 export interface GuestbookFormData {
   name: string;
-  satisfaction: number;
+  satisfaction: number | null;
   content: string;
   password: string;
 }

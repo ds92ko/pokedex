@@ -10,10 +10,15 @@ import {
   PREFIX,
   SATISFACTION_DEFAULT_MESSAGE
 } from '@/app/guestbook/_components/guestbook-form/constants';
-import { guestbookForm } from '@/app/guestbook/_components/guestbook-form/index.css';
+import {
+  guestbookFieldset,
+  guestbookForm,
+  guestbookPending
+} from '@/app/guestbook/_components/guestbook-form/index.css';
 import Field from '@/components/common/field';
 import Input from '@/components/common/input';
 import Pokeball from '@/components/common/pokeball';
+import Rating from '@/components/common/rating';
 import Textarea from '@/components/common/textarea';
 import { GUESTBOOK_ERRORS } from '@/constants/guestbooks';
 import { useDialogActions } from '@/stores/dialog';
@@ -22,21 +27,23 @@ import { GuestbookFormData, GuestbookFormErrors } from '@/type/guestbooks';
 import { guestbooksValidation, validateGuestbookForm } from '@/utils/validate/guestbooks';
 
 export default function GuestbookForm({ dialogId }: FormContentProps) {
-  const { setDisabled } = useDialogActions();
+  const { setDisabled, openAlert } = useDialogActions();
   const [formData, setFormData] = useState<GuestbookFormData>(GUESTBOOK_FORM_DEFAULTS);
   const [errors, setErrors] = useState<GuestbookFormErrors>(GUESTBOOK_ERROR_DEFAULTS);
 
   const { mutate, isPending } = useMutation({
     mutationFn: createGuestbook,
-    onSuccess: (data, variables, context) => {
-      console.log('Guestbook created successfully:', data, variables, context);
-    },
-    onError: (error, variables, context) => {
-      console.error('Error creating guestbook:', error, variables, context);
-    },
-    onSettled: () => {
-      setDisabled(false);
-    }
+    onSuccess: () =>
+      openAlert({
+        title: '방명록 작성 완료',
+        content: '방명록이 성공적으로 등록되었습니다.'
+      }),
+    onError: () =>
+      openAlert({
+        title: '방명록 작성 실패',
+        content: '방명록 작성에 실패했습니다. 다시 시도해주세요.'
+      }),
+    onSettled: () => setDisabled(false)
   });
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -50,11 +57,9 @@ export default function GuestbookForm({ dialogId }: FormContentProps) {
     const isValid = isSatisfaction
       ? guestbooksValidation[key](Number(value))
       : guestbooksValidation[key](value);
-
     const error = isValid ? '' : GUESTBOOK_ERRORS[key];
 
     setErrors({ ...errors, [key]: error });
-
     setDisabled(
       !!validateGuestbookForm({ ...formData, [key]: isSatisfaction ? Number(value) : value })
     );
@@ -87,91 +92,85 @@ export default function GuestbookForm({ dialogId }: FormContentProps) {
       noValidate
     >
       {isPending && (
-        // TODO: pending 상태에서 보여줄 로딩 컴포넌트 작업 필요
-        <div>
-          <Pokeball />
+        <div className={guestbookPending}>
+          <Pokeball size={50} />
           <span>트레이너의 모험을 기록 중입니다...</span>
         </div>
       )}
-      <Field
-        id={`${PREFIX}name`}
-        label="트레이너 이름"
-        error={errors.name}
-      >
-        <Input
-          type="text"
+      <fieldset className={`${guestbookFieldset} ${isPending ? 'pending' : ''}`}>
+        <Field
           id={`${PREFIX}name`}
-          name={`${PREFIX}name`}
-          value={formData.name}
-          onChange={handleChange}
-          placeholder="트레이너분의 이름을 입력해주세요."
-          disabled={isPending}
-          required
-          autoComplete="off"
-        />
-      </Field>
-      <Field
-        id={`${PREFIX}satisfaction`}
-        label="모험 만족도"
-        error={errors.satisfaction}
-        message={SATISFACTION_DEFAULT_MESSAGE}
-      >
-        <Input
-          type="range"
+          label="트레이너 이름"
+          error={errors.name}
+        >
+          <Input
+            type="text"
+            id={`${PREFIX}name`}
+            name={`${PREFIX}name`}
+            value={formData.name}
+            onChange={handleChange}
+            placeholder="트레이너분의 이름을 입력해주세요."
+            disabled={isPending}
+            required
+            autoComplete="off"
+          />
+        </Field>
+        <Field
           id={`${PREFIX}satisfaction`}
-          name={`${PREFIX}satisfaction`}
-          min="1"
-          max="5"
-          step="1"
-          value={formData.satisfaction}
-          onChange={handleChange}
-          aria-label="모험 만족도"
-          disabled={isPending}
-          required
-          autoComplete="off"
-        />
-      </Field>
-      <Field
-        id={`${PREFIX}content`}
-        label="모험 내용"
-        error={errors.content}
-        count={{
-          value: formData.content.length,
-          max: 500
-        }}
-      >
-        <Textarea
+          label="모험 만족도"
+          error={errors.satisfaction}
+          message={SATISFACTION_DEFAULT_MESSAGE}
+        >
+          <Rating
+            id={`${PREFIX}satisfaction`}
+            name={`${PREFIX}satisfaction`}
+            checked={formData.satisfaction}
+            onChange={handleChange}
+            disabled={isPending}
+          />
+        </Field>
+        <Field
           id={`${PREFIX}content`}
-          name={`${PREFIX}content`}
-          value={formData.content}
-          onChange={handleChange}
-          rows={3}
-          placeholder="모험 중 느낀 점이나 방문 소감을 자유롭게 적어주세요."
-          maxLength={500}
-          disabled={isPending}
-          required
-          autoComplete="off"
-        />
-      </Field>
-      <Field
-        id={`${PREFIX}password`}
-        label="비밀번호"
-        error={errors.password}
-      >
-        <Input
-          type="password"
+          label="모험 내용"
+          error={errors.content}
+          count={{
+            value: formData.content.length,
+            max: 500
+          }}
+        >
+          <Textarea
+            id={`${PREFIX}content`}
+            name={`${PREFIX}content`}
+            value={formData.content}
+            onChange={handleChange}
+            rows={3}
+            placeholder="모험 중 느낀 점이나 방문 소감을 자유롭게 적어주세요."
+            maxLength={500}
+            disabled={isPending}
+            required
+            autoComplete="off"
+          />
+        </Field>
+        <Field
           id={`${PREFIX}password`}
-          name={`${PREFIX}password`}
-          value={formData.password}
-          onChange={handleChange}
-          placeholder="작성한 내용을 수정하거나 삭제할 수 있는 비밀번호를 입력해주세요."
-          minLength={4}
-          maxLength={20}
-          disabled={isPending}
-          required
-          autoComplete="off"
-        />
-      </Field>
+          label="비밀번호"
+          error={errors.password}
+        >
+          <Input
+            type="password"
+            id={`${PREFIX}password`}
+            name={`${PREFIX}password`}
+            value={formData.password}
+            onChange={handleChange}
+            placeholder="작성한 내용을 수정하거나 삭제할 수 있는 비밀번호를 입력해주세요."
+            minLength={4}
+            maxLength={20}
+            disabled={isPending}
+            required
+            autoComplete="off"
+          />
+        </Field>
+      </fieldset>
     </form>
   );
 }
