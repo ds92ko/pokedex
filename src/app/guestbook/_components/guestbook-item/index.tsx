@@ -4,6 +4,7 @@ import { format } from 'date-fns';
 import { BiEdit, BiTrash } from 'react-icons/bi';
 
 import GuestbookDelete from '@/app/guestbook/_components/guestbook-delete';
+import GuestbookEdit from '@/app/guestbook/_components/guestbook-edit';
 import {
   guestbookCard,
   guestbookCardButtonGroup,
@@ -19,6 +20,21 @@ import { icons } from '@/styles/vars.css';
 
 export default function GuestbookItem({ data }: GuestbookItemProps) {
   const { openForm } = useDialogActions();
+
+  const handleEdit = () => {
+    openForm({
+      title: '방명록 수정',
+      content: dialogId => (
+        <GuestbookEdit
+          dialogId={dialogId}
+          data={data}
+        />
+      ),
+      cancelLabel: '취소하기',
+      confirmLabel: '수정하기',
+      disabled: true
+    });
+  };
 
   const handleDelete = () => {
     openForm({
@@ -52,7 +68,10 @@ export default function GuestbookItem({ data }: GuestbookItemProps) {
         <div className={guestbookCardControl}>
           <small>{format(data.updatedAt, 'yyyy.MM.dd HH:mm:ss')}</small>
           <div className={guestbookCardButtonGroup}>
-            <button className={`${button.sm} outline`}>
+            <button
+              className={`${button.sm} outline`}
+              onClick={handleEdit}
+            >
               <BiEdit size={icons.size.sm} />
               수정
             </button>

@@ -1,5 +1,5 @@
 import { HttpError } from '@/lib/errors/http-errors';
-import { CreateGuestbook, FetchGuestbookList } from '@/type/guestbooks';
+import { CreateGuestbook, FetchGuestbookList, UpdateGuestbook } from '@/type/guestbooks';
 
 export const createGuestbook: CreateGuestbook = async data => {
   try {
@@ -56,6 +56,33 @@ export const deleteGuestbook = async ({ id, password }: { id: string; password: 
     }
 
     return res.json();
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const updateGuestbook: UpdateGuestbook = async data => {
+  try {
+    const res = await fetch(`/api/guestbooks/${data.id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+
+    const json = await res.json().catch(() => null);
+
+    if (!res.ok) {
+      const message = json.message || res.statusText;
+      throw new HttpError(res.status, message);
+    }
+
+    if (!json?.success) {
+      throw new HttpError(res.status, json?.errors ?? 'Failed to update guestbook');
+    }
+
+    return json.data;
   } catch (error) {
     throw error;
   }

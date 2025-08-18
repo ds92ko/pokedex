@@ -27,6 +27,12 @@ export type CreateGuestbookRow = Omit<GuestbookRow, 'deletedAt'>;
 
 export type CreateGuestbook = MutationFunction<GuestbookItem, GuestbookFormData>;
 
+interface GuestbookUpdateData extends GuestbookFormData {
+  id: string;
+}
+
+export type UpdateGuestbook = MutationFunction<GuestbookItem, GuestbookUpdateData>;
+
 export type GuestbookItem = Omit<GuestbookRow, 'password' | 'deletedAt'>;
 
 export interface GuestbookListResponse {

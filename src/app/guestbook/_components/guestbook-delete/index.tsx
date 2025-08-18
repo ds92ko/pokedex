@@ -8,6 +8,7 @@ import {
   guestbookDeleteFieldset,
   guestbookDeletePending
 } from '@/app/guestbook/_components/guestbook-delete/index.css';
+import { GuestbookDeleteProps } from '@/app/guestbook/_components/guestbook-delete/types';
 import Field from '@/components/common/field';
 import Input from '@/components/common/input';
 import Pokeball from '@/components/common/pokeball';
@@ -17,7 +18,7 @@ import { useDialogActions } from '@/stores/dialog';
 import { GuestbookListResponse } from '@/type/guestbooks';
 import { guestbooksValidation } from '@/utils/validate/guestbooks';
 
-export default function GuestbookDelete({ dialogId, id }: { dialogId: string; id: string }) {
+export default function GuestbookDelete({ dialogId, id }: GuestbookDeleteProps) {
   const { setDisabled, openAlert } = useDialogActions();
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
