@@ -3,30 +3,32 @@
 import { useState } from 'react';
 import { BiSolidStar, BiStar } from 'react-icons/bi';
 
-import { star, starIcon, stars } from '@/components/common/rating/index.css';
+import { star, starIcon, starInput, stars } from '@/components/common/rating/index.css';
 import { RatingProps } from '@/components/common/rating/types';
 import { icons, vars } from '@/styles/vars.css';
 
-export default function Rating({ id, name, rating, onChange, disabled }: RatingProps) {
+export default function Rating({ id, name, checked, onChange, disabled }: RatingProps) {
   const [hovered, setHovered] = useState<number | null>(null);
 
   return (
-    <ul
-      id={id}
-      className={stars}
-    >
+    <ul className={stars}>
       {Array.from({ length: 5 }, (_, i) => (
         <li key={i}>
-          <button
-            id={`${id}-${i}`}
-            name={name}
-            type="button"
+          <label
             className={star}
             onMouseEnter={() => setHovered(i)}
             onMouseLeave={() => setHovered(null)}
-            onClick={() => onChange(i + 1)}
-            disabled={disabled}
           >
+            <input
+              id={`${id}-${i}`}
+              name={name}
+              className={starInput}
+              type="radio"
+              value={i + 1}
+              checked={checked === i + 1}
+              onChange={onChange}
+              disabled={disabled}
+            />
             <span>
               <BiStar
                 size={icons.size.xl}
@@ -34,14 +36,14 @@ export default function Rating({ id, name, rating, onChange, disabled }: RatingP
               />
             </span>
             <span
-              className={`${starIcon} ${typeof hovered === 'number' ? (hovered >= i ? 'active' : '') : rating > i ? 'active' : ''}`}
+              className={`${starIcon} ${typeof hovered === 'number' ? (hovered >= i ? 'active' : '') : typeof checked === 'number' && checked > i ? 'active' : ''}`}
             >
               <BiSolidStar
                 size={icons.size.xl}
                 color={disabled ? vars.colors.border : vars.colors.secondary}
               />
             </span>
-          </button>
+          </label>
         </li>
       ))}
     </ul>

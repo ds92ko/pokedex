@@ -1,7 +1,9 @@
+import { ChangeEvent } from 'react';
+
 export interface RatingProps {
   id?: string;
   name?: string;
-  rating: number;
-  onChange: (rating: number) => void;
+  checked: number | null;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   disabled?: boolean;
 }

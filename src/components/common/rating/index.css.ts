@@ -4,8 +4,13 @@ export const stars = style({
   display: 'flex'
 });
 
+export const starInput = style({
+  display: 'none'
+});
+
 export const star = style({
   position: 'relative',
+  display: 'inline-block',
   transition: 'transform 0.3s ease-out',
   selectors: {
     '&:not(:disabled):hover': {
