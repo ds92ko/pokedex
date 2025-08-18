@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 import sheets from '@/lib/google-sheets/sheets-connect';
 
-export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const { password } = await req.json();
 
@@ -53,8 +53,8 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
   }
 }
 
-export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
-  const { id } = params;
+export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
   const { name, satisfaction, content, password } = await req.json();
 
   try {
