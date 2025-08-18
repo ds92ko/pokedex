@@ -1,6 +1,9 @@
+'use client';
+
 import { format } from 'date-fns';
 import { BiEdit, BiTrash } from 'react-icons/bi';
 
+import GuestbookDelete from '@/app/guestbook/_components/guestbook-delete';
 import {
   guestbookCard,
   guestbookCardButtonGroup,
@@ -10,10 +13,28 @@ import {
 } from '@/app/guestbook/_components/guestbook-item/index.css';
 import { GuestbookItemProps } from '@/app/guestbook/_components/guestbook-item/types';
 import Rating from '@/components/common/rating';
+import { useDialogActions } from '@/stores/dialog';
 import { button } from '@/styles/actions.css';
 import { icons } from '@/styles/vars.css';
 
 export default function GuestbookItem({ data }: GuestbookItemProps) {
+  const { openForm } = useDialogActions();
+
+  const handleDelete = () => {
+    openForm({
+      title: '방명록 삭제',
+      content: dialogId => (
+        <GuestbookDelete
+          dialogId={dialogId}
+          id={data.id}
+        />
+      ),
+      cancelLabel: '취소하기',
+      confirmLabel: '삭제하기',
+      disabled: true
+    });
+  };
+
   return (
     <li key={data.id}>
       <div className={guestbookCard}>
@@ -35,7 +56,10 @@ export default function GuestbookItem({ data }: GuestbookItemProps) {
               <BiEdit size={icons.size.sm} />
               수정
             </button>
-            <button className={button.sm}>
+            <button
+              className={button.sm}
+              onClick={handleDelete}
+            >
               <BiTrash size={icons.size.sm} />
               삭제
             </button>

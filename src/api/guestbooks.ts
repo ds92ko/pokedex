@@ -1,3 +1,4 @@
+import { HttpError } from '@/lib/errors/http-errors';
 import { CreateGuestbook, FetchGuestbookList } from '@/type/guestbooks';
 
 export const createGuestbook: CreateGuestbook = async data => {
@@ -31,6 +32,28 @@ export const fetchGuestbookList: FetchGuestbookList = async ({ pageParam = 0 }) 
     });
 
     if (!res.ok) throw new Error(`Failed to fetch guestbooks: ${res.status} ${res.statusText}`);
+
+    return res.json();
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const deleteGuestbook = async ({ id, password }: { id: string; password: string }) => {
+  try {
+    const res = await fetch(`/api/guestbooks/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ password })
+    });
+
+    if (!res.ok) {
+      const json = await res.json();
+      const message = json.message || res.statusText;
+      throw new HttpError(res.status, message);
+    }
 
     return res.json();
   } catch (error) {
