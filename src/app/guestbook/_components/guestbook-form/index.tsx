@@ -184,7 +184,7 @@ export default function GuestbookForm({ dialogId }: FormContentProps) {
             name={`${PREFIX}password`}
             value={formData.password}
             onChange={handleChange}
-            placeholder="작성한 내용을 수정하거나 삭제할 수 있는 비밀번호를 입력해주세요."
+            placeholder="비밀번호를 입력해주세요."
             minLength={4}
             maxLength={20}
             disabled={isPending}

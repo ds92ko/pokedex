@@ -18,6 +18,8 @@ export const guestbookCardTitle = style({
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
+  flexWrap: 'wrap',
+  gap: vars.spacing.sm,
   fontSize: vars.fonts.size.lg,
   fontWeight: vars.fonts.weight.bold
 });
@@ -30,6 +32,8 @@ export const guestbookCardControl = style({
   display: 'flex',
   justifyContent: 'space-between',
   alignItems: 'center',
+  flexWrap: 'wrap',
+  gap: vars.spacing.sm,
   color: vars.colors.caption,
   fontSize: vars.fonts.size.sm
 });

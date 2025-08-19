@@ -107,7 +107,7 @@ export default function GuestbookDelete({ dialogId, id }: GuestbookDeleteProps) 
             name={`delete-guestbook-password`}
             value={password}
             onChange={handleChange}
-            placeholder="방명록 등록 시 설정한 비밀번호를 입력해주세요."
+            placeholder="비밀번호를 입력해주세요."
             minLength={4}
             maxLength={20}
             disabled={isPending}
